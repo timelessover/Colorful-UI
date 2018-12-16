@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/timelessover/P-UI/issues"
   },
-  "homepage": "https://github.com/timelessover/P-UI#readme"
+  "homepage": "https://github.com/timelessover/P-UI#readme",
+  "dependencies": {
+    "vue": "^2.5.21"
+  }
 }
