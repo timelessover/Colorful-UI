@@ -1,0 +1,17 @@
+.p-button[data-v-37c6c2] {
+  font-size: var(--font-size);
+  height: var(--button-height);
+  padding: 0 1em;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background: var(--button-bg);
+}
+.p-button[data-v-37c6c2]:hover {
+    border-color: var(--border-color-hover);
+}
+.p-button[data-v-37c6c2]:active {
+    background-color: var(--button-active-bg);
+}
+.p-button[data-v-37c6c2]:focus {
+    outline: none;
+}

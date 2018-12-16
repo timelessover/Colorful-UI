@@ -8,5 +8,5 @@
 使用本框架前，请在 CSS  中开启 box-sizing:border-box
 
 ```
-*{box-sizing:borde-rbox}
+*{box-sizing:borde-box}
 ```
