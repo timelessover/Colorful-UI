@@ -1,0 +1,23 @@
+{
+  "name": "p-ui",
+  "version": "1.0.0",
+  "description": "\u001b[A\u001b[C\u001b[C\u001b[B\u001b[D\u001b[D\u001b[D这是一个UI框架",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timelessover/P-UI.git"
+  },
+  "keywords": [
+    "vue",
+    "UI"
+  ],
+  "author": "chirsping",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timelessover/P-UI/issues"
+  },
+  "homepage": "https://github.com/timelessover/P-UI#readme"
+}
