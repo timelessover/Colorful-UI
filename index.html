@@ -1,37 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>P-UI</title>
     <style>
-        *{margin:0;padding:0;box-sizing: border-box;}
-        :root{
-            --button-height:32px;
-            --font-size:14px;
-            --button-bg:white;
-            --button-active-bg:#eee;
-            --border-radius:4px;
-            --color:#333;
-            --border-color:#999;
-            --border-color-hover:#666;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        #app{
-            margin:20px;
+
+        :root {
+            --button-height: 32px;
+            --font-size: 14px;
+            --button-bg: white;
+            --button-active-bg: #eee;
+            --border-radius: 4px;
+            --color: #333;
+            --border-color: #999;
+            --border-color-hover: #666;
         }
-        body{
+
+        #app {
+            margin: 20px;
+        }
+
+        body {
             font-size: var(--font-size)
         }
     </style>
     <style>
-      
+        .icon {
+            width: 1em;
+            height: 1em;
+        }
     </style>
 </head>
+
 <body>
     <div id="app">
-        <p-button></p-button>
+        <p-button > 警告</p-button>
+        <p-button icon="setting"> 警告</p-button>
+        <p-button icon="download" icon-position="right" >下载</p-button>
     </div>
-<script src="./src/app.js"></script>
+    <script src="./src/app.js"></script>
+    <script src="//at.alicdn.com/t/font_861647_symxf6de8f.js"></script>
 </body>
+
 </html>
