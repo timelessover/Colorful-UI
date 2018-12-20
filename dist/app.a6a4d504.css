@@ -8,6 +8,8 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  vertical-align: middle;
+  padding: 0  1em;
 }
 .p-button[data-v-37c6c2]:hover {
     border-color: var(--border-color-hover);
@@ -20,12 +22,15 @@
 }
 .p-button > .icon[data-v-37c6c2] {
     order: 1;
+    margin-right: .3em;
 }
 .p-button > .content[data-v-37c6c2] {
     order: 2;
 }
 .p-button.icon-right > .icon[data-v-37c6c2] {
     order: 2;
+    margin-right: 0em;
+    margin-left: .3em;
 }
 .p-button.icon-right > .content[data-v-37c6c2] {
     order: 1;
