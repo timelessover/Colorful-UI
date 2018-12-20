@@ -1,3 +1,11 @@
+@keyframes spin-data-v-37c6c2 {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}
 .p-button[data-v-37c6c2] {
   font-size: var(--font-size);
   height: var(--button-height);
@@ -34,6 +42,9 @@
 }
 .p-button.icon-right > .content[data-v-37c6c2] {
     order: 1;
+}
+.p-button .loading[data-v-37c6c2] {
+    animation: spin-data-v-37c6c2 2s infinite linear;
 }
 .p-icon[data-v-6c27e1] {
   width: 1em;
