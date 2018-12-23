@@ -4,7 +4,15 @@
 </template>
 <script>
 export default {
-    
+    mounted(){
+        for(let node of this.$el.children){
+            let name =node.nodeName.toLowerCase()
+            if(name !=='button'){    
+                console.warn(`p-button-group内子元素应该都是p-button,但是你写的是${name}`)
+            }
+        }
+        
+    }
 }
 </script>
 <style lang="scss" scoped>
