@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    name:'P-icon',
     props:['name']
 };
 </script>

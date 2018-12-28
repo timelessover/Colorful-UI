@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>P-UI</title>
-    <style>
-        * {
+    <style>* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -30,21 +29,20 @@
 
         body {
             font-size: var(--font-size)
-        }
-    </style>
+        }</style>
 
-</head>
+<link rel="stylesheet" href="/app.a6a4d504.css"></head>
 
 <body>
     <div id="app">
-        <p-input value="张三" disabled></p-input>
-        <p-input value="李四" readonly></p-input>
-        <p-input value="王五" ></p-input>
+        <p-input value="张三" disabled=""></p-input>
+        <p-input value="李四" readonly=""></p-input>
+        <p-input value="王五"></p-input>
         <p-input value="王五" error="姓名不能少于两个字"></p-input>
         <div>
-        <p-button :loading="loading1" @click="loading1 = !loading1"  > 警告</p-button>
+        <p-button :loading="loading1" @click="loading1 = !loading1"> 警告</p-button>
         <p-button icon="setting" :loading="loading2" @click="loading2 = !loading2"> 警告</p-button>
-        <p-button icon="download" :loading="loading3" icon-position="right" @click="loading3 = !loading3" >下载</p-button>
+        <p-button icon="download" :loading="loading3" icon-position="right" @click="loading3 = !loading3">下载</p-button>
         <p-button-group>
             <p-button icon="left">上一页</p-button>
             <p-button>更多</p-button>
@@ -52,7 +50,7 @@
         </p-button-group>
     </div>
     </div>
-    <script src="./src/app.js"></script>
+    <script src="/app.a6a4d504.js"></script>
     <script src="//at.alicdn.com/t/font_861647_h3qlcfgl4t.js"></script>
 </body>
 </html>

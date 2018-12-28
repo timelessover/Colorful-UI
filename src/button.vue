@@ -8,6 +8,7 @@
 <script>
 import Icon from "./icon";
 export default {
+    name:'P-button',
     components:{
         'p-icon':Icon
     },
