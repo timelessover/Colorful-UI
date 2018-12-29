@@ -39,8 +39,9 @@
     <div id="app">
         <p-input value="张三" disabled></p-input>
         <p-input value="李四" readonly></p-input>
-        <p-input value="王五" ></p-input>
-        <p-input value="王五" error="姓名不能少于两个字"></p-input>
+        <p-input value="王五"  ></p-input>
+        <p-input  @change='inputChange' v-model="message"  error="姓名不能少于两个字"></p-input>
+        <p>{{message}}</p>
         <div>
         <p-button :loading="loading1" @click="loading1 = !loading1"  > 警告</p-button>
         <p-button icon="setting" :loading="loading2" @click="loading2 = !loading2"> 警告</p-button>

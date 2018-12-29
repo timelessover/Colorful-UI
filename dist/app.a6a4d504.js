@@ -11746,6 +11746,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
   components: {
     Icon: _icon.default
@@ -11787,7 +11792,21 @@ exports.default = _default;
     [
       _c("input", {
         attrs: { disabled: _vm.disabled, readonly: _vm.readonly, type: "text" },
-        domProps: { value: _vm.value }
+        domProps: { value: _vm.value },
+        on: {
+          change: function($event) {
+            _vm.$emit("change", $event.target.value)
+          },
+          blur: function($event) {
+            _vm.$emit("blur", $event.target.value)
+          },
+          focus: function($event) {
+            _vm.$emit("focus", $event.target.value)
+          },
+          input: function($event) {
+            _vm.$emit("input", $event.target.value)
+          }
+        }
       }),
       _vm._v(" "),
       _vm.error
@@ -11864,7 +11883,13 @@ new _vue.default({
   data: {
     loading1: true,
     loading2: false,
-    loading3: true
+    loading3: true,
+    message: "hi"
+  },
+  methods: {
+    inputChange: function inputChange(e) {
+      console.log(e.target.value);
+    }
   }
 });
 },{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./button-group":"src/button-group.vue","./input":"src/input.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -11894,7 +11919,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53788" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55530" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
