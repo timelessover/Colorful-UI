@@ -11792,9 +11792,11 @@ exports.default = _default;
       _vm._v(" "),
       _vm.error
         ? [
-            _c("icon", { attrs: { name: "setting" } }),
+            _c("icon", { staticClass: "icon-error", attrs: { name: "error" } }),
             _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(_vm.error))])
+            _c("span", { staticClass: "errorMessage" }, [
+              _vm._v(_vm._s(_vm.error))
+            ])
           ]
         : _vm._e()
     ],
@@ -11892,7 +11894,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51320" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53788" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

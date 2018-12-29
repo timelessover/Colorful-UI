@@ -72,7 +72,11 @@
 }
 .warpper[data-v-30e298] {
   font-size: 12px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+}
+.warpper[data-v-30e298] > :not(:last-child) {
+    margin-right: .5em;
 }
 .warpper > input[data-v-30e298] {
     height: 32px;
@@ -85,6 +89,7 @@
 }
 .warpper > input[data-v-30e298]:focus {
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+      outline: none;
 }
 .warpper > input[disabled][data-v-30e298], .warpper > input[readonly][data-v-30e298] {
       border-color: #aaa;
@@ -93,4 +98,10 @@
 }
 .warpper.error > input[data-v-30e298] {
     border-color: #F1453D;
+}
+.warpper .icon-error[data-v-30e298] {
+    fill: #F1453D;
+}
+.warpper .errorMessage[data-v-30e298] {
+    color: red;
 }
