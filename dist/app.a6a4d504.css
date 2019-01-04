@@ -105,3 +105,84 @@
 .warpper .errorMessage[data-v-30e298] {
     color: red;
 }
+.row[data-v-ce9f95] {
+  display: flex;
+}
+.col[data-v-331676] {
+  height: 100px;
+  background: grey;
+  width: 50%;
+  border: 1px solid red;
+}
+.col.col-1[data-v-331676] {
+    width: 4.16667%;
+}
+.col.col-2[data-v-331676] {
+    width: 8.33333%;
+}
+.col.col-3[data-v-331676] {
+    width: 12.5%;
+}
+.col.col-4[data-v-331676] {
+    width: 16.66667%;
+}
+.col.col-5[data-v-331676] {
+    width: 20.83333%;
+}
+.col.col-6[data-v-331676] {
+    width: 25%;
+}
+.col.col-7[data-v-331676] {
+    width: 29.16667%;
+}
+.col.col-8[data-v-331676] {
+    width: 33.33333%;
+}
+.col.col-9[data-v-331676] {
+    width: 37.5%;
+}
+.col.col-10[data-v-331676] {
+    width: 41.66667%;
+}
+.col.col-11[data-v-331676] {
+    width: 45.83333%;
+}
+.col.col-12[data-v-331676] {
+    width: 50%;
+}
+.col.col-13[data-v-331676] {
+    width: 54.16667%;
+}
+.col.col-14[data-v-331676] {
+    width: 58.33333%;
+}
+.col.col-15[data-v-331676] {
+    width: 62.5%;
+}
+.col.col-16[data-v-331676] {
+    width: 66.66667%;
+}
+.col.col-17[data-v-331676] {
+    width: 70.83333%;
+}
+.col.col-18[data-v-331676] {
+    width: 75%;
+}
+.col.col-19[data-v-331676] {
+    width: 79.16667%;
+}
+.col.col-20[data-v-331676] {
+    width: 83.33333%;
+}
+.col.col-21[data-v-331676] {
+    width: 87.5%;
+}
+.col.col-22[data-v-331676] {
+    width: 91.66667%;
+}
+.col.col-23[data-v-331676] {
+    width: 95.83333%;
+}
+.col.col-24[data-v-331676] {
+    width: 100%;
+}

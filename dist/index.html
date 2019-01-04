@@ -6,40 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>P-UI</title>
-    <style>* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <style>* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        :root {
-            --button-height: 32px;
-            --font-size: 14px;
-            --button-bg: white;
-            --button-active-bg: #eee;
-            --border-radius: 4px;
-            --color: #333;
-            --border-color: #999;
-            --border-color-hover: #666;
-        }
+        :root { --button-height: 32px; --font-size: 14px; --button-bg: white; --button-active-bg: #eee; --border-radius: 4px; --color: #333; --border-color: #999; --border-color-hover: #666; }
 
-        #app {
-            margin: 20px;
-        }
+        #app { margin: 20px; }
 
-        body {
-            font-size: var(--font-size)
-        }</style>
-
+        body { font-size: var(--font-size) }</style>
+    
 <link rel="stylesheet" href="/app.a6a4d504.css"></head>
 
 <body>
+    
     <div id="app">
+        <p-row>
+            <p-col>1</p-col>
+            <p-col>2</p-col>
+        </p-row>
+        <p-row>
+            <p-col>1</p-col>
+            <p-col>2</p-col>
+            <p-col>3</p-col>
+        </p-row>
+        <p-row>
+            <p-col span="2">1</p-col>
+            <p-col span="22">2</p-col>
+        </p-row>
+        <p-row>
+            <p-col span="4">1</p-col>
+            <p-col span="20">2</p-col>
+        </p-row>
+
+
+
         <p-input value="张三" disabled=""></p-input>
         <p-input value="李四" readonly=""></p-input>
         <p-input value="王五"></p-input>
         <p-input @change="inputChange" v-model="message" error="姓名不能少于两个字"></p-input>
-        <p>{{message}}</p>
+
+
+
         <div>
         <p-button :loading="loading1" @click="loading1 = !loading1"> 警告</p-button>
         <p-button icon="setting" :loading="loading2" @click="loading2 = !loading2"> 警告</p-button>
