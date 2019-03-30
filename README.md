@@ -1,10 +1,5 @@
-## Colorful-UI一个基于Vue 2.0的自定义组件库
+# Colorful-UI一个基于Vue 2.0的自定义组件库
 
-作者：ChrisPing
 
-## 安装
-使用本框架前，请在 CSS  中开启 box-sizing:border-box
-
-```
-*{box-sizing:borde-box}
-```
+###更新 
+2019-3-30 之前用了parcel进行打包，坑很多，准备换成webpack和vue-cli3重新写组件库
