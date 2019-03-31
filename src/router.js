@@ -1,23 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Button.vue'
 
 Vue.use(Router)
+
+let home = () => import('./views/Home.vue')
+let button = () => import('./components/button/Button.vue')
+let icon = () => import('./components/Icon.vue')
 
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Icon.vue')
-    }
+      path: '/button',
+      name: 'button',
+      component: button
+    },
+    {
+      path: '/icon',
+      name: 'icon',
+      component: icon
+    },
+
   ]
 })

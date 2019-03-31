@@ -8,6 +8,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "node-sass": "^4.11.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -18,7 +19,6 @@
     "@vue/cli-service": "^3.5.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "chai": "^4.1.2",
-    "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
   },
