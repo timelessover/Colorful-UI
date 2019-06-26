@@ -1,23 +1,21 @@
-let onClickDocument = (e) => {
-  let {target} = e
-  callbacks.forEach((item) => {
-    if (target === item.el || item.el.contains(target)) {
-      return
-    } else {
-      item.callback()
-    }
-  })
-}
-document.addEventListener('click', onClickDocument)
-let callbacks = []
 export default {
-  bind: function (el, binding, vnode) {
-    callbacks.push({el, callback: binding.value})
+  bind: (el, binding, vnode) => {
+    let documentHandler = (e) => {
+      if (el.contains(e.target)) {
+        return false
+      }
+      if (binding.expression) {
+        binding.value(e)
+      }
+    }
+    el.__vueClickOutside__ = documentHandler
+    document.addEventListener('click', documentHandler)
+  },
+  update: () => {
+
+  },
+  unbind: (el, binding) => {
+    document.removeEventListener('click', el.__vueClickOutside__)
+    delete el.__vueClickOutside__
   }
 }
-
-let removeListener = () => {
-  document.removeEventListener('click', onClickDocument)
-}
-
-export {removeListener}
