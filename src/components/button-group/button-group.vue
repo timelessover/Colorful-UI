@@ -1,5 +1,5 @@
 <template>
-  <div class="c-button-group">
+  <div class="c-button-group" >
     <slot></slot>
   </div>
 </template>
@@ -13,7 +13,24 @@
           console.warn(`c-button-group 的子元素应该全是 c-button，但是你写的是 ${name}`)
         }
       }
-    }
+    },
+    created() {
+      
+    },
+    beforeCreate() {
+      
+    },
+    data() {
+      return {
+        data: 'msg'
+      }
+    },
+    
+    computed: {
+    },
+    methods: {
+
+    },
   }
 </script>
 <style lang="scss" scoped>

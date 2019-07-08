@@ -1,10 +1,11 @@
-const path = require('path')
+const path = require('path');
+
 module.exports = {
-    css: {
-        loaderOptions: {
-            sass: {
-                includePaths: [path.join(__dirname, 'styles')]
-            },
-        }
+    configureWebpack: {
+      resolve: {
+        alias: {
+          css: path.join(__dirname, 'src/styles'),
+        },
+      },
     },
-}
+  };
