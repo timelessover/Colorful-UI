@@ -43,13 +43,12 @@
     },
     data () {
       return {
-//        currentValue
       }
     },
     computed: {
       classObject () {
         return [
-          'fish input',
+          'cl-input',
           this.icon && (this.iconLeft ? 'left' : 'right') || '',
           {'loading': this.loading},
           this.size,

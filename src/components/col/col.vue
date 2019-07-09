@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div :class="classObject" :style="sytleObjec"></div>
+        <div :class="classObject" :style="styleObject"></div>
     </div>
 </template>
 

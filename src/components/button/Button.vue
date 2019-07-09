@@ -2,20 +2,25 @@
   <button :class="classObject" @click="clickHandler">
     <c-icon class="icon" v-if="icon && !loading" :name="icon"/>
     <c-icon class="loading icon" v-if="loading" name="loading"></c-icon>
-    <div class="c-button-content">
+    <div class="cl-btn-content">
       <slot/>
     </div>
   </button>
 </template>
 <script>
-import Icon from "../icon";
+import Icon from "../icon/icon";
+
+const COMPONENT_NAME = 'cl-button'
 export default {
-  name: "cl-button",
+  name: COMPONENT_NAME,
   components: {
     "c-icon": Icon
   },
   props: {
-    icon: {},
+    icon: {
+      type: String,
+      default: false
+    },
     loading: {
       type: Boolean,
       default: false
@@ -24,7 +29,7 @@ export default {
       type: String,
       default: 'normal'
     },
-    shanpe: {
+    shape: {
       type: String,
       default: 'square'
     },
@@ -36,37 +41,41 @@ export default {
       type: String,
       default: "left",
       validator(value) {
-        return value === "left" || value === "right";
+        return value === "left" || value === "right"
       }
     }
   },
   computed: {
       classObject () {
         return [
-          'c-button',
+          'cl-btn',
           `icon-${this.iconPosition}`,
-          // this.type,
-          // { 'loading': this.loading },
-          // { 'disabled': this.disabled },
-          // this.shape,
-          // this.size
+          `cl-btn-${this.type}`,
+          { 'cl-btn-loading': this.loading },
+          { 'cl-btn-disabled': this.disabled },
+          `cl-btn-${this.shape}`,
+          `cl-btn-${this.size}`
         ]
       }
     },
     methods: {
       clickHandler (e) {
+        if(this.disabled){
+          e.preventDefault()
+          e.stopPropagation()
+          return
+        }
         this.$emit('click', e)
       }
     }
 };
 </script>
 <style lang="scss" scoped>
-@import "../../styles/common/var";
+@import "@/styles/common/base.scss";
 
-.c-button {
+.cl-btn {
     font-size: $font-size;
-    height: $button-height;
-    padding: 0 1em;
+    padding: 12px 20px;;
     border-radius: $border-radius;
     border: 1px solid $border-color;
     background: $button-bg;
@@ -74,7 +83,8 @@ export default {
     justify-content: center;
     align-items: center;
     vertical-align: middle;
-
+    color: $color;
+    line-height: 1;
     &:hover {
         border-color: $border-color-hover;
     }
@@ -87,7 +97,7 @@ export default {
         outline: none;
     }
 
-    >.c-button-content {
+    >.cl-btn-content {
         order: 2;
     }
 
@@ -97,7 +107,7 @@ export default {
     }
 
     &.icon-right {
-        >.c-button-content {
+        >.cl-btn-content {
             order: 1;
         }
 

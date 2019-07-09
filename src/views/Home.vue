@@ -1,11 +1,11 @@
 <template>
   <div id="home">
     <div class="button-demo">
-      <cl-button iconPosition="right"  icon="settings" :loading="loading" @click="flag">{{msg}}</cl-button>
+      <cl-button iconPosition="left"  icon="settings" :loading="loading" @click="flag">{{msg}}</cl-button>
       <cl-button icon="settings">{{msg}}</cl-button>
       <cl-button-group>
-        <cl-button icon="settings">上一页</cl-button>
-        <cl-button icon="settings" iconPosition="right">下一页</cl-button>
+        <cl-button icon="arrow-left">上一页</cl-button>
+        <cl-button icon="arrow-right" iconPosition="right">下一页</cl-button>
       </cl-button-group>
     </div>
   </div>
@@ -36,9 +36,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 </style>

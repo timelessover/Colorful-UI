@@ -1,11 +1,12 @@
 <template>
-  <div class="c-button-group" >
+  <div class="cl-button-group" >
     <slot></slot>
   </div>
 </template>
 <script>
+  const COMPONENT_NAME = 'cl-button-group'
   export default {
-    name: 'c-buttongroup',
+    name: COMPONENT_NAME,
     mounted () {
       for (let node of this.$el.children) {
         let name = node.nodeName.toLowerCase()
@@ -13,26 +14,9 @@
           console.warn(`c-button-group 的子元素应该全是 c-button，但是你写的是 ${name}`)
         }
       }
-    },
-    created() {
-      
-    },
-    beforeCreate() {
-      
-    },
-    data() {
-      return {
-        data: 'msg'
-      }
-    },
-    
-    computed: {
-    },
-    methods: {
-
-    },
+    }
   }
 </script>
 <style lang="scss" scoped>
-@import "../../styles/button-group";
+@import "@/styles/common/base.scss";
 </style>
