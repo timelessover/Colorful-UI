@@ -1,7 +1,7 @@
 <template>
   <button :class="classObject" @click="clickHandler">
-    <c-icon class="icon" v-if="icon && !loading" :name="icon"/>
-    <c-icon class="loading icon" v-if="loading" name="loading"></c-icon>
+    <cl-icon class="icon" v-if="icon && !loading" :name="icon"/>
+    <cl-icon class="loading icon" v-if="loading" name="loading"></cl-icon>
     <div class="cl-btn-content">
       <slot/>
     </div>
@@ -14,7 +14,7 @@ const COMPONENT_NAME = 'cl-button'
 export default {
   name: COMPONENT_NAME,
   components: {
-    "c-icon": Icon
+    "cl-icon": Icon
   },
   props: {
     icon: {

@@ -7,16 +7,19 @@
         <cl-button icon="arrow-left">上一页</cl-button>
         <cl-button icon="arrow-right" iconPosition="right">下一页</cl-button>
       </cl-button-group>
+      <cl-back-top/>
     </div>
   </div>
 </template>
 <script>
 import Button from "@/components/button/button";
 import ButtonGroup from "../components/button-group/button-group";
+import BackTop from "../components/backtop/backtop";
 export default {
   components: {
     "cl-button": Button,
     "cl-button-group": ButtonGroup,
+    "cl-back-top": BackTop
   },
   data() {
     return {
@@ -36,4 +39,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+  #home{
+    height:200vh;
+  }
 </style>
