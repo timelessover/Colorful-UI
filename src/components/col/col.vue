@@ -1,51 +1,76 @@
 <template>
-    <div>
-        <div :class="classObject" :style="styleObject"></div>
+  <div>
+    <div :class="classObject" :style="styleObject">
+      <slot></slot>
     </div>
+  </div>
 </template>
 
 <script>
+const COMPONENT_NAME = "cl-col";
 export default {
-  name: "cl-col",
+  name: COMPONENT_NAME,
   props: {
-    type: {
-      type: String,
-      default: ""
-    },
-    width: {
+    span: {
       type: Number,
-      default: 200
+      default: 24
     },
-    span: { type: [String, Number], default: 8 }, // 1-24
-    offset: { type: [String, Number], default: 0 }, // 1-24
-    push: { type: [String, Number], default: 0 }, // 1-24
-    pull: { type: [String, Number], default: 0 } // 1-24
+    offset: Number,
+    pull: Number,
+    push: Number,
+    xs: [Number, Object],
+    sm: [Number, Object],
+    md: [Number, Object],
+    lg: [Number, Object],
+    xl: [Number, Object]
   },
   computed: {
-      classObject() {
-          return [
-              'cl-col',
-              `width-${this.width}`
-          ] 
-      },
-      styleObject() {
-          if (this.type === 'percent') {
-          const ret = {
-            width: `${spanWidth * parseInt(this.span + '')}%`,
-            marginLeft: `${spanWidth * parseInt(this.offset + '')}%`
-          }
-          if (this.push > 0) ret['left'] = `${spanWidth * parseInt(this.push + '')}%`
-          if (this.pull > 0) ret['right'] = `${spanWidth * parseInt(this.pull + '')}%`
-          return ret
-        } else if (this.type === 'fixed') {
-          return {
-            width: `${this.width}px`
-          }
-        }
-        return {}
-      }
-  },
+    styleObject() {
+      let style = {};
 
+      if (this.gutter) {
+        style.paddingLeft = this.gutter / 2 + "px";
+        style.paddingRight = style.paddingLeft;
+      }
+      return style;
+    },
+    classObject() {
+      let classList = [];
+
+      ["span", "offset", "pull", "push"].forEach(prop => {
+        if (this[prop] || this[prop] === 0) {
+          classList.push(
+            prop !== "span"
+              ? `cl-col-${prop}-${this[prop]}`
+              : `cl-col-${this[prop]}`
+          );
+        }
+      });
+
+      ["xs", "sm", "md", "lg", "xl"].forEach(size => {
+        if (typeof this[size] === "number") {
+          classList.push(`cl-col-${size}-${this[size]}`);
+        } else if (typeof this[size] === "object") {
+          let props = this[size];
+          Object.keys(props).forEach(prop => {
+            classList.push(
+              prop !== "span"
+                ? `cl-col-${size}-${prop}-${props[prop]}`
+                : `cl-col-${size}-${props[prop]}`
+            );
+          });
+        }
+      });
+      return ["cl-col", classList];
+    },
+    gutter() {
+      let parent = this.$parent;
+      while (parent && parent.$options.componentName !== "ClRow") {
+        parent = parent.$parent;
+      }
+      return parent ? parent.gutter : 0;
+    }
+  }
 };
 </script>
 

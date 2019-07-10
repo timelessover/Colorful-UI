@@ -7,7 +7,7 @@
         <cl-button icon="arrow-left">上一页</cl-button>
         <cl-button icon="arrow-right" iconPosition="right">下一页</cl-button>
       </cl-button-group>
-      <cl-back-top/>
+      <cl-back-top :bottom="100" :right="50"></cl-back-top>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
       flag1: true,
       flag2: true,
       errorMsg: "用户名错误",
-      inputValue: "你好colorful"
+      inputValue: ""
     };
   },
   methods: {
@@ -39,7 +39,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  #home{
-    height:200vh;
-  }
+  
 </style>

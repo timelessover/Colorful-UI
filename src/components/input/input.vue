@@ -1,3 +1,4 @@
+
 <template>
   <div :class="classObject">
     <div class="label-left" v-if="labelLeft" v-html="labelLeft"></div>

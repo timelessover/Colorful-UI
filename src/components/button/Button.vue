@@ -1,3 +1,10 @@
+//1. 添加icon
+//2. 添加loading状态
+//3. 控制大小和形状
+//4. 禁用状态
+//5. icon位置
+//6. type类型 
+//<cl-button :type="..." :icon=".." :loading="..." :size="..." :shape="..." :disabled="..." :iconPosition="..." ></cl-button>
 <template>
   <button :class="classObject" @click="clickHandler">
     <cl-icon class="icon" v-if="icon && !loading" :name="icon"/>

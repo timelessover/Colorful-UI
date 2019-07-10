@@ -5,4 +5,7 @@
 </template>
 
 <style lang="scss">
+body{
+    height:200vh;
+  }
 </style>
