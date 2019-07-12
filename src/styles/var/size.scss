@@ -1,12 +1,31 @@
-// font-size vars
-$fontsize-large-xxxx : 30px;
-$fontsize-large-xxx : 24px;
-$fontsize-large-xx : 20px;
-$fontsize-large-x : 18px;
-$fontsize-large : 16px;
-$fontsize-medium : 14px;
-$fontsize-small : 12px;
-$fontsize-small-s : 10px;
+/* Fill
+-------------------------- */
+$--fill-base: $--color-white !default;
 
-// radius-size
-$radius-size-medium : 5px;
+/* Typography
+-------------------------- */
+$--font-path: 'fonts' !default;
+/// fontSize|1|Font Size|0
+$--font-size-extra-large: 20px !default;
+/// fontSize|1|Font Size|0
+$--font-size-large: 18px !default;
+/// fontSize|1|Font Size|0
+$--font-size-medium: 16px !default;
+/// fontSize|1|Font Size|0
+$--font-size-base: 14px !default;
+/// fontSize|1|Font Size|0
+$--font-size-small: 13px !default;
+/// fontSize|1|Font Size|0
+$--font-size-extra-small: 12px !default;
+/// fontWeight|1|Font Weight|1
+$--font-weight-primary: 500 !default;
+/// fontWeight|1|Font Weight|1
+$--font-weight-secondary: 100 !default;
+/// fontLineHeight|1|Line Height|2
+$--font-line-height-primary: 24px !default;
+/// fontLineHeight|1|Line Height|2
+$--font-line-height-secondary: 16px !default;
+$--font-color-disabled-base: #bbb !default;
+/* Size
+-------------------------- */
+$--size-base: 14px !default;

@@ -6,7 +6,7 @@
 //6. type类型 
 //<cl-button :type="..." :icon=".." :loading="..." :size="..." :shape="..." :disabled="..." :iconPosition="..." ></cl-button>
 <template>
-  <button :class="classObject" @click="clickHandler">
+  <button :class="classObject" @click="clickHandler" :disabled="isDisabled">
     <cl-icon class="icon" v-if="icon && !loading" :name="icon"/>
     <cl-icon class="loading icon" v-if="loading" name="loading"></cl-icon>
     <div class="cl-btn-content">
@@ -16,8 +16,10 @@
 </template>
 <script>
 import Icon from "../icon/icon";
+import { deflate } from 'zlib';
 
 const COMPONENT_NAME = 'cl-button'
+
 export default {
   name: COMPONENT_NAME,
   components: {
@@ -27,6 +29,10 @@ export default {
     icon: {
       type: String,
       default: false
+    },
+    type: {
+      type: String,
+      default: "default"
     },
     loading: {
       type: Boolean,
@@ -63,6 +69,9 @@ export default {
           `cl-btn-${this.shape}`,
           `cl-btn-${this.size}`
         ]
+      },
+      isDisabled(){
+        return this.disabled
       }
     },
     methods: {
@@ -81,10 +90,10 @@ export default {
 @import "@/styles/common/base.scss";
 
 .cl-btn {
-    font-size: $font-size;
+    font-size: $--font-size-base;
     padding: 12px 20px;;
-    border-radius: $border-radius;
-    border: 1px solid $border-color;
+    border-radius: $--border-radius-base;
+    border: 1px solid $--border-color-base;
     background: $button-bg;
     display: inline-flex;
     justify-content: center;

@@ -5,7 +5,10 @@
 </template>
 
 <style lang="scss">
-body{
-    height:200vh;
-  }
+body {
+  height: 200vh;
+}
+input {
+  cursor: pointer;
+}
 </style>
