@@ -1,7 +1,7 @@
 
 <template>
     <div class="cl-collapse" role="tablist" aria-multiselectable="true">
-        <slot></slot>
+      <slot></slot>
     </div>
 </template>
 

@@ -1,17 +1,14 @@
 // 三个pane 三个tab
 // 点击一个tab,一个pane打开，再点击关闭，二三同上
 
-<template>
+<template >
     <div
         class="cl-collapse-item"
         :class="{'is-active': isActive, 'is-disabled': disabled }"
         @click="handleHeaderClick"
     >
         <slot name="title">{{title}}</slot>
-     
-     <i class="cl-collapse-item__arrow cl-icon-arrow-right" ></i>
-    <!-- <div>xxxxxx</div> -->
-
+        <i class="cl-collapse-item__arrow cl-icon-arrow-right"></i>
     </div>
 </template>
 <script>
@@ -41,9 +38,6 @@ export default {
       }
     },
     disabled: Boolean
-  },
-  created() {
-    console.log(this.collapse);
   },
   computed: {
     // isActive() {

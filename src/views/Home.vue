@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div class="button-demo">
-      <cl-button iconPosition="left" icon = "refresh" :loading="flag1">{{msg}}</cl-button>
+      <cl-button iconPosition="left" icon="refresh" :loading="flag1">{{msg}}</cl-button>
       <cl-button :loading="loading" @click="flag">{{msg}}</cl-button>
       <cl-button-group>
         <cl-button icon="arrow-left">上一页</cl-button>
@@ -11,9 +11,14 @@
       <cl-input v-model="inputValue" type="text" clearable></cl-input>
       <cl-collapse>
         <cl-collapse-item name="1"></cl-collapse-item>
-        <cl-collapse-item name="2"> </cl-collapse-item>
+        <cl-collapse-item name="2"></cl-collapse-item>
         <cl-collapse-item name="3" title="45646"></cl-collapse-item>
       </cl-collapse>
+      <cl-tabs @tabs="handleClick">
+        <cl-tab-pane label="用户管理" name= 0>用户管理</cl-tab-pane>
+        <cl-tab-pane label="配置管理" name= 1>配置管理</cl-tab-pane>
+        <cl-tab-pane label="角色管理" name= 2>角色管理</cl-tab-pane>
+      </cl-tabs>
     </div>
   </div>
 </template>
@@ -22,8 +27,10 @@ import Button from "@/components/button/button";
 import ButtonGroup from "@/components/button-group/button-group";
 import BackTop from "@/components/backtop/backtop";
 import Input from "@/components/input/input";
-import Collapse from "@/components/collapse/collapse.vue";
-import CollapseItem from "@/components/collapse/collapse-item.vue";
+import Collapse from "@/components/collapse/collapse";
+import CollapseItem from "@/components/collapse/collapse-item";
+import Tabs from "@/components/tabs/tabs";
+import Pane from "@/components/tabs/tab-pane";
 import axios from "axios";
 
 export default {
@@ -33,7 +40,9 @@ export default {
     "cl-back-top": BackTop,
     "cl-input": Input,
     "cl-collapse": Collapse,
-    "cl-collapse-item": CollapseItem
+    "cl-collapse-item": CollapseItem,
+    "cl-tabs": Tabs,
+    "cl-tab-pane": Pane
   },
   data() {
     return {
@@ -45,11 +54,13 @@ export default {
       inputValue: ""
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     flag() {
       this.loading = !this.loading;
+    },
+    handleClick(tab, event) {
+      console.log(tab);
     }
   }
 };

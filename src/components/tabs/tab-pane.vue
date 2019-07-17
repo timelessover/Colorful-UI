@@ -1,56 +1,53 @@
 <template>
   <div
-    class="el-tab-pane"
-    v-if="(!lazy || loaded) || active"
-    v-show="active"
-    role="tabpanel"
-    :aria-hidden="!active"
-    :id="`pane-${paneName}`"
-    :aria-labelledby="`tab-${paneName}`"
+    class="cl-tab-pane"
+    v-show="isShow"
   >
+    {{name}}
     <slot></slot>
   </div>
 </template>
 <script>
   export default {
-    name: 'ElTabPane',
+    name: 'cl-tab-pane',
 
-    componentName: 'ElTabPane',
+    componentName: 'cl-tab-pane',
 
     props: {
-      label: String,
-      labelContent: Function,
-      name: String,
-      closable: Boolean,
-      disabled: Boolean,
-      lazy: Boolean
+      name:{
+        type: String
+      }
     },
 
     data() {
       return {
         index: null,
-        loaded: false
+        loaded: false,
+        // isShow: true
       };
     },
+    
 
     computed: {
-      isClosable() {
-        return this.closable || this.$parent.closable;
-      },
-      active() {
-        const active = this.$parent.currentName === (this.name || this.index);
-        if (active) {
-          this.loaded = true;
+      isShow(){
+        if(this.name == this.$parent.index + ''){
+          return true
+        }else{
+          return false
         }
-        return active;
-      },
-      paneName() {
-        return this.name || this.index;
       }
     },
+    
 
     updated() {
       this.$parent.$emit('tab-nav-update');
     }
   };
 </script>
+<style lang="scss" scoped>
+cl-tab-pane{
+  height: 50px;
+  width: 50px;
+  background: blue;
+}
+</style>
