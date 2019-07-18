@@ -63,7 +63,6 @@ export default {
 .cl-tabs{
   height:200px;
   width:500px;
-  background: red;
 }
 </style>
 

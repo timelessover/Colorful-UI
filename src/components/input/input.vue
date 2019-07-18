@@ -1,6 +1,4 @@
 
-import { constants } from 'fs';
-import { constants } from 'fs';
 //<cl-input v-model="input" placeholder="请输入内容"></cl-input>
 <template>
   <div :class="classObject">
@@ -30,9 +28,9 @@ import { constants } from 'fs';
 export default {
   name: "cl-input",
   props: {
-    value: { type: String, default: "" },
+    value: { type: [String,Number], default: "" },
     type: { type: String, default: "text" },
-    hint: { type: String, default: "Please ..." },
+    hint: { type: String, default: "" },
     icon: { type: String },
     iconLeft: { type: Boolean, default: false },
     loading: { type: Boolean, default: false },
@@ -42,7 +40,8 @@ export default {
     labelLeft: { type: String },
     disabled: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
-    readonly: Boolean
+    readonly: Boolean,
+    inputValue: {type: Number}
   },
   data() {
     return {};
@@ -58,7 +57,6 @@ export default {
     showClear() {
       return this.clearable;
     },
-    
     valueEmpty() {
       return /^\s*$/.test(this.value);
     }
@@ -66,6 +64,7 @@ export default {
   methods: {
     updateValue(v) {
       this.changeHandler(v);
+      this.$emit('change',v)
     },
     clearHandler() {
       this.changeHandler("");
@@ -84,7 +83,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/styles/common/base.scss";
 .cl-input {
   width: 180px;
