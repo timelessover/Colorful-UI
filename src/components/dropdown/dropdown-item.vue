@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: "cl-dropdown-item",
   created() {}
 };
 </script>

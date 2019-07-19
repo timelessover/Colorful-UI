@@ -14,12 +14,8 @@
 
 <script>
 export default {
+  name:'cl-dropdown-menu',
   inject: ["dropdown"],
-  data() {
-    return {
-      item: "value"
-    };
-  },
   created() {
     console.log(this.$slots.default);
   },

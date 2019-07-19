@@ -100,4 +100,7 @@ export default {
   width: 100px;
   background: blue;
 }
+#home{
+  height:200vh;
+}
 </style>

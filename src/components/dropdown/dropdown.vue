@@ -21,6 +21,7 @@
 
 <script>
 export default {
+  name: "cl-dropdown",
   props: {},
   data() {
     return {
@@ -35,6 +36,7 @@ export default {
     };
   },
   created() {},
+  mounted() {},
   methods: {
     initEvent() {
       let show = this.show;

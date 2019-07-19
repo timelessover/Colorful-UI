@@ -11,3 +11,13 @@ describe('HelloWorld.vue', () => {
     expect(wrapper.text()).to.include(msg)
   })
 })
+describe('Button.vue', () => {
+  it('测试按钮', () => {
+    const msg = 'new message'
+    const wrapper = shallowMount(HelloWorld, {
+      propsData: { msg }
+    })
+    expect(wrapper.text()).to.include(msg)
+  })
+})
+

@@ -22,10 +22,10 @@
 <script>
 import Icon from "../icon/icon";
 
-const COMPONENT_NAME = 'cl-back-top'
+const COMPONENT_NAME = "cl-back-top";
 export default {
   name: COMPONENT_NAME,
-   components: {
+  components: {
     "cl-icon": Icon
   },
   props: {
@@ -52,10 +52,10 @@ export default {
   },
   computed: {
     styleBottom() {
-      return `${this.bottom}px`
+      return `${this.bottom}px`;
     },
     styleRight() {
-      return `${this.right}px`
+      return `${this.right}px`;
     }
   },
   methods: {
@@ -76,29 +76,32 @@ export default {
     },
     handleClick(e) {
       this.scrollToTop();
-      this.$emit('click', e);
+      this.$emit("click", e);
     },
     scrollToTop() {
+      let timer;
       let el = this.el;
-      let step = 0;
-      let interval = setInterval(() => {
-        if (el.scrollTop <= 0) {
-          clearInterval(interval);
-          return;
+      let distance = 0;
+      function step() {
+        distance += 10;
+        el.scrollTop -= distance;
+        if (el.scrollTop > 0) {
+          timer = requestAnimationFrame(step);
+        } else {
+          cancelAnimationFrame(timer);
         }
-        step += 10;
-        el.scrollTop -= step;
-      }, 20);
+      };
+      step()
     }
   },
   mounted() {
     this.init();
-    this.throttledScrollHandler = this._.throttle(this.onScroll,300);
-    this.container.addEventListener('scroll', this.throttledScrollHandler);
+    this.throttledScrollHandler = this._.throttle(this.onScroll, 300);
+    this.container.addEventListener("scroll", this.throttledScrollHandler);
   },
-  beforeDestroy () {
-    this.container.removeEventListener('scroll');
-  },
+  beforeDestroy() {
+    this.container.removeEventListener("scroll");
+  }
 };
 </script>
 <style lang="scss" scoped>
