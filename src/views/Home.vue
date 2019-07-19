@@ -15,12 +15,24 @@
         <cl-collapse-item name="3" title="45646"></cl-collapse-item>
       </cl-collapse>
       <cl-tabs @tabs="handleClick">
-        <cl-tab-pane label="用户管理" name= "0">用户管理</cl-tab-pane>
-        <cl-tab-pane label="配置管理" name= "1">配置管理</cl-tab-pane>
-        <cl-tab-pane label="角色管理" name= "2">角色管理</cl-tab-pane>
-        <cl-tab-pane label="哈哈哈" name= "3">哈哈哈</cl-tab-pane>
+        <cl-tab-pane label="用户管理" name="0">用户管理</cl-tab-pane>
+        <cl-tab-pane label="配置管理" name="1">配置管理</cl-tab-pane>
+        <cl-tab-pane label="角色管理" name="2">角色管理</cl-tab-pane>
+        <cl-tab-pane label="哈哈哈" name="3">哈哈哈</cl-tab-pane>
       </cl-tabs>
       <cl-input-number v-model="value" @change="handleChange"></cl-input-number>
+      <cl-dropdown>
+        <span class="cl-dropdown-link">下拉菜单
+          <i class="cl-icon-arrow-down cl-icon--right"></i>
+        </span>
+        <cl-dropdown-menu slot="dropdown">
+          <cl-dropdown-item>黄金糕</cl-dropdown-item>
+          <cl-dropdown-item>狮子头</cl-dropdown-item>
+          <cl-dropdown-item>螺蛳粉</cl-dropdown-item>
+          <cl-dropdown-item >双皮奶</cl-dropdown-item>
+          <cl-dropdown-item >蚵仔煎</cl-dropdown-item>
+        </cl-dropdown-menu>
+      </cl-dropdown>
     </div>
   </div>
 </template>
@@ -33,7 +45,11 @@ import Collapse from "@/components/collapse/collapse";
 import CollapseItem from "@/components/collapse/collapse-item";
 import Tabs from "@/components/tabs/tabs";
 import Pane from "@/components/tabs/tab-pane";
-import InputNumber from '@/components/input-number/input-number.vue';
+import InputNumber from "@/components/input-number/input-number.vue";
+import Popover from "@/components/popover/popover.vue";
+import DropDownMenu from "@/components/dropdown/dropdown-menu.vue";
+import DropDownItem from "@/components/dropdown/dropdown-item.vue";
+import DropDown from "@/components/dropdown/dropdown.vue";
 import axios from "axios";
 
 export default {
@@ -46,7 +62,11 @@ export default {
     "cl-collapse-item": CollapseItem,
     "cl-tabs": Tabs,
     "cl-tab-pane": Pane,
-    "cl-input-number": InputNumber
+    "cl-input-number": InputNumber,
+    "cl-popover": Popover,
+    "cl-dropdown-menu": DropDownMenu,
+    "cl-dropdown-item": DropDownItem,
+    "cl-dropdown": DropDown
   },
   data() {
     return {
@@ -56,12 +76,11 @@ export default {
       flag2: true,
       errorMsg: "用户名错误",
       value: 5,
-      list:[{name:'chris',age: 18},{name: 'james',age:30}]
+      list: [{ name: "chris", age: 18 }, { name: "james", age: 30 }]
     };
   },
   created() {},
-  watch: {
-  },
+  watch: {},
   methods: {
     flag() {
       this.loading = !this.loading;
@@ -70,10 +89,15 @@ export default {
       console.log(tab);
     },
     handleChange(value) {
-        console.log(value);
-      }
+      console.log(value);
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
+.cl-dropdown-link{
+  height:50px;
+  width: 100px;
+  background: blue;
+}
 </style>
