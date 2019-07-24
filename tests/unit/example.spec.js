@@ -1,23 +1,15 @@
 import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import Button from '@/components/button/button.vue'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
-    })
-    expect(wrapper.text()).to.include(msg)
-  })
-})
-describe('Button.vue', () => {
-  it('测试按钮', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
-    })
-    expect(wrapper.text()).to.include(msg)
-  })
+describe('Button', () => {
+  let vm;
+  it('create', () => {
+    vm = shallowMount(Button, {
+      type: 'primary'
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('cl-button--primary')).to.be.true;
+  });
 })
 

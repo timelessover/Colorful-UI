@@ -33,6 +33,7 @@
           <cl-dropdown-item >蚵仔煎</cl-dropdown-item>
         </cl-dropdown-menu>
       </cl-dropdown>
+      <cl-magnifier :imgList="imgList"></cl-magnifier>
     </div>
   </div>
 </template>
@@ -50,6 +51,7 @@ import Popover from "@/components/popover/popover.vue";
 import DropDownMenu from "@/components/dropdown/dropdown-menu.vue";
 import DropDownItem from "@/components/dropdown/dropdown-item.vue";
 import DropDown from "@/components/dropdown/dropdown.vue";
+import Magnifier from "@/components/magnifier/magnifier.vue";
 import axios from "axios";
 
 export default {
@@ -66,7 +68,8 @@ export default {
     "cl-popover": Popover,
     "cl-dropdown-menu": DropDownMenu,
     "cl-dropdown-item": DropDownItem,
-    "cl-dropdown": DropDown
+    "cl-dropdown": DropDown,
+    'cl-magnifier':Magnifier
   },
   data() {
     return {
@@ -76,7 +79,14 @@ export default {
       flag2: true,
       errorMsg: "用户名错误",
       value: 5,
-      list: [{ name: "chris", age: 18 }, { name: "james", age: 30 }]
+      list: [{ name: "chris", age: 18 }, { name: "james", age: 30 }],
+      imgList:[
+         { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner1.jpg" },
+        { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg" },
+        { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg" },
+        { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg" },
+        { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg" }
+      ]
     };
   },
   created() {},

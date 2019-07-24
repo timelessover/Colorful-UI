@@ -82,7 +82,7 @@ export default {
       let timer;
       let el = this.el;
       let distance = 0;
-      function step() {
+      !function step() {
         distance += 10;
         el.scrollTop -= distance;
         if (el.scrollTop > 0) {
@@ -90,8 +90,7 @@ export default {
         } else {
           cancelAnimationFrame(timer);
         }
-      };
-      step()
+      }()
     }
   },
   mounted() {

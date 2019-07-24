@@ -16,7 +16,6 @@
 </template>
 <script>
 import Icon from "../icon/icon";
-import { deflate } from "zlib";
 
 const COMPONENT_NAME = "cl-button";
 
