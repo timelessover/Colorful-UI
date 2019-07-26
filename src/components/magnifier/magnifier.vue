@@ -99,6 +99,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin zero{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 body,
 ul {
   padding: 0;
@@ -118,9 +123,7 @@ img {
   height: 492px;
 }
 .imgs {
-  position: absolute;
-  left: 0;
-  top: 0;
+  @include zero;
   width: 100%;
   height: 100%;
 }
@@ -162,17 +165,13 @@ img {
   width: 400px;
   height: 400px;
   img {
-    position: absolute;
-    left: 0;
-    top: 0;
+    @include zero;
     width: 200%;
     height: 200%;
   }
 }
 .mask {
-  position: absolute;
-  left: 0;
-  top: 0;
+  @include zero;
   width: 200px;
   height: 200px;
   background: url("http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/mask-bg.png")
