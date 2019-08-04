@@ -1,4 +1,4 @@
 # :rainbow:Colorful-UI
 
-> 一个基于Vue 2.0的自定义组件库
+> 一个基于Vue 2.x的自定义组件库
 
