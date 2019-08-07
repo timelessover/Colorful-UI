@@ -5,7 +5,7 @@
 Basic
 
 - [ ] Container 布局容器
-- [ ] Layout 布局
+- [x] Layout 布局
 - [ ] Link 文字链接
 - [ ] Color 色彩
 - [x] Icon 图标
