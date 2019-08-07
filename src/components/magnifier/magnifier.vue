@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     handleClick(index) {
+      console.log(index)
       this.currentIndex = index;
     },
     handleEnter() {

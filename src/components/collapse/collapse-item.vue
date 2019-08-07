@@ -63,8 +63,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.cl-collapse-item{
+  height:20px;
+  transition:height 0.3s;
+  
+}
 .is-active {
   background: red;
   height: 50px;
 }
+
 </style>

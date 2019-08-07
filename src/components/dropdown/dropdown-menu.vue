@@ -17,7 +17,6 @@ export default {
   name:'cl-dropdown-menu',
   inject: ["dropdown"],
   created() {
-    console.log(this.$slots.default);
   },
   computed: {
     isVisable() {

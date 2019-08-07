@@ -1,5 +1,10 @@
 <template>
   <div id="home">
+    <cl-row :gutter="20">
+      <cl-col :span="6"><div style="background:blue;width:100%">1</div> </cl-col>
+      <cl-col :span="6"><div style="background:blue;width:100%;">1</div></cl-col>
+      <cl-col :span="12"><div style="background:blue;width:100%;">1</div></cl-col>
+    </cl-row>
     <div class="button-demo">
       <cl-button iconPosition="left" icon="refresh" :loading="flag1">{{msg}}</cl-button>
       <cl-button :loading="loading" @click="flag">{{msg}}</cl-button>
@@ -22,18 +27,21 @@
       </cl-tabs>
       <cl-input-number v-model="value" @change="handleChange"></cl-input-number>
       <cl-dropdown>
-        <span class="cl-dropdown-link">下拉菜单
+        <span class="cl-dropdown-link">
+          下拉菜单
           <i class="cl-icon-arrow-down cl-icon--right"></i>
         </span>
         <cl-dropdown-menu slot="dropdown">
           <cl-dropdown-item>黄金糕</cl-dropdown-item>
           <cl-dropdown-item>狮子头</cl-dropdown-item>
           <cl-dropdown-item>螺蛳粉</cl-dropdown-item>
-          <cl-dropdown-item >双皮奶</cl-dropdown-item>
-          <cl-dropdown-item >蚵仔煎</cl-dropdown-item>
+          <cl-dropdown-item>双皮奶</cl-dropdown-item>
+          <cl-dropdown-item>蚵仔煎</cl-dropdown-item>
         </cl-dropdown-menu>
       </cl-dropdown>
-      <cl-magnifier :imgList="imgList"></cl-magnifier>
+      <div>
+        <cl-magnifier :imgList="imgList"></cl-magnifier>
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +60,8 @@ import DropDownMenu from "@/components/dropdown/dropdown-menu.vue";
 import DropDownItem from "@/components/dropdown/dropdown-item.vue";
 import DropDown from "@/components/dropdown/dropdown.vue";
 import Magnifier from "@/components/magnifier/magnifier.vue";
+import Row from "@/components/row/row.vue";
+import Col from "@/components/col/col.vue";
 import axios from "axios";
 
 export default {
@@ -69,7 +79,9 @@ export default {
     "cl-dropdown-menu": DropDownMenu,
     "cl-dropdown-item": DropDownItem,
     "cl-dropdown": DropDown,
-    'cl-magnifier':Magnifier
+    "cl-magnifier": Magnifier,
+    "cl-row": Row,
+    "cl-col": Col
   },
   data() {
     return {
@@ -80,12 +92,27 @@ export default {
       errorMsg: "用户名错误",
       value: 5,
       list: [{ name: "chris", age: 18 }, { name: "james", age: 30 }],
-      imgList:[
-         { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner1.jpg" },
-        { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg" },
-        { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg" },
-        { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg" },
-        { "path": "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg" }
+      imgList: [
+        {
+          path:
+            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner1.jpg"
+        },
+        {
+          path:
+            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg"
+        },
+        {
+          path:
+            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg"
+        },
+        {
+          path:
+            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg"
+        },
+        {
+          path:
+            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg"
+        }
       ]
     };
   },
@@ -105,12 +132,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.cl-dropdown-link{
-  height:50px;
+.cl-dropdown-link {
+  height: 50px;
   width: 100px;
   background: blue;
 }
-#home{
-  height:200vh;
+#home {
+  height: 200vh;
 }
 </style>
