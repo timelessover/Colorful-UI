@@ -9,7 +9,7 @@
 
 <template>
   <div :class="classObjet" >
-    <TabNav></TabNav>
+    <TabNav ></TabNav>
     <slot></slot>
   </div>
 </template>
