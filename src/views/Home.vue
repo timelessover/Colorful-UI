@@ -1,9 +1,25 @@
 <template>
   <div id="home">
-    <div>
+    <cl-popover
+      placement="top-start"
+      title="标题"
+      width="200"
+      trigger="click"
+      content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
+    >
+      <cl-button slot="reference">hover 激活</cl-button>
+    </cl-popover>
+    <!-- <div>
       <cl-radio v-model="radio" label="1">备选项1</cl-radio>
       <cl-radio v-model="radio" label="2">备选项2</cl-radio>
-    </div>
+    </div>-->
+    <!-- <el-checkbox-group v-model="checkList">
+      <el-checkbox label="复选框 A"></el-checkbox>
+      <el-checkbox label="复选框 B"></el-checkbox>
+      <el-checkbox label="复选框 C"></el-checkbox>
+      <el-checkbox label="禁用" disabled></el-checkbox>
+      <el-checkbox label="选中且禁用" disabled></el-checkbox>
+    </el-checkbox-group>-->
     <!-- <cl-row :gutter="20">
       <cl-col :span="6">
         <div style="background:blue;width:100%">1</div>
@@ -52,7 +68,8 @@
       <div>
         <cl-magnifier :imgList="imgList"></cl-magnifier>
       </div>
-    </div> -->
+    </div>-->
+
     <div></div>
   </div>
 </template>
@@ -74,6 +91,7 @@ import Magnifier from "@/components/magnifier/magnifier.vue";
 import Row from "@/components/row/row.vue";
 import Col from "@/components/col/col.vue";
 import Radio from "@/components/radio/radio.vue";
+import Checkbox from "@/components/checkbox/checkbox.vue";
 import axios from "axios";
 
 export default {
@@ -94,11 +112,12 @@ export default {
     "cl-magnifier": Magnifier,
     "cl-row": Row,
     "cl-col": Col,
-    "cl-radio": Radio
+    "cl-radio": Radio,
+    "cl-checkbox": Checkbox
   },
   data() {
     return {
-      radio: '2'
+      radio: "2"
     };
   },
   created() {},

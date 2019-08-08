@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  componentName: "ElRadio",
+  componentName: "ClRadio",
   props: {
     value: {},
     label: {
@@ -45,7 +45,6 @@ export default {
       },
       set(val) {
         this.$emit("input", val);
-        console.log('2')
         this.$refs.radio &&
           (this.$refs.radio.checked = this.model === this.label);
       }
@@ -65,6 +64,7 @@ export default {
   },
   methods: {
     updateValue(v) {
+      this.$emit('input',v)
       this.$nextTick(() => {
         this.$parent.$children.forEach(child => {
           child.label == v ? child.$refs.radio.checked = true : child.$refs.radio.checked = false

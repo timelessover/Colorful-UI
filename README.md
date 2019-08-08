@@ -13,7 +13,7 @@ Basic
 
 Form
 
-- [ ] Radio 单选框
+- [x] Radio 单选框
 - [ ] Checkbox 多选框
 - [x] Input 输入框
 - [x] InputNumber 计算器
