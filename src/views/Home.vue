@@ -1,9 +1,19 @@
 <template>
   <div id="home">
-    <cl-row :gutter="20">
-      <cl-col :span="6"><div style="background:blue;width:100%">1</div> </cl-col>
-      <cl-col :span="6"><div style="background:blue;width:100%;">1</div></cl-col>
-      <cl-col :span="12"><div style="background:blue;width:100%;">1</div></cl-col>
+    <div>
+      <cl-radio v-model="radio" label="1">备选项1</cl-radio>
+      <cl-radio v-model="radio" label="2">备选项2</cl-radio>
+    </div>
+    <!-- <cl-row :gutter="20">
+      <cl-col :span="6">
+        <div style="background:blue;width:100%">1</div>
+      </cl-col>
+      <cl-col :span="6">
+        <div style="background:blue;width:100%;">1</div>
+      </cl-col>
+      <cl-col :span="12">
+        <div style="background:blue;width:100%;">1</div>
+      </cl-col>
     </cl-row>
     <div class="button-demo">
       <cl-button iconPosition="left" icon="refresh" :loading="flag1">{{msg}}</cl-button>
@@ -42,7 +52,8 @@
       <div>
         <cl-magnifier :imgList="imgList"></cl-magnifier>
       </div>
-    </div>
+    </div> -->
+    <div></div>
   </div>
 </template>
 <script>
@@ -62,6 +73,7 @@ import DropDown from "@/components/dropdown/dropdown.vue";
 import Magnifier from "@/components/magnifier/magnifier.vue";
 import Row from "@/components/row/row.vue";
 import Col from "@/components/col/col.vue";
+import Radio from "@/components/radio/radio.vue";
 import axios from "axios";
 
 export default {
@@ -81,39 +93,12 @@ export default {
     "cl-dropdown": DropDown,
     "cl-magnifier": Magnifier,
     "cl-row": Row,
-    "cl-col": Col
+    "cl-col": Col,
+    "cl-radio": Radio
   },
   data() {
     return {
-      msg: "确定",
-      loading: false,
-      flag1: true,
-      flag2: true,
-      errorMsg: "用户名错误",
-      value: 5,
-      list: [{ name: "chris", age: 18 }, { name: "james", age: 30 }],
-      imgList: [
-        {
-          path:
-            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner1.jpg"
-        },
-        {
-          path:
-            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg"
-        },
-        {
-          path:
-            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg"
-        },
-        {
-          path:
-            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg"
-        },
-        {
-          path:
-            "http://www.17sucai.com/preview/905244/2019-06-20/%E6%B7%98%E5%AE%9D%E4%B8%BB%E5%9B%BE/images/banner2.jpg"
-        }
-      ]
+      radio: '2'
     };
   },
   created() {},
