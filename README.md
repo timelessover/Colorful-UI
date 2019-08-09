@@ -2,6 +2,8 @@
 
 > 一个基于Vue 2.x的自定义UI组件库
 
+组件列表
+
 Basic
 
 - [ ] Container 布局容器
@@ -37,10 +39,15 @@ Data
 - [x] Breadcrumb 面包屑 
 - [x] Collapse 折叠面板
 - [x] Dropdown 下拉菜单
-- [x] Backtop 回到顶部
-- [x] Magnifier 放大镜
 - [ ] Card 卡片
 - [x] Popover 弹出框
+
+Others
+
+- [x] Magnifier 放大镜
+- [x] Affix 钉子
+- [x] Backtop 回到顶部
+
 
 
 
