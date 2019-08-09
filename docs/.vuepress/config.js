@@ -1,8 +1,9 @@
 const path = require('path')
 module.exports = {
-  base: 'https://timelessover.github.io/Colorful-UI/',
+  base: '',
   title: 'Colorful-UI',
-  description: '一个好用的UI框架',
+  description: '一个专注体验的UI框架',
+  port:8085,
   themeConfig: {
     nav: [
       {text: '主页', link: '/'},
@@ -20,16 +21,16 @@ module.exports = {
       {
         title: '组件',
         collapsable: false,
-        // children: [
-        //   '/components/button',
-        //   '/components/tabs',
-        //   '/components/input',
-        //   '/components/grid',
-        //   '/components/layout',
-        //   '/components/toast',
-        //   '/components/popover',
-        //   '/components/slides',
-        // ]
+        children: [
+          '/components/button',
+          '/components/tabs',
+          '/components/input',
+          '/components/grid',
+          '/components/layout',
+          '/components/toast',
+          '/components/popover',
+          '/components/slides',
+        ]
       },
 
     ]

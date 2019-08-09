@@ -7,11 +7,11 @@ title: 安装
 本章节待完善
 
 ```bash
-npm install gulu
+npm install Colorful
 ```
 
 或
 
 ```bash
-yarn add gulu
+yarn add Colorful
 ```
