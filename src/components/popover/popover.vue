@@ -9,7 +9,9 @@
         
 <template>
     <div class="cl-popover">
-        <div class="cl-popover__item" v-show="open" ref="popover">{{content}}</div>
+      <transition name="fade">
+         <div class="cl-popover__item" v-show="open" ref="popover">{{content}}</div>
+      </transition>
         <slot name="reference"></slot>
     </div>
 </template>
@@ -93,7 +95,7 @@ export default {
   width: 100px;
   margin: 200px auto;
   position: relative;
-  .cl-popover__item {
+  .cl-popover__item-- {
     position: absolute;
     left: -75px;
     top: -60px;
@@ -101,5 +103,11 @@ export default {
     width: 100px;
     background: blue;
   }
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

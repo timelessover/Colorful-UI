@@ -1,6 +1,7 @@
 <template>
   <div id="home">
-    <cl-popover
+    <cl-affix></cl-affix>
+    <!-- <cl-popover
       placement="top-start"
       title="标题"
       width="200"
@@ -8,18 +9,18 @@
       content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
     >
       <cl-button slot="reference">hover 激活</cl-button>
-    </cl-popover>
+    </cl-popover> -->
     <!-- <div>
       <cl-radio v-model="radio" label="1">备选项1</cl-radio>
       <cl-radio v-model="radio" label="2">备选项2</cl-radio>
-    </div>-->
-    <!-- <el-checkbox-group v-model="checkList">
-      <el-checkbox label="复选框 A"></el-checkbox>
-      <el-checkbox label="复选框 B"></el-checkbox>
-      <el-checkbox label="复选框 C"></el-checkbox>
-      <el-checkbox label="禁用" disabled></el-checkbox>
-      <el-checkbox label="选中且禁用" disabled></el-checkbox>
-    </el-checkbox-group>-->
+    </div> -->
+    <!-- <cl-checkbox-group v-model="checkList">
+      <cl-checkbox label="复选框 A"></cl-checkbox>
+      <cl-checkbox label="复选框 B"></cl-checkbox>
+      <cl-checkbox label="复选框 C"></cl-checkbox>
+      <cl-checkbox label="禁用" disabled></cl-checkbox>
+      <cl-checkbox label="选中且禁用" disabled></cl-checkbox>
+    </cl-checkbox-group> -->
     <!-- <cl-row :gutter="20">
       <cl-col :span="6">
         <div style="background:blue;width:100%">1</div>
@@ -92,6 +93,8 @@ import Row from "@/components/row/row.vue";
 import Col from "@/components/col/col.vue";
 import Radio from "@/components/radio/radio.vue";
 import Checkbox from "@/components/checkbox/checkbox.vue";
+import CheckboxGroup from "@/components/checkbox/checkbox-group.vue";
+import Affix from "@/components/affix/affix.vue";
 import axios from "axios";
 
 export default {
@@ -113,11 +116,13 @@ export default {
     "cl-row": Row,
     "cl-col": Col,
     "cl-radio": Radio,
-    "cl-checkbox": Checkbox
+    "cl-checkbox": Checkbox,
+    "cl-checkbox-group": CheckboxGroup,
+    'cl-affix': Affix
   },
   data() {
     return {
-      radio: "2"
+      checkList: ['选中且禁用','复选框 A']
     };
   },
   created() {},

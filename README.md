@@ -40,6 +40,7 @@ Data
 - [x] Backtop 回到顶部
 - [x] Magnifier 放大镜
 - [ ] Card 卡片
+- [x] Popover 弹出框
 
 
 
