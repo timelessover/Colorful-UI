@@ -1,6 +1,6 @@
 const path = require('path')
 module.exports = {
-  base: '',
+  base: '/Colorful-UI/',
   title: 'Colorful-UI',
   description: '一个专注体验的UI框架',
   port:8085,
