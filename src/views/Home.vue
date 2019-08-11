@@ -1,6 +1,8 @@
 <template>
   <div id="home">
     <cl-affix></cl-affix>
+    <cl-button iconPosition="left" icon="refresh" :loading=true>xxx</cl-button>
+    <cl-button :loading=true >xxx</cl-button>
     <!-- <cl-popover
       placement="top-start"
       title="标题"
@@ -33,8 +35,7 @@
       </cl-col>
     </cl-row>
     <div class="button-demo">
-      <cl-button iconPosition="left" icon="refresh" :loading="flag1">{{msg}}</cl-button>
-      <cl-button :loading="loading" @click="flag">{{msg}}</cl-button>
+
       <cl-button-group>
         <cl-button icon="arrow-left">上一页</cl-button>
         <cl-button icon="arrow-right" iconPosition="right">下一页</cl-button>

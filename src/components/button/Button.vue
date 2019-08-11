@@ -88,7 +88,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "@/styles/common/base.scss";
+@import "../../styles/common/base.scss";
 
 .cl-btn {
   font-size: $--font-size-base;

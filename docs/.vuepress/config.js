@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         title: '组件',
-        collapsable: false,
+        collapsable: true,
         children: [
           '/components/button',
           '/components/tabs',
