@@ -6,8 +6,7 @@
     <p>组件功能描述</p>
     <div class="component-wrapper">
       <div class="component-wrapper-demo">
-        <cl-button>默认按钮</cl-button>
-        <cl-button :loading="true">loading</cl-button>
+       <cl-input v-model="value" type="text"></cl-input>
       </div>
       <div class="code-content" v-highlight style="height: 0;">
         <div class="code-content-height">
@@ -31,19 +30,19 @@
 <script>
 import Icon from "../../../src/components/icon/icon";
 import mixin from "../mixin";
-import Button from "../../../src/components/button/button";
+import Input from "../../../src/components/input/input";
 export default {
-  name: "demo",
+  name: "input-demo",
   mixins: [mixin],
   components: {
     "cl-icon": Icon,
-    "cl-button": Button
+    "cl-input": Input 
   },
   data() {
-    return {
+    return { 
+      value:'',
       codeStr: `
-          <cl-button>默认按钮</cl-button>
-        <cl-button :loading = true>loading</cl-button>
+          <cl-input v-model="value" type="text"></cl-input>
         `
         .replace(/^\s*/gm, "")
         .trim()

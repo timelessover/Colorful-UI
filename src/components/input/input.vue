@@ -83,8 +83,8 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-@import "@/styles/common/base.scss";
+<style lang="scss" scoped>
+@import "../../styles/common/base.scss";
 .cl-input {
   width: 180px;
   position: relative;

@@ -1,40 +1,30 @@
-const webpackConfig = require('./build/webpack.test.conf')
+var webpackConfig = require('@vue/cli-service/webpack.config.js')
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
-
-    basePath: '',
-
-    frameworks: ['mocha','chai'],
+    frameworks: ['mocha'],
 
     files: [
-      'test/*.test.js'
+      'tests/**/*.spec.js'
     ],
 
-    exclude: [
-    ],
-    
-    // 测试文件添加中间件处理
     preprocessors: {
-      'test/*.test.js': ['webpack']
+      '**/*.spec.js': ['webpack', 'sourcemap']
     },
 
     webpack: webpackConfig,
 
-    reporters: ['progress'],
-
-    port: 9876,
-
-    colors: true,
-
-    logLevel: config.LOG_INFO,
+    reporters: ['spec', 'coverage'],
+    coverageReporter: {
+      dir: './coverage',
+      reporters: [
+        { type: 'lcov', subdir: '.' },
+        { type: 'text-summary' }
+      ]
+    },
 
     autoWatch: true,
 
-    browsers: ['Chrome'],
-
-    singleRun: false,
-
-    concurrency: Infinity
+    browsers: ['ChromeHeadless']
   })
 }

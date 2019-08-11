@@ -8,6 +8,8 @@ module.exports = {
     nav: [
       {text: '主页', link: '/'},
       {text: '文档', link: '/get-started/'},
+      { text: '交流', link: 'https://github.com/timelessover/Colorful-UI/issues' },
+      { text: 'GitHub', link: 'https://github.com/timelessover/Colorful-UI'}
     ],
     sidebar: [
       {
