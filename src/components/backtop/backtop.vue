@@ -1,7 +1,3 @@
-//1. 可选择触发滚动的对象
-//2. 可设置滚动高度达到某数值才出现
-//3. 可控制其位置，left和right
-//<cl-backtop target="..." :bottom="100"></cl-backtop>
 <template>
   <transition name="cl-fade-in">
     <div

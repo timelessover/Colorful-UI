@@ -1,13 +1,4 @@
 
-// export default {
-//   data() {
-//     return {
-//       radio: "1"
-//     };
-//   }
-// };
-// </script>
-//  **/
 <template>
   <label :tabindex="tabIndex">
     <span class="cl-radio__input">
@@ -30,7 +21,7 @@
 
 <script>
 export default {
-  componentName: "ClRadio",
+  componentName: "cl-radio",
   props: {
     value: {},
     label: {

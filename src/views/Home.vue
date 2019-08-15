@@ -3,6 +3,7 @@
     <cl-affix></cl-affix>
     <cl-button iconPosition="left" icon="refresh" :loading=true>xxx</cl-button>
     <cl-button :loading=true >xxx</cl-button>
+    <cl-button disabled>禁用</cl-button>
     <!-- <cl-popover
       placement="top-start"
       title="标题"

@@ -8,6 +8,7 @@
       <div class="component-wrapper-demo">
         <cl-button>默认按钮</cl-button>
         <cl-button :loading="true">loading</cl-button>
+        <cl-button disabled>禁用</cl-button>
       </div>
       <div class="code-content" v-highlight style="height: 0;">
         <div class="code-content-height">

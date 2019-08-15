@@ -1,10 +1,3 @@
-//1. 添加icon
-//2. 添加loading状态
-//3. 控制大小和形状
-//4. 禁用状态
-//5. icon位置
-//6. type类型 
-//<cl-button :type="..." :icon=".." :loading="..." :size="..." :shape="..." :disabled="..." :iconPosition="..." ></cl-button>
 <template>
   <button :class="[classObject , getIconPosition]" @click="clickHandler" :disabled="isDisabled">
     <cl-icon class="icon" v-if="icon && !loading" :name="icon"/>
@@ -60,8 +53,8 @@ export default {
       return [
         "cl-btn",
         `cl-btn-${this.type}`,
-        { "cl-btn-loading": this.loading },
-        { "cl-btn-disabled": this.disabled },
+        { "cl-btn--loading": this.loading },
+        { "cl-btn--disabled": this.disabled },
         `cl-btn-${this.shape}`,
         `cl-btn-${this.size}`
       ];
@@ -102,6 +95,10 @@ export default {
   vertical-align: middle;
   color: $color;
   line-height: 1;
+  &.cl-btn--disabled{
+    background: $--disabled-color-base;
+    border: 1px solid $--disabled-color-base;
+  }
   &:hover {
     border-color: $border-color-hover;
   }
