@@ -1,5 +1,3 @@
-
-//<cl-input v-model="input" placeholder="请输入内容"></cl-input>
 <template>
   <div :class="classObject">
     <input

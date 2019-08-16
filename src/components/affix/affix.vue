@@ -1,66 +1,76 @@
 <template>
-    <div class="cl-affix-warpper" ref="affix_warper">
-        <div :class="[classObjet]" ref="affix">
-            <slot></slot>
-        </div>
+  <div class="cl-affix-wrapper" ref="wrapper" :style="{height}">
+    <div class="cl-affix-item" :class="classObject" :style="{left, width, top}">
+      <slot></slot>
     </div>
+  </div>
 </template>
-
 <script>
 export default {
-  name: "cl-affix",
+  name: 'cl-affix',
+  props: {
+    distance: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
-      fixed: false
-    };
+      sticky: false,
+      left: null,
+      height: null,
+      width: null,
+      top: null
+    }
   },
-  props: {
-    top: {
-      type: Number
-    },
-    left: {
-      type: Number
+  computed: {
+    classObject() {
+      return {
+        sticky: this.sticky
+      }
     }
   },
   mounted() {
-    let affix = this.$refs.affix;
-    window.addEventListener("scroll", this.getTop);
+    this.windowScrollHandler = this._windowScrollHandler.bind(this)
+    window.addEventListener('scroll', this.windowScrollHandler)
   },
-  computed: {
-    classObjet() {
-      return ["cl-affix-item"];
-    }
+  beforeDestroy(){
+    window.removeEventListener('scroll', this.windowScrollHandler)
   },
   methods: {
-    getTop() {
-      let affix = this.$refs.affix;
-      let warper = this.$refs.affix_warper
-      let getTop = warper.getBoundingClientRect().top;
-      if (getTop <= 0) {
-        this.changeFixed(affix);
+    offsetTop() {
+      let { top } = this.$refs.wrapper.getBoundingClientRect()
+      let t = window.scrollY
+      return t + top
+    },
+    _windowScrollHandler(){
+      // top 多次获取会改变，因此只能获取一次
+      let top = this.offsetTop()
+      if(window.scrollY > top - this.distance) {
+        let { height, width, left } = this.$refs.wrapper.getBoundingClientRect()
+        // 需要给最外层div加高度让他占位置，否则会出现不能滚动的情况
+        this.height = `${height}px`
+        // 有可能sticky内容是延迟加载的，所以宽度会变，应该浮起来的时候再赋值
+        this.width = `${width}px`
+        // 有可能居中，因此left会变
+        this.left = `${left}px`
+        this.top = `${this.distance}px`
+        this.sticky = true
       } else {
-        this.changeBack(affix);
+        this.height = null
+        this.width = null
+        this.left = null
+        this.top = null
+        this.sticky = false
       }
-    },
-    changeFixed(affix) {
-      affix.style.position = "fixed";
-      affix.style.top = 0;
-    },
-    changeBack(affix) {
-      affix.style.position = "relative";
     }
   }
-};
+}
 </script>
-
 <style lang="scss" scoped>
-.cl-affix-warpper {
-  position: absolute;
-  top: 50px;
-}
-.cl-affix-item {
-  height: 20px;
-  width: 500px;
-  background: red;
-}
+  .cl-affix-wrapper {
+    .cl-affix-item {
+      position: fixed;
+    }
+  }
 </style>

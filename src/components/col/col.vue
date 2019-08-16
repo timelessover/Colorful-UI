@@ -1,52 +1,152 @@
 <template>
-  <div :class="classObject" :style="styleObject">
+  <div class="col" :class="classObject" :style="colStyle">
     <slot></slot>
   </div>
 </template>
-
 <script>
-const COMPONENT_NAME = "cl-col";
+let validator = (value) => {
+  let keys = Object.keys(value)
+  let valid = true
+  keys.forEach((key) => {
+    if (!(['span', 'offset'].indexOf(key) >= 0)) {
+      valid = false
+    }
+  })
+  return valid
+}
 export default {
-  name: COMPONENT_NAME,
+  name: 'cl-col',
   props: {
     span: {
-      type: Number,
-      default: 24
+      type: [Number,String]
     },
-    offset: Number,
+    offset: {
+      type: [Number, String]
+    },
+    ipad: {
+      type: Object,
+      validator
+    },
+    narrowPc: {
+      type: Object,
+      validator
+    },
+    pc: {
+      type: Object,
+      validator
+    },
+    widePc: {
+      type: Object,
+      validator
+    }
+  },
+  data() {
+    return {
+      gutter: 0
+    }
   },
   computed: {
-    gutter() {
-      let parent = this.$parent;
-      console.log(parent)
-      return parent ? parent.gutter : 0;
-    },
     classObject() {
-      return ["cl-col", `cl-col-${this.span}`];
+      let { span, offset, ipad, narrowPc, pc, widePc } = this
+      let createClasses = this.createClasses
+      return [
+        ...createClasses({span, offset}),
+        ...createClasses(ipad, 'ipad-'),
+        ...createClasses(narrowPc, 'narrow-pc-'),
+        ...createClasses(pc, 'pc-'),
+        ...createClasses(widePc, 'wide-pc-'),
+      ]
     },
-    styleObject() {
-      let style = {};
-
-      if (this.gutter) {
-        style.paddingLeft = this.gutter / 2 + "px";
-        style.paddingRight = style.paddingLeft;
+    colStyle() {
+      let { gutter } = this
+      return {paddingLeft: gutter / 2 + 'px', paddingRight: gutter / 2 + 'px'}
+    }
+  },
+  methods: {
+    createClasses(obj, str = '') {
+      if(!obj) return []
+      let arr = []
+      if(obj.span){
+        arr.push(`col-${str}${obj.span}`)
       }
-      return style;
+      if(obj.offset){
+        arr.push(`offset-${str}${obj.offset}`)
+      }
+      return arr
     }
   }
-};
+}
 </script>
-
 <style lang="scss" scoped>
-.cl-col {
-  height: 100%;
-
-  display: inline-flex;
-}
-
-@for $i from 1 through 24 {
-  .cl-col-#{$i} {
-    width: 100%/24 * $i;
+@import "../../styles/common/base.scss";
+  .col {
+    $class-prefix: col-;
+    @for $n from 1 through 24 {
+      &.#{$class-prefix}#{$n} {
+        width: ($n / 24 ) * 100%;
+      }
+    }
+    $class-prefix: offset-;
+    @for $n from 1 through 24 {
+      &.#{$class-prefix}#{$n} {
+        margin-left: ($n / 24 ) * 100%;
+      }
+    }
+    @media (min-width: 577px){    
+      $class-prefix: col-ipad-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          width: ($n / 24 ) * 100%;
+        }
+      }
+      $class-prefix: offset-ipad-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          margin-left: ($n / 24 ) * 100%;
+        }
+      }
+    }
+    @media (min-width: 769px) {    
+      $class-prefix: col-narrow-pc-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          width: ($n / 24 ) * 100%;
+        }
+      }
+      $class-prefix: offset-narrow-pc-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          margin-left: ($n / 24 ) * 100%;
+        }
+      }
+    }
+    @media (min-width: 993px) {    
+      $class-prefix: col-pc-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          width: ($n / 24 ) * 100%;
+        }
+      }
+      $class-prefix: offset-pc-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          margin-left: ($n / 24 ) * 100%;
+        }
+      }
+    }
+    @media (min-width: 1201px) {    
+      $class-prefix: col-wide-pc-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          width: ($n / 24 ) * 100%;
+        }
+      }
+      $class-prefix: offset-wide-pc-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          margin-left: ($n / 24 ) * 100%;
+        }
+      }
+    }
   }
-}
 </style>

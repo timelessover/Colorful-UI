@@ -1,163 +1,104 @@
 <template>
-  <ul @click="onPagerClick" class="el-pager">
-    <li
-      :class="{ active: currentPage === 1, disabled }"
-      v-if="pageCount > 0"
-      class="number">1</li>
-    <li
-      class="el-icon more btn-quickprev"
-      :class="[quickprevIconClass, { disabled }]"
-      v-if="showPrevMore"
-      @mouseenter="onMouseenter('left')"
-      @mouseleave="quickprevIconClass = 'el-icon-more'">
-    </li>
-    <li
-      v-for="pager in pagers"
-      :key="pager"
-      :class="{ active: currentPage === pager, disabled }"
-      class="number">{{ pager }}</li>
-    <li
-      class="el-icon more btn-quicknext"
-      :class="[quicknextIconClass, { disabled }]"
-      v-if="showNextMore"
-      @mouseenter="onMouseenter('right')"
-      @mouseleave="quicknextIconClass = 'el-icon-more'">
-    </li>
-    <li
-      :class="{ active: currentPage === pageCount, disabled }"
-      class="number"
-      v-if="pageCount > 1">{{ pageCount }}</li>
-  </ul>
+  <div class="cl-pager" :class="{hide: hideIfOnePage && totalPage <=1 }">
+    <span class="cl-pager-nav prev" :class="{disabled:currentPage===1}" @click="onClickPage(currentPage - 1)">
+      <icon name="left"></icon>
+    </span>
+    <template v-for="(page, i) in pages">
+      <template v-if="page === currentPage">
+        <span :key="i" class="cl-pager-item current">{{page}}</span>
+      </template>
+      <template v-else-if="page === '...'">
+        <icon :key="i" class="cl-pager-separator" name="dots"></icon>
+      </template>
+      <template v-else>
+        <span :key="i" class="cl-pager-item other" @click="onClickPage(page)">{{page}}</span>
+      </template>
+    </template>
+    <span class="cl-pager-nav next" :class="{disabled: currentPage===totalPage}" @click="onClickPage(currentPage + 1)">
+      <icon name="right"></icon>
+    </span>
+  </div>
 </template>
+<script>
+import Icon from '../icon/icon'
 
-<script type="text/babel">
-  export default {
-    name: 'ElPager',
-
-    props: {
-      currentPage: Number,
-
-      pageCount: Number,
-
-      pagerCount: Number,
-
-      disabled: Boolean
+export default {
+  name: 'cl-pagination',
+  components: {Icon},
+  props: {
+    currentPage: {
+      type: Number,
+      required: true
     },
-
-    watch: {
-      showPrevMore(val) {
-        if (!val) this.quickprevIconClass = 'el-icon-more';
-      },
-
-      showNextMore(val) {
-        if (!val) this.quicknextIconClass = 'el-icon-more';
-      }
+    totalPage: {
+      type: Number,
+      required: true
     },
-
-    methods: {
-      onPagerClick(event) {
-        const target = event.target;
-        if (target.tagName === 'UL' || this.disabled) {
-          return;
-        }
-
-        let newPage = Number(event.target.textContent);
-        const pageCount = this.pageCount;
-        const currentPage = this.currentPage;
-        const pagerCountOffset = this.pagerCount - 2;
-
-        if (target.className.indexOf('more') !== -1) {
-          if (target.className.indexOf('quickprev') !== -1) {
-            newPage = currentPage - pagerCountOffset;
-          } else if (target.className.indexOf('quicknext') !== -1) {
-            newPage = currentPage + pagerCountOffset;
-          }
-        }
-
-        /* istanbul ignore if */
-        if (!isNaN(newPage)) {
-          if (newPage < 1) {
-            newPage = 1;
-          }
-
-          if (newPage > pageCount) {
-            newPage = pageCount;
-          }
-        }
-
-        if (newPage !== currentPage) {
-          this.$emit('change', newPage);
-        }
-      },
-
-      onMouseenter(direction) {
-        if (this.disabled) return;
-        if (direction === 'left') {
-          this.quickprevIconClass = 'el-icon-d-arrow-left';
-        } else {
-          this.quicknextIconClass = 'el-icon-d-arrow-right';
-        }
-      }
-    },
-
-    computed: {
-      pagers() {
-        const pagerCount = this.pagerCount;
-        const halfPagerCount = (pagerCount - 1) / 2;
-
-        const currentPage = Number(this.currentPage);
-        const pageCount = Number(this.pageCount);
-
-        let showPrevMore = false;
-        let showNextMore = false;
-
-        if (pageCount > pagerCount) {
-          if (currentPage > pagerCount - halfPagerCount) {
-            showPrevMore = true;
-          }
-
-          if (currentPage < pageCount - halfPagerCount) {
-            showNextMore = true;
-          }
-        }
-
-        const array = [];
-
-        if (showPrevMore && !showNextMore) {
-          const startPage = pageCount - (pagerCount - 2);
-          for (let i = startPage; i < pageCount; i++) {
-            array.push(i);
-          }
-        } else if (!showPrevMore && showNextMore) {
-          for (let i = 2; i < pagerCount; i++) {
-            array.push(i);
-          }
-        } else if (showPrevMore && showNextMore) {
-          const offset = Math.floor(pagerCount / 2) - 1;
-          for (let i = currentPage - offset ; i <= currentPage + offset; i++) {
-            array.push(i);
-          }
-        } else {
-          for (let i = 2; i < pageCount; i++) {
-            array.push(i);
-          }
-        }
-
-        this.showPrevMore = showPrevMore;
-        this.showNextMore = showNextMore;
-
-        return array;
-      }
-    },
-
-    data() {
-      return {
-        current: null,
-        showPrevMore: false,
-        showNextMore: false,
-        quicknextIconClass: 'el-icon-more',
-        quickprevIconClass: 'el-icon-more'
-      };
+    hideIfOnePage: {
+      type: Boolean,
+      default: true
     }
-  };
+  },
+  computed: {
+    pages() {
+      let {currentPage, totalPage} = this
+      return unique([1, currentPage,currentPage-1, currentPage-2, currentPage +1, currentPage +2, totalPage])
+                  .filter((n) => n >= 1 && n <= totalPage)
+                  .sort((a, b) => a-b)
+                  .reduce((prev, current, index, array) => {
+                    prev.push(current)
+                    array[index+1] && array[index+1] - array[index] > 1 && prev.push('...')
+                    return prev
+                  }, [])
+
+    }
+  },
+  methods: {
+    onClickPage(n) {
+      if(n >=1 && n <= this.totalPage) {
+        this.$emit('update:currentPage', n)
+      }
+    }
+  },
+}
+function unique(array) {
+  const obj = {}
+  array.map((number) => {
+    obj[number] = true
+  })
+  return Object.keys(obj).map((s) => parseInt(s, 10))
+}
 </script>
+<style scoped lang="scss">
+  @import "../../styles/_var.scss";
+  .cl-pager { 
+    display: flex; justify-content: flex-start; align-items: center;
+    $width: 20px;
+    $height: 20px;
+    $font-size: 12px;
+    user-select: none;
+    &.hide {
+      display: none;
+    }
+    &-separator {
+      width: $width;
+      font-size: $font-size;
+    }
+    &-item {
+      min-width: $width; height: $height;font-size: $font-size;
+      border: 1px solid #e1e1e1; border-radius: $border-radius; padding: 0 4px; display: inline-flex; justify-content: center;
+      align-items: center; margin: 0 4px; cursor: pointer;
+      &.current, &:hover { border-color: $blue; }
+      &.current { cursor: default; }
+    }
+    &-nav {
+      margin: 0 4px; display: inline-flex; justify-content: center; align-items: center;
+      background: $grey; height: $height; width: $width; border-radius: $border-radius; font-size: $font-size;
+      cursor: pointer;
+      &.disabled {
+        cursor: default;
+        svg { fill: darken($grey, 30%); }
+      }
+    }
+  }
+</style>

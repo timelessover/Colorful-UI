@@ -1,0 +1,37 @@
+<template>
+  <div class="layout" :class="layoutClass">
+    <slot></slot>
+  </div>
+</template>
+<script>
+export default {
+  name: 'cl-layout',
+  data() {
+    return {
+      layoutClass: {
+        hasSider: false
+      }
+    }
+  },
+  mounted () {
+    this.$children.forEach((vm) => {
+      if (vm.$options.name === 'cl-sider') {
+        this.layoutClass.hasSider = true
+      }
+    })
+  }
+}
+</script>
+<style lang="scss" scoped>
+@import '../../styles/_var.scss';
+  .layout {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    &.hasSider {
+      flex-direction: row;
+    }
+  }
+</style>
+
+

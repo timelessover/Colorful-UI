@@ -20,7 +20,7 @@ export default {
   props: {
     icon: {
       type: String,
-      default: ''
+      default: ""
     },
     type: {
       type: String,
@@ -45,24 +45,24 @@ export default {
     iconPosition: {
       type: String,
       default: "left",
-      validator: val =>  ['left', 'right'].indexOf(val) > -1
+      validator: val => ["left", "right"].indexOf(val) > -1
     }
   },
   computed: {
     classObject() {
       return [
         "cl-btn",
-        `cl-btn-${this.type}`,
+        `cl-btn--${this.type}`,
         { "cl-btn--loading": this.loading },
         { "cl-btn--disabled": this.disabled },
-        `cl-btn-${this.shape}`,
-        `cl-btn-${this.size}`
+        `cl-btn--${this.shape}`,
+        `cl-btn--${this.size}`
       ];
     },
-    getIconPosition(){
-      const icon = this.icon
-      const loading = this.loading
-      if(icon || loading)  return `icon-${this.iconPosition}`
+    getIconPosition() {
+      const icon = this.icon;
+      const loading = this.loading;
+      if (icon || loading) return `icon-${this.iconPosition}`;
     },
     isDisabled() {
       return this.disabled;
@@ -95,9 +95,12 @@ export default {
   vertical-align: middle;
   color: $color;
   line-height: 1;
-  &.cl-btn--disabled{
+  &.cl-btn--disabled {
     background: $--disabled-color-base;
     border: 1px solid $--disabled-color-base;
+    &:active {
+      background-color: $--disabled-color-base;
+    }
   }
   &:hover {
     border-color: $border-color-hover;

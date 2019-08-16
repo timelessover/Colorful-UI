@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Cl-checkbox-group",
+  name: "cl-checkbox-group",
   props: {
     value: {
       value: {},

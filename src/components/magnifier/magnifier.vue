@@ -1,8 +1,3 @@
-<v-magnifier dirction>
-    <v-magnifier-item>
-</v-magnifier>
-magnifier //bigger左右方向
-
 <template>
   <div class="wrap" ref="wrap">
     <div class="bigger" ref="bigger" v-show="visable">
