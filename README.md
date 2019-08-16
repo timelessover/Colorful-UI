@@ -47,6 +47,7 @@ Others
 - [x] Magnifier 放大镜
 - [x] Affix 钉子
 - [x] Backtop 回到顶部
+- [x] Carousel 走马灯
 
 
 
