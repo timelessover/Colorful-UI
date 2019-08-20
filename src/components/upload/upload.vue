@@ -163,7 +163,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "var";
+@import "../../styles/common/base.scss";
 .cl-uploader {
   &-fileList {
     list-style: none;

@@ -1,6 +1,3 @@
-// 三个pane 三个tab
-// 点击一个tab,一个pane打开，再点击关闭，二三同上
-
 <template >
     <div
         class="cl-collapse-item"

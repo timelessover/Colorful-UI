@@ -20,20 +20,21 @@ Form
 - [x] Input 输入框
 - [x] InputNumber 计算器
 - [ ] Select 选择器
-- [ ] Cascader 级联选择器
+- [x] Cascader 级联选择器
 - [ ] Switch 开关
 - [ ] Slider 滑块
 - [ ] TimePicker 时间选择器 
-- [ ] DatePicker 日期选择器
+- [x] DatePicker 日期选择器
 - [ ] DateTimePicker 日期时间选择器
-- [ ] Upload 上传
+- [x] Upload 上传
 - [ ] Rate 评分
 - [ ] ColorPicker 颜色选择器
 - [ ] Form 表单
 - [x] Tabs 标签页
+
 Data
 
-- [ ] Table 表格
+- [x] Table 表格
 - [ ] Tag 标签
 - [ ] Progress 进度条
 - [x] Breadcrumb 面包屑 
