@@ -12,8 +12,8 @@ describe('Button', () => {
                 type: 'primary'
             }
         });
-        let buttonElm = wrapper.vm.$el;
-        expect(buttonElm.classList.contains('cl-btn--primary')).to.be.true;
+        let buttonElm = wrapper.vm.$el.querySelector('button')
+        expect(buttonElm.classList.contains('primary')).to.be.true;
     })
     it('icon', () => {
         const wrapper = mount(Button, {
@@ -21,8 +21,9 @@ describe('Button', () => {
                 icon: 'settings'
             }
         })
-        const Element = wrapper.find('i').vm.$el
-        expect(Element.classList.contains('cl-icon-settings')).to.be.true;
+        const vm = wrapper.vm
+        const Element = vm.$el.querySelector('i')
+        expect(Element.classList.contains('cl-icon--settings')).to.be.true;
     })
     it('loading', () => {
         const wrapper = mount(Button, {
@@ -44,7 +45,7 @@ describe('Button', () => {
                 iconPosition: 'right'
             }
         })
-        const Element = wrapper.vm.$el
+        const Element = wrapper.vm.$el.querySelector('button')
         expect(Element.classList.contains('icon-right')).to.be.true
     })
     it('size',()=>{
@@ -53,8 +54,8 @@ describe('Button', () => {
                 size: 'large'
             }
         })
-        const Element = wrapper.vm.$el
-        expect(Element.classList.contains('cl-btn--large')).to.be.true
+        const Element = wrapper.vm.$el.querySelector('button')
+        expect(Element.classList.contains('large')).to.be.true
     })
     it('disabled',()=>{
         const wrapper = mount(Button,{
@@ -62,34 +63,22 @@ describe('Button', () => {
                 disabled: true
             }
         })
-        const Element = wrapper.vm.$el
         const vm = wrapper.vm
+        const Element = vm.$el.querySelector('button')
         const callback = sinon.fake();
         vm.$on('click', callback)
         vm.$el.click()
-        expect(Element.classList.contains('cl-btn--disabled')).to.be.true
+        expect(Element.classList.contains('disabled')).to.be.true
         expect(callback).to.not.have.been.called
-    })
-    it('shape',()=>{
-        const wrapper = mount(Button,{
-            propsData:{
-                shape: 'square'
-            }
-        })
-        const Element = wrapper.vm.$el
-        expect(Element.classList.contains('cl-btn--square')).to.be.true
     })
     
     it('click', () => {
         const wrapper = mount(Button, {
-            propsData: {
-                icon: 'settings',
-            }
         })
         const vm = wrapper.vm
         const callback = sinon.fake();
         vm.$on('click', callback)
-        vm.$el.click()
+        vm.$el.querySelector('button').click()
         expect(callback).to.have.been.called
     })
 })

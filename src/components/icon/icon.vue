@@ -1,5 +1,5 @@
 <template>
-  <i :class="'cl-icon-' + name"></i>
+  <i :class="'cl-icon--' + name"></i>
 </template>
 <script>
 export default {

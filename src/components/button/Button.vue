@@ -1,21 +1,24 @@
 <template>
-  <button :class="[classObject , getIconPosition]" @click="clickHandler" :disabled="isDisabled">
-    <cl-icon class="icon" v-if="icon && !loading" :name="icon"/>
-    <cl-icon class="loading icon" v-if="loading" name="loading"></cl-icon>
-    <div class="cl-btn-content">
-      <slot/>
-    </div>
-  </button>
+  <Wave>
+    <button :class="[classObject , getIconPosition]" @click="clickHandler" :disabled="isDisabled">
+      <Icon class="icon" v-if="icon && !loading" :name="icon" />
+      <Icon class="loading icon" v-if="loading" name="loading"></Icon>
+      <div class="content">
+        <slot />
+      </div>
+    </button>
+  </Wave>
 </template>
 <script>
 import Icon from "../icon/icon";
-
+import Wave from "components/wave/wave";
 const COMPONENT_NAME = "cl-button";
 
 export default {
   name: COMPONENT_NAME,
   components: {
-    "cl-icon": Icon
+    Icon,
+    Wave
   },
   props: {
     icon: {
@@ -34,10 +37,6 @@ export default {
       type: String,
       default: "normal"
     },
-    shape: {
-      type: String,
-      default: "square"
-    },
     disabled: {
       type: Boolean,
       default: false
@@ -52,11 +51,10 @@ export default {
     classObject() {
       return [
         "cl-btn",
-        `cl-btn--${this.type}`,
-        { "cl-btn--loading": this.loading },
-        { "cl-btn--disabled": this.disabled },
-        `cl-btn--${this.shape}`,
-        `cl-btn--${this.size}`
+        `${this.type}`,
+        { loading: this.loading },
+        { disabled: this.disabled },
+        `${this.size}`
       ];
     },
     getIconPosition() {
@@ -82,39 +80,107 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../styles/common/base.scss";
-
 .cl-btn {
-  font-size: $--font-size-base;
-  padding: 12px 20px;
-  border-radius: $--border-radius-base;
-  border: 1px solid $--border-color-base;
-  background: $button-bg;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  vertical-align: middle;
-  color: $color;
-  line-height: 1;
-  &.cl-btn--disabled {
-    background: $--disabled-color-base;
-    border: 1px solid $--disabled-color-base;
-    &:active {
-      background-color: $--disabled-color-base;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 4px 15px;
+  border: 1px solid;
+  color: $main;
+  border-color: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  &.large {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 6px 15px;
+  }
+  &.small {
+    font-size: 12px;
+    line-height: 20px;
+    padding: 2px 10px;
+  }
+  &.disabled {
+    color: rgba(0, 0, 0, 0.25);
+    border-color: #d9d9d9;
+    background-color: #e6e6e6;
+    cursor: not-allowed;
+    &:hover {
+      color: rgba(0, 0, 0, 0.25);
+      border-color: #d9d9d9;
     }
   }
-  &:hover {
-    border-color: $border-color-hover;
+  &.primary {
+    color: #fff;
+    background-color: $brand;
+    border-color: $brand;
+    &:hover {
+      background-color: $hover;
+      border-color: $hover;
+    }
+    &.disabled {
+      color: rgba(0, 0, 0, 0.25);
+      border-color: #d9d9d9;
+      background-color: #e6e6e6;
+      cursor: not-allowed;
+      &:hover {
+        color: rgba(0, 0, 0, 0.25);
+        border-color: #d9d9d9;
+      }
+    }
   }
-
-  &:active {
-    background-color: $button-active-bg;
+  &.danger {
+    color: $error;
+    background-color: #f5f5f5;
+    &:hover {
+      color: #fff;
+      background-color: $error;
+      border-color: $error;
+    }
+    &:focus {
+      color: $error;
+      background-color: #fff;
+      border-color: $error;
+      &.disabled {
+        border-color: #d9d9d9;
+        color: rgba(0, 0, 0, 0.25);
+        background-color: #e6e6e6;
+      }
+    }
   }
-
+  &.disabled {
+    color: rgba(0, 0, 0, 0.25);
+    border-color: #d9d9d9;
+    background-color: #e6e6e6;
+    cursor: not-allowed;
+    &:hover {
+      color: rgba(219, 217, 217, 0.25);
+      border-color: #d9d9d9;
+    }
+  }
+  &.default {
+    &:hover {
+      color: $brand;
+      border-color: $brand;
+      z-index: 1;
+    }
+    &:focus {
+      border-color: $brand;
+    }
+  }
   &:focus {
     outline: none;
+    z-index: 1;
   }
 
-  > .cl-btn-content {
+  &.dashed {
+    border-style: dashed;
+  }
+  > .content {
     order: 2;
   }
 
@@ -124,7 +190,7 @@ export default {
   }
 
   &.icon-right {
-    > .cl-btn-content {
+    > .content {
       order: 1;
     }
 

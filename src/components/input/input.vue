@@ -83,65 +83,65 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../styles/common/base.scss";
-.cl-input {
-  width: 180px;
-  position: relative;
-  font-size: 14px;
-  display: inline-block;
-  &.is-disabled {
-    .cl-input__inner {
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
-      color: #c0c4cc;
-      cursor: not-allowed;
-    }
-  }
-  > .cl-input__inner {
-    -webkit-appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    outline: none;
-    padding: 0 15px;
-    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-    width: 100%;
-    &:focus {
-      outline: none;
-      border-color: #409eff;
-    }
-  }
-  > .cl-input__suffix {
-    position: absolute;
-    height: 100%;
-    right: 5px;
-    top: 0;
-    text-align: center;
-    color: #c0c4cc;
-    transition: all 0.3s;
-    pointer-events: none;
-    > .cl-input__suffix-inner {
-      pointer-events: all;
-       .cl-input__icon{
-         line-height: $--input-medium-height;
-       }
-       .cl-input__clear {
-        color: $--input-icon-color;
-        font-size: $--input-font-size;
-        cursor: pointer;
-        transition: $--color-transition-base;
-        &:hover {
-          color: $--input-clear-hover-color;
-        }
-      }
-    }
-  }
-}
+// .cl-input {
+//   width: 180px;
+//   position: relative;
+//   font-size: 14px;
+//   display: inline-block;
+//   &.is-disabled {
+//     .cl-input__inner {
+//       background-color: #f5f7fa;
+//       border-color: #e4e7ed;
+//       color: #c0c4cc;
+//       cursor: not-allowed;
+//     }
+//   }
+//   > .cl-input__inner {
+//     -webkit-appearance: none;
+//     background-color: #fff;
+//     background-image: none;
+//     border-radius: 4px;
+//     border: 1px solid #dcdfe6;
+//     box-sizing: border-box;
+//     color: #606266;
+//     display: inline-block;
+//     font-size: inherit;
+//     height: 40px;
+//     line-height: 40px;
+//     outline: none;
+//     padding: 0 15px;
+//     transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+//     width: 100%;
+//     &:focus {
+//       outline: none;
+//       border-color: #409eff;
+//     }
+//   }
+//   > .cl-input__suffix {
+//     position: absolute;
+//     height: 100%;
+//     right: 5px;
+//     top: 0;
+//     text-align: center;
+//     color: #c0c4cc;
+//     transition: all 0.3s;
+//     pointer-events: none;
+//     > .cl-input__suffix-inner {
+//       pointer-events: all;
+//        .cl-input__icon{
+//          line-height: $--input-medium-height;
+//        }
+//        .cl-input__clear {
+//         color: $--input-icon-color;
+//         font-size: $--input-font-size;
+//         cursor: pointer;
+//         transition: $--color-transition-base;
+//         &:hover {
+//           color: $--input-clear-hover-color;
+//         }
+//       }
+//     }
+//   }
+// }
 </style>
 
