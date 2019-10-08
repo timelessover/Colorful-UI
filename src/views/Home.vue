@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <!-- <cl-affix></cl-affix> -->
-    <cl-button  :loading = 'flag'  size='large'>很好</cl-button>
+    <cl-button  loading  size='large'>很好</cl-button>
     <!-- <cl-button :loading=true >xxx</cl-button>
     <cl-button disabled>禁用</cl-button> -->
     <!-- <cl-popover

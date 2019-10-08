@@ -12,7 +12,7 @@ describe('Button', () => {
                 type: 'primary'
             }
         });
-        let buttonElm = wrapper.vm.$el.querySelector('button')
+        let buttonElm = wrapper.vm.$el
         expect(buttonElm.classList.contains('primary')).to.be.true;
     })
     it('icon', () => {
@@ -45,7 +45,7 @@ describe('Button', () => {
                 iconPosition: 'right'
             }
         })
-        const Element = wrapper.vm.$el.querySelector('button')
+        const Element = wrapper.vm.$el
         expect(Element.classList.contains('icon-right')).to.be.true
     })
     it('size',()=>{
@@ -54,7 +54,7 @@ describe('Button', () => {
                 size: 'large'
             }
         })
-        const Element = wrapper.vm.$el.querySelector('button')
+        const Element = wrapper.vm.$el
         expect(Element.classList.contains('large')).to.be.true
     })
     it('disabled',()=>{
@@ -64,7 +64,7 @@ describe('Button', () => {
             }
         })
         const vm = wrapper.vm
-        const Element = vm.$el.querySelector('button')
+        const Element = vm.$el
         const callback = sinon.fake();
         vm.$on('click', callback)
         vm.$el.click()
@@ -78,7 +78,7 @@ describe('Button', () => {
         const vm = wrapper.vm
         const callback = sinon.fake();
         vm.$on('click', callback)
-        vm.$el.querySelector('button').click()
+        vm.$el.click()
         expect(callback).to.have.been.called
     })
 })

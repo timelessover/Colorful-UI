@@ -1,5 +1,4 @@
 <template>
-  <Wave>
     <button :class="[classObject , getIconPosition]" @click="clickHandler" :disabled="isDisabled">
       <Icon class="icon" v-if="icon && !loading" :name="icon" />
       <Icon class="loading icon" v-if="loading" name="loading"></Icon>
@@ -7,19 +6,18 @@
         <slot />
       </div>
     </button>
-  </Wave>
 </template>
 <script>
 import Icon from "../icon/icon";
-import Wave from "components/wave/wave";
+import {Wave} from "../../utils/wave";
 const COMPONENT_NAME = "cl-button";
 
 export default {
   name: COMPONENT_NAME,
   components: {
-    Icon,
-    Wave
+    Icon
   },
+  mixins:[Wave],
   props: {
     icon: {
       type: String,
@@ -49,12 +47,13 @@ export default {
   },
   computed: {
     classObject() {
+      const { type, size, disabled, loading } = this;
       return [
         "cl-btn",
-        `${this.type}`,
-        { loading: this.loading },
-        { disabled: this.disabled },
-        `${this.size}`
+        type,
+        { loading: loading },
+        { disabled: disabled },
+        size
       ];
     },
     getIconPosition() {
@@ -80,6 +79,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../styles/common/base.scss";
+.cl-group-btn {
+  border-radius: 0;
+  &:not(:first-child) {
+    margin-left: -1px;
+  }
+  &:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  &:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+}
+
 .cl-btn {
   display: inline-flex;
   justify-content: center;
@@ -123,53 +137,57 @@ export default {
       border-color: $hover;
     }
     &.disabled {
-      color: rgba(0, 0, 0, 0.25);
-      border-color: #d9d9d9;
-      background-color: #e6e6e6;
-      cursor: not-allowed;
-      &:hover {
-        color: rgba(0, 0, 0, 0.25);
-        border-color: #d9d9d9;
-      }
+      color: #fff;
+      background-color: #a0cfff;
+      border-color: #a0cfff;
+    }
+  }
+  &.success {
+    color: #fff;
+    background-color: $success;
+    border-color: $success;
+    &:hover {
+      background-color: $success;
+      border-color: $success;
+    }
+    &.disabled {
+      color: #a4da89;
+      background-color: #f0f9eb;
+      border-color: #e1f3d8;
     }
   }
   &.danger {
-    color: $error;
-    background-color: #f5f5f5;
-    &:hover {
+    color: #fff;
+    background-color: $error;
+    &.disabled {
       color: #fff;
-      background-color: $error;
-      border-color: $error;
+      background-color: #fab6b6;
+      border-color: #fab6b6;
     }
-    &:focus {
-      color: $error;
-      background-color: #fff;
+    &:hover {
       border-color: $error;
       &.disabled {
-        border-color: #d9d9d9;
-        color: rgba(0, 0, 0, 0.25);
-        background-color: #e6e6e6;
+        color: #fff;
+        background-color: #fab6b6;
+        border-color: #fab6b6;
       }
     }
   }
-  &.disabled {
-    color: rgba(0, 0, 0, 0.25);
-    border-color: #d9d9d9;
-    background-color: #e6e6e6;
-    cursor: not-allowed;
-    &:hover {
-      color: rgba(219, 217, 217, 0.25);
-      border-color: #d9d9d9;
-    }
-  }
   &.default {
+    &.disabled {
+      background-color: #fff;
+      border-color: #ebeef5;
+      color: #c0c4cc;
+    }
     &:hover {
       color: $brand;
       border-color: $brand;
       z-index: 1;
-    }
-    &:focus {
-      border-color: $brand;
+      &.disabled {
+        background-color: #fff;
+        border-color: #ebeef5;
+        color: #c0c4cc;
+      }
     }
   }
   &:focus {
@@ -177,16 +195,13 @@ export default {
     z-index: 1;
   }
 
-  &.dashed {
-    border-style: dashed;
-  }
   > .content {
     order: 2;
   }
 
   > .icon {
     order: 1;
-    margin-right: 0.1em;
+    margin-right: 0.2em;
   }
 
   &.icon-right {
@@ -197,7 +212,7 @@ export default {
     > .icon {
       order: 2;
       margin-right: 0;
-      margin-left: 0.1em;
+      margin-left: 0.2em;
     }
   }
 
@@ -205,4 +220,37 @@ export default {
     @include spin;
   }
 }
+.cl-wave-animation-animating {
+  position: relative;
+  &::before {
+    content: "";
+    display: block;
+    background-color: inherit;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    right: -1px;
+    border-radius: inherit;
+    border: 0 solid;
+    border-color: inherit;
+    opacity: 0.3;
+    animation: cl-wave-animation 0.3s ease-in-out forwards;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes cl-wave-animation {
+  to {
+    top: -6px;
+    left: -6px;
+    bottom: -6px;
+    right: -6px;
+    border-width: 6px;
+    opacity: 0;
+  }
+}
 </style>
+

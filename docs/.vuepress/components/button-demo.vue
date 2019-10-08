@@ -1,21 +1,18 @@
 <template>
   <div class="demo">
-    <h2>创建组件文档模板</h2>
-    <p>组件描述</p>
-    <h3>组件功能名字</h3>
-    <p>组件功能描述</p>
+    <p>常用的操作按钮</p>
+    <h3>基础用法</h3>
+    <p>基础的按钮用法</p>
     <div class="component-wrapper">
       <div class="component-wrapper-demo">
         <cl-button>默认按钮</cl-button>
-        <cl-button :loading="true">loading</cl-button>
-        <cl-button disabled>禁用</cl-button>
+        <cl-button type="primary">主要按钮</cl-button>
+        <cl-button type="success">成功按钮</cl-button>
+        <cl-button type="danger">危险按钮</cl-button>
       </div>
       <div class="code-content" v-highlight style="height: 0;">
         <div class="code-content-height">
-          <!-- <div class="code-user-desc">
-            组件描述说明
-          </div>-->
-          <pre><code class="html">{{codeStr}}</code></pre>
+          <pre><code class="html">{{baseMethods}}</code></pre>
         </div>
       </div>
       <div class="lock-code" @click="showCode(0)" ref="xxx">
@@ -23,7 +20,66 @@
         <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
       </div>
     </div>
-
+    <h3>禁用状态</h3>
+    <p>按钮不可用状态</p>
+    <div class="component-wrapper">
+      <div class="component-wrapper-demo">
+        <cl-button disabled>默认按钮</cl-button>
+        <cl-button type="primary" disabled>主要按钮</cl-button>
+        <cl-button type="success" disabled>成功按钮</cl-button>
+        <cl-button type="danger" disabled>危险按钮</cl-button>
+      </div>
+      <div class="code-content" v-highlight style="height: 0;">
+        <div class="code-content-height">
+          <pre><code class="html">{{disabled}}</code></pre>
+        </div>
+      </div>
+      <div class="lock-code" @click="showCode(1)" ref="xxx">
+        <cl-icon class="icon-down" :name=" isShow[0]=== false ? 'arrow-down' : 'arrow-up'"></cl-icon>
+        <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
+      </div>
+    </div>
+    <h3>图标按钮</h3>
+    <p>带图标的按钮可增强辨识度（有文字）或节省空间（无文字）。</p>
+    <div class="component-wrapper">
+      <div class="component-wrapper-demo">
+        <cl-button type="primary" icon="setting"></cl-button>
+        <cl-button type="danger" icon="delete"></cl-button>
+        <cl-button type="success" icon="success"></cl-button>
+        <cl-button icon="search">搜索</cl-button>
+        <cl-button type="primary" icon="upload" iconPosition="right">上传</cl-button>
+      </div>
+      <div class="code-content" v-highlight style="height: 0;">
+        <div class="code-content-height">
+          <pre><code class="html">{{withIcon}}</code></pre>
+        </div>
+      </div>
+      <div class="lock-code" @click="showCode(2)" ref="xxx">
+        <cl-icon class="icon-down" :name=" isShow[0]=== false ? 'arrow-down' : 'arrow-up'"></cl-icon>
+        <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
+      </div>
+    </div>
+    <h3>按钮组</h3>
+    <p>以按钮组的方式出现，常用于多项类似操作。</p>
+    <div class="component-wrapper">
+      <div class="component-wrapper-demo">
+        <cl-button-group>
+          <cl-button type="primary" icon="arrow-left">上一页</cl-button>
+          <cl-button type="primary" icon = "arrow-right" iconPosition="right">
+            下一页
+          </cl-button>
+        </cl-button-group>
+      </div>
+      <div class="code-content" v-highlight style="height: 0;">
+        <div class="code-content-height">
+          <pre><code class="html">{{withIcon}}</code></pre>
+        </div>
+      </div>
+      <div class="lock-code" @click="showCode(3)" ref="xxx">
+        <cl-icon class="icon-down" :name=" isShow[0]=== false ? 'arrow-down' : 'arrow-up'"></cl-icon>
+        <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
+      </div>
+    </div>
     <h3>attributes</h3>
     <p>组件参数说明后期扩展</p>
   </div>
@@ -33,25 +89,61 @@
 import Icon from "../../../src/components/icon/icon";
 import mixin from "../mixin";
 import Button from "../../../src/components/button/button";
+import ButtonGroup from "../../../src/components/button-group/button-group";
 export default {
   name: "demo",
   mixins: [mixin],
   components: {
     "cl-icon": Icon,
-    "cl-button": Button
+    "cl-button": Button,
+    "cl-button-group": ButtonGroup
   },
   data() {
     return {
       codeStr: `
-          <cl-button>默认按钮</cl-button>
-        <cl-button :loading = true>loading</cl-button>
-        `
-        .replace(/^\s*/gm, "")
-        .trim()
+         <cl-button>默认按钮</cl-button>
+        <cl-button type="primary">主要按钮</cl-button>
+        <cl-button type="success">危险按钮</cl-button>
+        <cl-button type="danger">危险按钮</cl-button>
+        `,
+      codeStr1: `
+         <cl-button disabled>默认按钮</cl-button>
+        <cl-button type="primary" disabled>主要按钮</cl-button>
+        <cl-button type="success" disabled>成功按钮</cl-button>
+        <cl-button type="danger" disabled>危险按钮</cl-button>
+        `,
+      codeStr2: `
+      <cl-button type="primary" icon="setting"></cl-button>
+        <cl-button type="danger" icon="delete"></cl-button>
+        <cl-button type="success" icon="success"></cl-button>
+        <cl-button  icon="search">搜索</cl-button>
+        <cl-button type="primary" icon="upload" iconPosition="right">上传</cl-button>`
     };
+  },
+  computed: {
+    baseMethods() {
+      return this.trim(this.codeStr);
+    },
+    disabled() {
+      return this.trim(this.codeStr1);
+    },
+    withIcon() {
+      return this.trim(this.codeStr2);
+    }
+  },
+  methods: {
+    trim(code) {
+      return code.replace(/^\s*/gm, "").trim();
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.component-wrapper-demo {
+  display: flex;
+  > .wave {
+    margin-right: 20px;
+  }
+}
 </style>
