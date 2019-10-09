@@ -29,11 +29,13 @@ export default {
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
+      
     },
     size: {
       type: String,
-      default: "normal"
+      default: "normal",
+      validator: val => ["normal", "large","small"].indexOf(val) > -1
     },
     disabled: {
       type: Boolean,
@@ -47,12 +49,12 @@ export default {
   },
   computed: {
     classObject() {
-      const { type, size, disabled, loading } = this;
+      const { type, size, isDisabled, loading } = this;
       return [
         "cl-btn",
         type,
         { loading: loading },
-        { disabled: disabled },
+        { disabled: isDisabled },
         size
       ];
     },
@@ -62,7 +64,7 @@ export default {
       if (icon || loading) return `icon-${this.iconPosition}`;
     },
     isDisabled() {
-      return this.disabled;
+      return this.loading || this.disabled;
     }
   },
   methods: {
@@ -122,7 +124,7 @@ export default {
     color: rgba(0, 0, 0, 0.25);
     border-color: #d9d9d9;
     background-color: #e6e6e6;
-    cursor: not-allowed;
+    cursor:default;
     &:hover {
       color: rgba(0, 0, 0, 0.25);
       border-color: #d9d9d9;

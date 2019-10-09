@@ -60,7 +60,7 @@
       </div>
     </div>
     <h3>按钮组</h3>
-    <p>以按钮组的方式出现，常用于多项类似操作。</p>
+    <p>以按钮组的方式出现，常用于多项类似操作</p>
     <div class="component-wrapper">
       <div class="component-wrapper-demo">
         <cl-button-group>
@@ -80,8 +80,23 @@
         <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
       </div>
     </div>
-    <h3>attributes</h3>
-    <p>组件参数说明后期扩展</p>
+    <h3>加载中</h3>
+    <p>点击按钮后进行数据加载操作，在按钮上显示加载状态</p>
+    <div class="component-wrapper">
+      <div class="component-wrapper-demo">
+          <cl-button type="primary" loading>加载中</cl-button>
+      </div>
+      <div class="code-content" v-highlight style="height: 0;">
+        <div class="code-content-height">
+          <pre><code class="html">{{withLoading}}</code></pre>
+        </div>
+      </div>
+      <div class="lock-code" @click="showCode(4)" ref="xxx">
+        <cl-icon class="icon-down" :name=" isShow[0]=== false ? 'arrow-down' : 'arrow-up'"></cl-icon>
+        <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
+      </div>
+    </div>
+    <Attributes></Attributes>      
   </div>
 </template>
 
@@ -90,13 +105,15 @@ import Icon from "../../../src/components/icon/icon";
 import mixin from "../mixin";
 import Button from "../../../src/components/button/button";
 import ButtonGroup from "../../../src/components/button-group/button-group";
+import Attributes from "./button-attributes.vue"
 export default {
   name: "demo",
   mixins: [mixin],
   components: {
     "cl-icon": Icon,
     "cl-button": Button,
-    "cl-button-group": ButtonGroup
+    "cl-button-group": ButtonGroup,
+    Attributes
   },
   data() {
     return {
@@ -117,7 +134,9 @@ export default {
         <cl-button type="danger" icon="delete"></cl-button>
         <cl-button type="success" icon="success"></cl-button>
         <cl-button  icon="search">搜索</cl-button>
-        <cl-button type="primary" icon="upload" iconPosition="right">上传</cl-button>`
+        <cl-button type="primary" icon="upload" iconPosition="right">上传</cl-button>`,
+        codeStr3: `
+     <cl-button type="primary" loading>加载中</cl-button>`
     };
   },
   computed: {
@@ -129,6 +148,9 @@ export default {
     },
     withIcon() {
       return this.trim(this.codeStr2);
+    },
+    withLoading(){
+      return this.trim(this.codeStr3)
     }
   },
   methods: {

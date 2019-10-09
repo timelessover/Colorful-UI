@@ -6,11 +6,11 @@ title: 安装
 npm 安装
 
 ```bash
-npm install Colorful
+npm install Colorful -S
 ```
 
-yarn
+yarn 安装
 
 ```bash
-yarn add Colorful
+yarn add Colorful -S
 ```
