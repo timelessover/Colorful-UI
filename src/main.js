@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import _ from 'lodash'
 import './styles/index.scss'
+import "./assets/fonts/icon.css";
 
 Vue.prototype._ = _
 

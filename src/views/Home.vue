@@ -1,78 +1,6 @@
 <template>
   <div id="home">
-    <!-- <cl-affix></cl-affix> -->
-    <cl-button  loading  size='large'>很好</cl-button>
-    <!-- <cl-button :loading=true >xxx</cl-button>
-    <cl-button disabled>禁用</cl-button> -->
-    <!-- <cl-popover
-      placement="top-start"
-      title="标题"
-      width="200"
-      trigger="click"
-      content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
-    >
-      <cl-button slot="reference">hover 激活</cl-button>
-    </cl-popover> -->
-    <!-- <div>
-      <cl-radio v-model="radio" label="1">备选项1</cl-radio>
-      <cl-radio v-model="radio" label="2">备选项2</cl-radio>
-    </div> -->
-    <!-- <cl-checkbox-group v-model="checkList">
-      <cl-checkbox label="复选框 A"></cl-checkbox>
-      <cl-checkbox label="复选框 B"></cl-checkbox>
-      <cl-checkbox label="复选框 C"></cl-checkbox>
-      <cl-checkbox label="禁用" disabled></cl-checkbox>
-      <cl-checkbox label="选中且禁用" disabled></cl-checkbox>
-    </cl-checkbox-group> -->
-    <!-- <cl-row :gutter="20">
-      <cl-col :span="6">
-        <div style="background:blue;width:100%">1</div>
-      </cl-col>
-      <cl-col :span="6">
-        <div style="background:blue;width:100%;">1</div>
-      </cl-col>
-      <cl-col :span="12">
-        <div style="background:blue;width:100%;">1</div>
-      </cl-col>
-    </cl-row>
-    <div class="button-demo">
-
-      <cl-button-group>
-        <cl-button icon="arrow-left">上一页</cl-button>
-        <cl-button icon="arrow-right" iconPosition="right">下一页</cl-button>
-      </cl-button-group>
-      <cl-back-top :bottom="100" :right="50"></cl-back-top>
-      <cl-input v-model="value" type="text" clearable></cl-input>
-      <cl-collapse>
-        <cl-collapse-item name="1"></cl-collapse-item>
-        <cl-collapse-item name="2"></cl-collapse-item>
-        <cl-collapse-item name="3" title="45646"></cl-collapse-item>
-      </cl-collapse>
-      <cl-tabs @tabs="handleClick">
-        <cl-tab-pane label="用户管理" name="0">用户管理</cl-tab-pane>
-        <cl-tab-pane label="配置管理" name="1">配置管理</cl-tab-pane>
-        <cl-tab-pane label="角色管理" name="2">角色管理</cl-tab-pane>
-        <cl-tab-pane label="哈哈哈" name="3">哈哈哈</cl-tab-pane>
-      </cl-tabs>
-      <cl-input-number v-model="value" @change="handleChange"></cl-input-number>
-      <cl-dropdown>
-        <span class="cl-dropdown-link">
-          下拉菜单
-          <i class="cl-icon-arrow-down cl-icon--right"></i>
-        </span>
-        <cl-dropdown-menu slot="dropdown">
-          <cl-dropdown-item>黄金糕</cl-dropdown-item>
-          <cl-dropdown-item>狮子头</cl-dropdown-item>
-          <cl-dropdown-item>螺蛳粉</cl-dropdown-item>
-          <cl-dropdown-item>双皮奶</cl-dropdown-item>
-          <cl-dropdown-item>蚵仔煎</cl-dropdown-item>
-        </cl-dropdown-menu>
-      </cl-dropdown>
-      <div>
-        <cl-magnifier :imgList="imgList"></cl-magnifier>
-      </div>
-    </div>-->
-
+      <cl-input v-model="value" type="phone" placeholder ="请输入内容" clearable></cl-input>
     <div></div>
   </div>
 </template>
@@ -125,15 +53,12 @@ export default {
   data() {
     return {
       flag: true,
-      checkList: ['选中且禁用','复选框 A']
+      value:'',
     };
   },
   created() {},
   watch: {},
   methods: {
-    flag() {
-      this.loading = !this.loading;
-    },
     handleClick(tab, event) {
       console.log(tab);
     },
