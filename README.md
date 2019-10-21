@@ -1,6 +1,6 @@
 # :rainbow:Colorful-UI
 
-> 一个基于Vue 2.x的自定义UI组件库
+> 一个基于 vue 2.x 的自定义UI组件库
 
 组件列表
 
