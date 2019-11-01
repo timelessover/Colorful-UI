@@ -1,7 +1,8 @@
 <template>
   <div id="home">
-      <cl-input v-model="value" type="phone" placeholder ="请输入内容" clearable></cl-input>
-    <div></div>
+      <cl-input v-model="value" type="phone" placeholder ="请输入内容" show-password></cl-input>
+      <!-- <cl-input-number></cl-input-number> -->
+      <!-- <cl-input-number v-model="value" @change="handleChange" :min="1" :max="10" ></cl-input-number> -->
   </div>
 </template>
 <script>
@@ -53,7 +54,7 @@ export default {
   data() {
     return {
       flag: true,
-      value:'',
+      value:1,
     };
   },
   created() {},

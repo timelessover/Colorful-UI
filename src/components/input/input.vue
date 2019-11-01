@@ -1,6 +1,7 @@
 <template>
   <div :class="classObject">
-    <input
+  
+      <input
       class="cl-input__inner"
       :type="type"
       :placeholder="placeholder"
@@ -9,15 +10,22 @@
       :readonly="readonly"
       @input="updateValue($event.target.value)"
       autocomplete="off"
-    />
+      @blur="hideSuffix"
+      @focus="showSuffix"
+    >
+    
     <!-- 后置内容 -->
-    <span class="cl-input__suffix" v-if="isShow" >
+    <span class="cl-input__suffix" v-if="isShow" @mouseover="enterSuffix" @mouseout="leaveSuffix">
       <span class="cl-input__suffix-inner">
         <i
           v-if="showClear"
           class="cl-input-icon cl-icon--circle-close cl-input__clear"
           @click="clear"
         ></i>
+        <i v-if="showPwdVisible"
+            class="el-input__icon el-icon-view el-input__clear"
+            @click="handlePasswordVisible"
+          ></i>
       </span>
     </span>
   </div>
@@ -39,14 +47,19 @@ export default {
     disabled: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
     readonly: Boolean,
-    inputValue: { type: Number }
+    inputValue: { type: Number },
+    showPassword:{
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
-      isShow: this.getSuffixVisible()
+      isShow: false,
+      isEnterSuffix:false,
+      passwordVisible:false
     };
   },
-  mounted() {},
   computed: {
     classObject() {
       return ["cl-input", { "is-disabled": this.disabled }];
@@ -55,16 +68,11 @@ export default {
       return this.disabled;
     },
     showClear() {
-      return this.clearable;
+      return this.clearable && this.value;
     },
     valueEmpty() {
       return /^\s*$/.test(this.value);
-    },
-  },
-  mounted () {
-    this.$nextTick(()=>{
-      this.$refs
-    })
+    }
   },
   methods: {
     updateValue(v) {
@@ -77,16 +85,29 @@ export default {
     changeHandler(v) {
       this.$emit("input", v);
     },
-    getSuffixVisible() {
-      this.isShow =  this.showClear && this.value;
-    },
-    hideSuffixVisible(){
-      this.isShow = false
-    },
     clear() {
       this.$emit("input", "");
       this.$emit("change", "");
       this.$emit("clear");
+      this.isEnterSuffix = false
+    },
+    handlePasswordVisible(){
+      this.passwordVisible = !this.passwordVisible;
+      // this.focus();
+    },
+    enterSuffix(){
+      this.isEnterSuffix = true
+    },
+    leaveSuffix(){
+      this.isEnterSuffix = false
+    },
+    showSuffix(e) {
+        this.isShow = this.showClear || true;
+    },
+    hideSuffix(e) {
+      if(!this.isEnterSuffix){
+        this.isShow = false;
+      }
     }
   }
 };
@@ -137,7 +158,6 @@ export default {
   }
   > .cl-input__suffix {
     position: absolute;
-    height: 100%;
     right: 8px;
     top: 10px;
     text-align: center;

@@ -1,29 +1,13 @@
-//    <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
-
-// //   export default {
-// //     data() {
-// //       return {
-// //         num: 1
-// //       };
-// //     },
-// //     methods: {
-// //       handleChange(value) {
-// //         console.log(value);
-// //       }
-// //     }
-// //   };
-
 <template>
     <div class="cl-input-number">
         <span class="cl-input-number__decrease" role="button" @click="mius">
-            <i :class="`cl-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
+            <i :class="`cl-icon--${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
         </span>
         <span class="cl-input-number__increase" role="button" @click="add">
-            <i :class="`cl-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
+            <i :class="`cl-icon--${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
         </span>
         <cl-input
             ref="input"
-            :value="disabledValue"
             :inputValue="value"
             :placeholder="placeholder"
             :max="max"
@@ -73,11 +57,11 @@ export default {
   },
   computed: {
     disabledValue() {
-    //   if (this.userInput !== null) {
-    //     let currentValue = this.userInput;
-    //     return currentValue
-    //   }
-    //   let currentValue = this.currentValue;
+      if (this.userInput !== null) {
+        let currentValue = this.userInput;
+        return currentValue
+      }
+      let currentValue = this.currentValue;
       return this.currentValue
     }
   },

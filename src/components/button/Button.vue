@@ -1,15 +1,15 @@
 <template>
-    <button :class="[classObject , getIconPosition]" @click="clickHandler" :disabled="isDisabled">
-      <Icon class="icon" v-if="icon && !loading" :name="icon" />
-      <Icon class="loading icon" v-if="loading" name="loading"></Icon>
-      <div class="content">
-        <slot />
-      </div>
-    </button>
+  <button :class="[classObject , getIconPosition]" @click="clickHandler" :disabled="isDisabled">
+    <Icon class="icon" v-if="icon && !loading" :name="icon"/>
+    <Icon class="loading icon" v-if="loading" name="loading"></Icon>
+    <div class="content">
+      <slot/>
+    </div>
+  </button>
 </template>
 <script>
 import Icon from "../icon/icon";
-import {Wave} from "../../utils/wave";
+import { Wave } from "../../utils/wave";
 const COMPONENT_NAME = "cl-button";
 
 export default {
@@ -17,7 +17,7 @@ export default {
   components: {
     Icon
   },
-  mixins:[Wave],
+  mixins: [Wave],
   props: {
     icon: {
       type: String,
@@ -29,13 +29,12 @@ export default {
     },
     loading: {
       type: Boolean,
-      default: false,
-      
+      default: false
     },
     size: {
       type: String,
       default: "normal",
-      validator: val => ["normal", "large","small"].indexOf(val) > -1
+      validator: val => ["normal", "large", "small"].indexOf(val) > -1
     },
     disabled: {
       type: Boolean,
@@ -124,7 +123,7 @@ export default {
     color: rgba(0, 0, 0, 0.25);
     border-color: #d9d9d9;
     background-color: #e6e6e6;
-    cursor:default;
+    cursor: default;
     &:hover {
       color: rgba(0, 0, 0, 0.25);
       border-color: #d9d9d9;

@@ -3,7 +3,7 @@
   <transition name="slide">
     <div class="sider" v-if="visible">
       <slot></slot>
-      <w-button class="close" @click="visible = false">关闭</w-button>
+      <cl-button class="close" @click="visible = false">关闭</cl-button>
     </div>
   </transition>
 </template>
@@ -11,7 +11,7 @@
 import Button from '../button/button'
 export default {
   name: "cl-sider",
-  components: {Button},
+  components: {'cl-button':Button},
   data() {
     return {
       visible: true
