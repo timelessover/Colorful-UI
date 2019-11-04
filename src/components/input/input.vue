@@ -1,31 +1,44 @@
 <template>
-  <div :class="classObject">
-  
-      <input
+  <div :class="classObject" @mouseenter="isShow = true" @mouseleave="isShow = false">
+    <input
       class="cl-input__inner"
-      :type="type"
+      :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
       :placeholder="placeholder"
       :value="value"
       :disabled="inputDisabled"
       :readonly="readonly"
       @input="updateValue($event.target.value)"
       autocomplete="off"
-      @blur="hideSuffix"
-      @focus="showSuffix"
+      @blur="handleBlur"
+      @focus="handleFocus"
     >
-    
+    <!-- 前置内容 -->
+    <span class="cl-input__prefix" v-if="$slots.prefix || prefixIcon">
+      <slot name="prefix"></slot>
+      <i class="cl-input__icon" v-if="prefixIcon" :class="prefixIcon"></i>
+    </span>
     <!-- 后置内容 -->
-    <span class="cl-input__suffix" v-if="isShow" @mouseover="enterSuffix" @mouseout="leaveSuffix">
+    <span
+      class="cl-input__suffix"
+      v-if="getSuffixVisible"
+      @mouseover="enterSuffix"
+      @mouseout="leaveSuffix"
+    >
       <span class="cl-input__suffix-inner">
+        <template v-if="!showClear || !showPwdVisible">
+          <slot name="suffix"></slot>
+          <i class="cl-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
+        </template>
         <i
           v-if="showClear"
           class="cl-input-icon cl-icon--circle-close cl-input__clear"
           @click="clear"
         ></i>
-        <i v-if="showPwdVisible"
-            class="el-input__icon el-icon-view el-input__clear"
-            @click="handlePasswordVisible"
-          ></i>
+        <i
+          v-if="showPwdVisible"
+          class="cl-input__icon cl-icon--view cl-input__clear"
+          @click="handlePasswordVisible"
+        ></i>
       </span>
     </span>
   </div>
@@ -46,33 +59,55 @@ export default {
     labelLeft: { type: String },
     disabled: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
-    readonly: Boolean,
+    readonly: { type: Boolean, default: false },
     inputValue: { type: Number },
-    showPassword:{
+    showPassword: {
       type: Boolean,
       default: false
-    }
+    },
+    suffixIcon: String,
+    prefixIcon: String
   },
   data() {
     return {
       isShow: false,
-      isEnterSuffix:false,
-      passwordVisible:false
+      focused: false,
+      isEnterSuffix: false,
+      passwordVisible: false
     };
   },
   computed: {
     classObject() {
-      return ["cl-input", { "is-disabled": this.disabled }];
+      return [
+        "cl-input",
+        { "is-disabled": this.disabled },
+        {
+          "cl-input--suffix":
+            this.suffixIcon || this.clearable || this.showPassword
+        },
+        { "cl-input--prefix": this.prefixIcon }
+      ];
     },
     inputDisabled() {
       return this.disabled;
     },
     showClear() {
-      return this.clearable && this.value;
+      return (
+        this.clearable &&
+        this.value &&
+        !this.readonly &&
+        (this.focused || this.isShow)
+      );
     },
     valueEmpty() {
       return /^\s*$/.test(this.value);
-    }
+    },
+    getSuffixVisible() {
+      return this.suffixIcon || this.showClear || this.showPassword;
+    },
+    showPwdVisible() {
+      return this.showPassword && this.value;
+    },
   },
   methods: {
     updateValue(v) {
@@ -89,25 +124,23 @@ export default {
       this.$emit("input", "");
       this.$emit("change", "");
       this.$emit("clear");
-      this.isEnterSuffix = false
     },
-    handlePasswordVisible(){
+    handlePasswordVisible() {
       this.passwordVisible = !this.passwordVisible;
-      // this.focus();
     },
-    enterSuffix(){
-      this.isEnterSuffix = true
+    enterSuffix() {
+      this.isEnterSuffix = true;
     },
-    leaveSuffix(){
-      this.isEnterSuffix = false
+    leaveSuffix() {
+      this.isEnterSuffix = false;
     },
-    showSuffix(e) {
-        this.isShow = this.showClear || true;
+    handleBlur(e) {
+      this.focused = false;
+      this.$emit("blur", e);
     },
-    hideSuffix(e) {
-      if(!this.isEnterSuffix){
-        this.isShow = false;
-      }
+    handleFocus(e) {
+      this.focused = true;
+      this.$emit("focus", e);
     }
   }
 };
@@ -120,16 +153,14 @@ export default {
   position: relative;
   font-size: 14px;
   display: inline-block;
-
-  &.is-disabled {
+  &.cl-input--suffix {
     .cl-input__inner {
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
-      color: #c0c4cc;
-      cursor: not-allowed;
-      &::-webkit-input-placeholder {
-        color: #c0c4cc;
-      }
+      padding-right: 30px;
+    }
+  }
+  &.cl-input--prefix {
+    .cl-input__inner {
+      padding-left: 30px;
     }
   }
   > .cl-input__inner {
@@ -156,9 +187,29 @@ export default {
       color: #e4e7ed;
     }
   }
+  &.is-disabled {
+    .cl-input__inner {
+      background-color: #f5f7fa;
+      border-color: #e4e7ed;
+      color: #c0c4cc;
+      cursor: not-allowed;
+      &::-webkit-input-placeholder {
+        color: #c0c4cc;
+      }
+    }
+  }
+
+  > .cl-input__prefix {
+    text-align: center;
+    transition: all 0.3s;
+    position: absolute;
+    left: 5px;
+    top: 12px;
+    color: #c0c4cc;
+  }
   > .cl-input__suffix {
     position: absolute;
-    right: 8px;
+    right: 5px;
     top: 10px;
     text-align: center;
     color: #c0c4cc;
@@ -166,6 +217,7 @@ export default {
     pointer-events: none;
     > .cl-input__suffix-inner {
       pointer-events: all;
+      // padding-right: 30px;
       .cl-input__icon {
         line-height: 20px;
       }
