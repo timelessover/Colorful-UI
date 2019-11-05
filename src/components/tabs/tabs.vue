@@ -1,12 +1,3 @@
-//1.tab-nav tab-pane tab-bar 点击后通知其他组件
-// <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
-  </el-tabs>
-
-
 <template>
   <div :class="classObjet" >
     <TabNav ></TabNav>
@@ -19,28 +10,24 @@
 
 <script>
 import TabNav from "./tab-nav";
+import TabBar from "./tab-bar";
 
 export default {
   name: "cl-tabs",
-  props: {},
+  props: {
+    activeName:{
+      type:String,
+    },
+    value: {}
+  },
   components: {
     TabNav,
+    TabBar
   },
   provide() {
     return {
       rootTabs: this
     };
-  },
-
-  data() {
-    return {
-      currentName: this.value || this.activeName,
-      panes: [],
-      index: 0
-    };
-  },
-
-  watch: {
   },
   computed: {
     classObjet() {
@@ -49,12 +36,10 @@ export default {
       ];
     }
   },
-  created () {
-    // console.log(this)
-  },
+
   methods: {
-    handleCick(){
-      this.$emit('tabs')
+    handleCick(e){
+      this.$emit('tab-click',e)
     }
   }
 };
@@ -63,6 +48,7 @@ export default {
 .cl-tabs{
   height:200px;
   width:500px;
+  padding:15px;
 }
 </style>
 

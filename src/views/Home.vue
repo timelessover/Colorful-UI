@@ -1,77 +1,36 @@
 <template>
   <div id="home">
-    <cl-row :gutter="20">
-      <cl-col :span="6">
-        <div class="grid-content bg-purple"></div>
-      </cl-col>
-      <cl-col :span="6">
-        <div class="grid-content bg-purple"></div>
-      </cl-col>
-      <cl-col :span="6">
-        <div class="grid-content bg-purple"></div>
-      </cl-col>
-      <cl-col :span="6">
-        <div class="grid-content bg-purple"></div>
-      </cl-col>
-    </cl-row>
+    <cl-tabs v-model="activeName" @tab-click="handleClick">
+      <cl-tab-pane label="用户管理" name="first">用户管理</cl-tab-pane>
+      <cl-tab-pane label="配置管理" name="second">配置管理</cl-tab-pane>
+      <cl-tab-pane label="角色管理" name="third">角色管理</cl-tab-pane>
+      <cl-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</cl-tab-pane>
+    </cl-tabs>
   </div>
 </template>
 <script>
-import Button from "@/components/button/button";
-import ButtonGroup from "@/components/button-group/button-group";
-import BackTop from "@/components/backtop/backtop";
-import Input from "@/components/input/input";
-import Collapse from "@/components/collapse/collapse";
-import CollapseItem from "@/components/collapse/collapse-item";
-import Tabs from "@/components/tabs/tabs";
-import Pane from "@/components/tabs/tab-pane";
-import InputNumber from "@/components/input-number/input-number.vue";
-import Popover from "@/components/popover/popover.vue";
-import DropDownMenu from "@/components/dropdown/dropdown-menu.vue";
-import DropDownItem from "@/components/dropdown/dropdown-item.vue";
-import DropDown from "@/components/dropdown/dropdown.vue";
-import Magnifier from "@/components/magnifier/magnifier.vue";
-import Row from "@/components/row/row.vue";
-import Col from "@/components/col/col.vue";
-import Radio from "@/components/radio/radio.vue";
-import Checkbox from "@/components/checkbox/checkbox.vue";
-import CheckboxGroup from "@/components/checkbox/checkbox-group.vue";
-import Affix from "@/components/affix/affix.vue";
-import axios from "axios";
+import ClButton from "@/components/button/button";
+import ClTabs from "@/components/tabs/tabs";
+import ClTabPane from "@/components/tabs/tab-pane";
+// import ClFooter from "@/components/tabs/footer";
+// import ClHeader from "@/components/tabs/header";
+// import ClMain from "@/components/tabs/main";
 
 export default {
   components: {
-    "cl-button": Button,
-    "cl-button-group": ButtonGroup,
-    "cl-back-top": BackTop,
-    "cl-input": Input,
-    "cl-collapse": Collapse,
-    "cl-collapse-item": CollapseItem,
-    "cl-tabs": Tabs,
-    "cl-tab-pane": Pane,
-    "cl-input-number": InputNumber,
-    "cl-popover": Popover,
-    "cl-dropdown-menu": DropDownMenu,
-    "cl-dropdown-item": DropDownItem,
-    "cl-dropdown": DropDown,
-    "cl-magnifier": Magnifier,
-    "cl-row": Row,
-    "cl-col": Col,
-    "cl-radio": Radio,
-    "cl-checkbox": Checkbox,
-    "cl-checkbox-group": CheckboxGroup,
-    "cl-affix": Affix
+    ClButton,
+    ClTabs,
+    ClTabPane
   },
   data() {
     return {
       flag: true,
-      activeNames: ["1"]
+      activeName: 'second'
     };
   },
-  created() {},
-  watch: {},
   methods: {
-    handleClick(tab, event) {
+    handleClick(tab) {
+      this.activeName = tab.name
       console.log(tab);
     },
     handleChange(val) {
@@ -81,6 +40,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .cl-dropdown-link {
   height: 50px;
   width: 100px;

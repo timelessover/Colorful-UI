@@ -24,19 +24,19 @@ export default {
       type: [Number, String]
     },
     xs: {
-      type: Object,
+      type: [Number,Object],
       validator
     },
     sm: {
-      type: Object,
+      type: [Number,Object],
       validator
     },
     md: {
-      type: Object,
+      type: [Number,Object],
       validator
     },
     lg: {
-      type: Object,
+      type: [Number,Object],
       validator
     }
   },
@@ -49,8 +49,12 @@ export default {
     classObject() {
       let { span, offset, lg, md, sm, xs } = this
       let createClasses = this.createClasses
+      let classArr = []
+      if(span || offset){
+        classArr.push(...createClasses({span, offset}))
+      }
       return [
-        ...createClasses({span, offset}),
+        ...classArr,
         ...createClasses(xs, 'xs-'),
         ...createClasses(sm	, 'sm-'),
         ...createClasses(md, 'md-'),
@@ -65,6 +69,7 @@ export default {
   methods: {
     createClasses(obj, str = '') {
       if(!obj) return []
+      if(typeof(Number(obj)) === Number) return [`cl-col-${str}${obj}`]
       let arr = []
       if(obj.span){
         arr.push(`cl-col-${str}${obj.span}`)
@@ -79,7 +84,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../styles/common/base.scss";
-  .col {
+  .cl-col {
     $class-prefix: cl-col-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
@@ -92,21 +97,21 @@ export default {
         margin-left: ($n / 24 ) * 100%;
       }
     }
-    @media (min-width: 577px){    
+    @media (min-width: 0px){    
       $class-prefix: cl-col-xs-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           width: ($n / 24 ) * 100%;
         }
       }
-      $class-prefix: cl-offset-lg-;
+      $class-prefix: cl-offset-xs-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           margin-left: ($n / 24 ) * 100%;
         }
       }
     }
-    @media (min-width: 769px) {    
+    @media (min-width: 577px){    
       $class-prefix: cl-col-sm-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -120,7 +125,7 @@ export default {
         }
       }
     }
-    @media (min-width: 993px) {    
+    @media (min-width: 769px) {    
       $class-prefix: cl-col-md-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -134,9 +139,23 @@ export default {
         }
       }
     }
-    @media (min-width: 1201px) {    
+    @media (min-width: 993px) {    
       $class-prefix: cl-col-lg-;
       @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          width: ($n / 24 ) * 100%;
+        }
+      }
+      $class-prefix: cl-offset-xl-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          margin-left: ($n / 24 ) * 100%;
+        }
+      }
+    }
+    @media (min-width: 1201px) {    
+      $class-prefix: cl-col-xl-;
+      @for $n from 1 through 24 {l
         &.#{$class-prefix}#{$n} {
           width: ($n / 24 ) * 100%;
         }

@@ -2,11 +2,10 @@
 <template>
   <div class="cl-popover">
     <transition name="fade">
-      <div
-        :class=classObject
-        v-show="visible"
-        ref="popover"
-      >{{content}}</div>
+      <div :class="classObject" :style="{width:`${width}px`}" v-show="visible" ref="popover">
+        <div class="cl-popover--title">{{title}}</div>
+        <div class="cl-popover--content">{{content}}</div>
+      </div>
     </transition>
     <slot name="reference"></slot>
   </div>
@@ -22,10 +21,10 @@ export default {
     content: {
       type: [Number, String]
     },
-    visible: {
-      type: Boolean,
-      default: false
-    },
+    // visible: {
+    //   type: Boolean,
+    //   default: false
+    // },
     position: {
       type: String,
       default: "top",
@@ -35,7 +34,11 @@ export default {
       type: String,
       default: "click",
       validator: value => ["click", "focus", "hover"].indexOf(value) > -1
-    }
+    },
+    width: {
+      type: [String, Number]
+    },
+    title: {}
   },
   data() {
     return {
@@ -44,7 +47,11 @@ export default {
   },
   computed: {
     classObject() {
-      return ["cl-popover--item", `position-${position}`,this.popClassName];
+      return [
+        "cl-popover--item",
+        `position-${this.position}`,
+        this.popClassName
+      ];
     }
   },
   mounted() {
@@ -110,40 +117,46 @@ export default {
 </script>
     
 <style lang="scss" scoped>
-$border-color: #333;
+$border-color: #ebeef5;
 $border-radius: 4px;
 .cl-popover {
   display: inline-block;
   vertical-align: top;
   position: relative;
+  font-size:14px;
 }
 .cl-popover--item {
   position: absolute;
   border: 1px solid $border-color;
   border-radius: $border-radius;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   background: white;
-  padding: 0.5em 1em;
+  padding: 1em 1.2em;
   word-break: break-all;
   z-index: 1;
+  >.cl-popover--title {
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
   &::before,
   &::after {
     content: "";
     display: block;
-    border: 10px solid transparent;
+    border: 8px solid transparent;
     width: 0;
     height: 0;
     position: absolute;
   }
   &.position-top {
     transform: translateY(-100%);
-    margin-top: -10px;
+    margin-top: -15px;
     &::before,
     &::after {
       left: 10px;
     }
     &::before {
-      border-top-color: black;
       border-bottom: none;
       top: 100%;
     }
@@ -154,14 +167,15 @@ $border-radius: 4px;
     }
   }
   &.position-bottom {
-    margin-top: 10px;
+    transform: translateY(50%);
+    margin-top: 15px;
     &::before,
     &::after {
       left: 10px;
     }
     &::before {
       border-top: none;
-      border-bottom-color: black;
+      border-bottom-color: white;
       bottom: 100%;
     }
     &::after {
@@ -171,15 +185,14 @@ $border-radius: 4px;
     }
   }
   &.position-left {
-    transform: translateX(-100%);
-    margin-left: -10px;
+    transform: translate(-100%,-25%);
+    margin-left: -15px;
     &::before,
     &::after {
       transform: translateY(-50%);
       top: 50%;
     }
     &::before {
-      border-left-color: black;
       border-right: none;
       left: 100%;
     }
@@ -190,14 +203,14 @@ $border-radius: 4px;
     }
   }
   &.position-right {
-    margin-left: 10px;
+    margin-left: 15px;
+    transform: translate(45%,-25%);
     &::before,
     &::after {
       transform: translateY(-50%);
       top: 50%;
     }
     &::before {
-      border-right-color: black;
       border-left: none;
       right: 100%;
     }
@@ -210,9 +223,9 @@ $border-radius: 4px;
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave-to{
   opacity: 0;
 }
 </style>

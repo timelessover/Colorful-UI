@@ -1,20 +1,20 @@
 <template>
-  <div class="wrap" ref="wrap">
-    <div class="bigger" ref="bigger" v-show="visable">
+  <div class="cl-magnifier--wrap" ref="wrap">
+    <div class="cl-magnifier--bigger" ref="bigger" v-show="visable">
       <img :src="currentImg" alt="">
     </div>
     <div class="imgs">
       <div
-        class="main"
+        class="cl-magnifier--main"
         ref="main"
         @mouseenter="handleEnter"
         @mouseleave="handleOut"
         @mousemove="handleMove"
       >
         <img :src="currentImg" alt="">
-        <div class="mask" :style="positions" ref="mask" v-show="visable"></div>
+        <div class="cl-magnifier--mask" :style="positions" ref="mask" v-show="visable"></div>
       </div>
-      <ul class="smaller">
+      <ul class="cl-magnifier--smaller">
         <li v-for="(item,index) in imgList" :key="index" @click="handleClick(index)">
           <img :src="item.path" alt="">
         </li>
@@ -51,7 +51,6 @@ export default {
   },
   methods: {
     handleClick(index) {
-      console.log(index)
       this.currentIndex = index;
     },
     handleEnter() {
@@ -95,35 +94,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@mixin zero{
+@mixin zero {
   position: absolute;
   left: 0;
   top: 0;
-}
-body,
-ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
 }
 img {
   vertical-align: middle;
   width: 100%;
   height: 100%;
 }
-.wrap {
+.cl-magnifier--wrap {
   position: relative;
   top: 100px;
   left: 100px;
   width: 400px;
   height: 492px;
+  .cl-magnifier--imgs {
+    @include zero;
+    width: 100%;
+    height: 100%;
+  }
 }
-.imgs {
-  @include zero;
-  width: 100%;
-  height: 100%;
-}
-.main {
+
+.cl-magnifier--main {
   position: relative;
   overflow: hidden;
   padding: 4px;
@@ -131,7 +125,7 @@ img {
   height: 390px;
   border: 1px solid #dadada;
 }
-.smaller {
+.cl-magnifier--smaller {
   position: relative;
   overflow: hidden;
   width: 400px;
@@ -154,7 +148,7 @@ img {
     border-color: #ff6a00;
   }
 }
-.bigger {
+.cl-magnifier--bigger {
   position: absolute;
   overflow: hidden;
   left: 410px;
@@ -166,7 +160,7 @@ img {
     height: 200%;
   }
 }
-.mask {
+.cl-magnifier--mask {
   @include zero;
   width: 200px;
   height: 200px;

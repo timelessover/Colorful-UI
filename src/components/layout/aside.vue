@@ -1,21 +1,24 @@
 
 <template>
-  <div class="cl-header" :style="{ height }">
+  <aside class="cl-aside" :style="{ width }">
     <slot></slot>
-  </div>
+  </aside>
 </template>
 <script>
 export default {
-  name: "cl-header",
+  name: "cl-sider",
   props: {
-    height: {
+    width: {
       type: String,
-      default: "10vh"
+      default: "300px"
     }
   }
 };
 </script>
 <style lang="scss" scoped>
+.cl-aside {
+  position: relative;
+}
 </style>
 
 

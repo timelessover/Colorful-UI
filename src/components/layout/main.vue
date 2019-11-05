@@ -1,16 +1,16 @@
 
 <template>
-  <div class="cl-content">
+  <main class="cl-main">
     <slot></slot>
-  </div>
+  </main>
 </template>
 <script>
 export default {
-  name: 'cl-content'
+  name: 'cl-main'
 }
 </script>
 <style lang="scss" scoped>
-  .cl-content {
+  .cl-main {
     flex-grow: 1;
   }
 </style>

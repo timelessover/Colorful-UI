@@ -3,7 +3,6 @@
     class="cl-tab-pane"
     v-show="isShow"
   >
-    {{name}}
     <slot></slot>
   </div>
 </template>
@@ -18,36 +17,15 @@
         type: String
       }
     },
-
-    data() {
-      return {
-        index: null,
-        loaded: false,
-        // isShow: true
-      };
-    },
-    
-
     computed: {
       isShow(){
-        if(this.name == this.$parent.index + ''){
-          return true
-        }else{
-          return false
-        }
+        if(this.name == this.$parent.value)return true
       }
     },
-    
-
-    updated() {
-      this.$parent.$emit('tab-nav-update');
-    }
   };
 </script>
 <style lang="scss" scoped>
-cl-tab-pane{
-  height: 50px;
-  width: 50px;
-  background: blue;
+.cl-tab-pane{
+  background: #fff;
 }
 </style>
