@@ -4,11 +4,10 @@
       class="cl-input__inner"
       :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
       :placeholder="placeholder"
-      :value="value"
+      :value="value?value:inputValue"
       :disabled="inputDisabled"
       :readonly="readonly"
       @input="updateValue($event.target.value)"
-      autocomplete="off"
       @blur="handleBlur"
       @focus="handleFocus"
     >
@@ -21,8 +20,6 @@
     <span
       class="cl-input__suffix"
       v-if="getSuffixVisible"
-      @mouseover="enterSuffix"
-      @mouseout="leaveSuffix"
     >
       <span class="cl-input__suffix-inner">
         <template v-if="!showClear || !showPwdVisible">
@@ -60,7 +57,6 @@ export default {
     disabled: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
-    inputValue: { type: Number },
     showPassword: {
       type: Boolean,
       default: false
@@ -72,7 +68,6 @@ export default {
     return {
       isShow: false,
       focused: false,
-      isEnterSuffix: false,
       passwordVisible: false
     };
   },
@@ -127,12 +122,6 @@ export default {
     },
     handlePasswordVisible() {
       this.passwordVisible = !this.passwordVisible;
-    },
-    enterSuffix() {
-      this.isEnterSuffix = true;
-    },
-    leaveSuffix() {
-      this.isEnterSuffix = false;
     },
     handleBlur(e) {
       this.focused = false;

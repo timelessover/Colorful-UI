@@ -1,22 +1,22 @@
 <template>
-    <div class="cl-input-number">
-        <span class="cl-input-number__decrease" role="button" @click="mius">
-            <i :class="`cl-icon--${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
-        </span>
-        <span class="cl-input-number__increase" role="button" @click="add">
-            <i :class="`cl-icon--${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
-        </span>
-        <cl-input
-            ref="input"
-            :inputValue="value"
-            :placeholder="placeholder"
-            :max="max"
-            :min="min"
-            :name="name"
-            :label="label"
-            @change="handleInputChange"
-        ></cl-input>
-    </div>
+  <div class="cl-input-number">
+    <span class="cl-input-number__decrease" role="button" @click="decrease">
+      <i class="cl-icon--minus"></i>
+    </span>
+    <span class="cl-input-number__increase" role="button" @click="increase">
+      <i class="cl-icon--plus"></i>
+    </span>
+    <cl-input
+      ref="input"
+      :value="currentValue"
+      :placeholder="placeholder"
+      :max="max"
+      :min="min"
+      :name="name"
+      :label="label"
+      @change="handleInputChange"
+    ></cl-input>
+  </div>
 </template>
 
 <script>
@@ -51,41 +51,40 @@ export default {
   data() {
     return {
       currentValue: 0,
-      userInput: null,
-      controlsAtRight: false
+      userInput: null
     };
-  },
-  computed: {
-    disabledValue() {
-      if (this.userInput !== null) {
-        let currentValue = this.userInput;
-        return currentValue
-      }
-      let currentValue = this.currentValue;
-      return this.currentValue
-    }
   },
   watch: {
     value: {
       immediate: true,
-      handler(value) {
+      handler(value) {        
         let newVal = value === undefined ? value : Number(value);
         if (newVal !== undefined) {
-            this.currentValue = newVal;
+          if (isNaN(newVal)) {
+            newVal = 0
+          }
         }
+        if (newVal >= this.max) newVal = this.max;
+        if (newVal <= this.min) newVal = this.min;
+        this.currentValue = newVal;
+        this.$emit("change", newVal);
       }
     }
   },
   methods: {
-    add() {
-      this.currentValue++;
+    increase() {
+      if (this.max) {
+        this.currentValue < this.max ? this.currentValue++ : this.max;
+      }
       this.$emit("change", this.currentValue);
     },
     handleInputChange(value) {
       this.currentValue = value;
     },
-    mius() {
-      this.currentValue > 0 ? this.currentValue-- : 0;
+    decrease() {
+      if (this.min) {
+        this.currentValue > this.min ? this.currentValue-- : this.min;
+      }
       this.$emit("change", this.currentValue);
     }
   }

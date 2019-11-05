@@ -1,12 +1,13 @@
 <template>
   <div id="home">
-      <cl-input
+      <!-- <cl-input
     placeholder="请选择日期"
     clearable
-    v-model="value">
-  </cl-input>
+    v-model="value"> -->
+  <!-- </cl-input> -->
       <!-- <cl-input-number></cl-input-number> -->
-      <!-- <cl-input-number v-model="value" @change="handleChange" :min="1" :max="10" ></cl-input-number> -->
+      <div>222</div>
+      <cl-input-number v-model="value" @change="handleChange" :min="1" :max="10" ></cl-input-number>
   </div>
 </template>
 <script>
@@ -67,8 +68,8 @@ export default {
     handleClick(tab, event) {
       console.log(tab);
     },
-    handleChange(value) {
-      console.log(value);
+    handleChange(value) { 
+      this.value = value
     }
   }
 };
