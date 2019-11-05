@@ -1,5 +1,5 @@
 <template>
-  <div class="col" :class="classObject" :style="colStyle">
+  <div class="cl-col" :class="classObject" :style="colStyle">
     <slot></slot>
   </div>
 </template>
@@ -23,19 +23,19 @@ export default {
     offset: {
       type: [Number, String]
     },
-    ipad: {
+    xs: {
       type: Object,
       validator
     },
-    narrowPc: {
+    sm: {
       type: Object,
       validator
     },
-    pc: {
+    md: {
       type: Object,
       validator
     },
-    widePc: {
+    lg: {
       type: Object,
       validator
     }
@@ -47,14 +47,14 @@ export default {
   },
   computed: {
     classObject() {
-      let { span, offset, ipad, narrowPc, pc, widePc } = this
+      let { span, offset, lg, md, sm, xs } = this
       let createClasses = this.createClasses
       return [
         ...createClasses({span, offset}),
-        ...createClasses(ipad, 'ipad-'),
-        ...createClasses(narrowPc, 'narrow-pc-'),
-        ...createClasses(pc, 'pc-'),
-        ...createClasses(widePc, 'wide-pc-'),
+        ...createClasses(xs, 'xs-'),
+        ...createClasses(sm	, 'sm-'),
+        ...createClasses(md, 'md-'),
+        ...createClasses(lg, 'lg-'),
       ]
     },
     colStyle() {
@@ -67,10 +67,10 @@ export default {
       if(!obj) return []
       let arr = []
       if(obj.span){
-        arr.push(`col-${str}${obj.span}`)
+        arr.push(`cl-col-${str}${obj.span}`)
       }
       if(obj.offset){
-        arr.push(`offset-${str}${obj.offset}`)
+        arr.push(`cl-offset-${str}${obj.offset}`)
       }
       return arr
     }
@@ -80,26 +80,26 @@ export default {
 <style lang="scss" scoped>
 @import "../../styles/common/base.scss";
   .col {
-    $class-prefix: col-;
+    $class-prefix: cl-col-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
         width: ($n / 24 ) * 100%;
       }
     }
-    $class-prefix: offset-;
+    $class-prefix: cl-offset-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
         margin-left: ($n / 24 ) * 100%;
       }
     }
     @media (min-width: 577px){    
-      $class-prefix: col-ipad-;
+      $class-prefix: cl-col-xs-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           width: ($n / 24 ) * 100%;
         }
       }
-      $class-prefix: offset-ipad-;
+      $class-prefix: cl-offset-lg-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           margin-left: ($n / 24 ) * 100%;
@@ -107,13 +107,13 @@ export default {
       }
     }
     @media (min-width: 769px) {    
-      $class-prefix: col-narrow-pc-;
+      $class-prefix: cl-col-sm-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           width: ($n / 24 ) * 100%;
         }
       }
-      $class-prefix: offset-narrow-pc-;
+      $class-prefix: cl-offset-sm-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           margin-left: ($n / 24 ) * 100%;
@@ -121,13 +121,13 @@ export default {
       }
     }
     @media (min-width: 993px) {    
-      $class-prefix: col-pc-;
+      $class-prefix: cl-col-md-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           width: ($n / 24 ) * 100%;
         }
       }
-      $class-prefix: offset-pc-;
+      $class-prefix: cl-offset-md-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           margin-left: ($n / 24 ) * 100%;
@@ -135,13 +135,13 @@ export default {
       }
     }
     @media (min-width: 1201px) {    
-      $class-prefix: col-wide-pc-;
+      $class-prefix: cl-col-lg-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           width: ($n / 24 ) * 100%;
         }
       }
-      $class-prefix: offset-wide-pc-;
+      $class-prefix: cl-offset-lg-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           margin-left: ($n / 24 ) * 100%;

@@ -1,13 +1,19 @@
 <template>
   <div id="home">
-      <!-- <cl-input
-    placeholder="请选择日期"
-    clearable
-    v-model="value"> -->
-  <!-- </cl-input> -->
-      <!-- <cl-input-number></cl-input-number> -->
-      <div>222</div>
-      <cl-input-number v-model="value" @change="handleChange" :min="1" :max="10" ></cl-input-number>
+    <cl-row :gutter="20">
+      <cl-col :span="6">
+        <div class="grid-content bg-purple"></div>
+      </cl-col>
+      <cl-col :span="6">
+        <div class="grid-content bg-purple"></div>
+      </cl-col>
+      <cl-col :span="6">
+        <div class="grid-content bg-purple"></div>
+      </cl-col>
+      <cl-col :span="6">
+        <div class="grid-content bg-purple"></div>
+      </cl-col>
+    </cl-row>
   </div>
 </template>
 <script>
@@ -54,12 +60,12 @@ export default {
     "cl-radio": Radio,
     "cl-checkbox": Checkbox,
     "cl-checkbox-group": CheckboxGroup,
-    'cl-affix': Affix
+    "cl-affix": Affix
   },
   data() {
     return {
       flag: true,
-      value:1,
+      activeNames: ["1"]
     };
   },
   created() {},
@@ -68,8 +74,8 @@ export default {
     handleClick(tab, event) {
       console.log(tab);
     },
-    handleChange(value) { 
-      this.value = value
+    handleChange(val) {
+      console.log(val);
     }
   }
 };
@@ -82,5 +88,31 @@ export default {
 }
 #home {
   height: 200vh;
+}
+.cl-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.cl-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
 }
 </style>
