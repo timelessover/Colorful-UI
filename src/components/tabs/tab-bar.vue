@@ -38,7 +38,7 @@ export default {
       for (let i = 0; i < DomList.length - 1; i++) {
         for (let j = 0; j < DomList[i].classList.length; j++) {
           if (DomList[i].classList[j] === "isActive") {
-            current = DomList[i];
+            current = DomList[i].children[0];
           }
         }
       }

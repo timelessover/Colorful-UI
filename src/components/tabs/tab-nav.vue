@@ -5,17 +5,19 @@
       v-for="(item,index) in tabList"
       :key="index"
       @click="handleClick(item)"
-    >{{item.label}}</div>
-    <TabBar :currentTab = currentTab></TabBar>
+    >
+      <div class="cl-tabs-nav--item--inner">{{item.label}}</div>
+    </div>
+    <TabBar :currentTab="currentTab"></TabBar>
   </div>
 </template>
 
 <script>
-import TabBar from './tab-bar';
+import TabBar from "./tab-bar";
 export default {
   name: "cl-tab-nav",
   components: {
-    TabBar,
+    TabBar
   },
   data() {
     return {
@@ -33,7 +35,7 @@ export default {
   },
   methods: {
     handleClick(item) {
-      this.currentTab = item
+      this.currentTab = item;
       this.$parent.$emit("tab-click", item);
     },
     getTabList() {
@@ -49,7 +51,7 @@ export default {
         let obj = {};
         obj.name = tabName[i].name;
         obj.label = list[i].label;
-        obj.index = i
+        obj.index = i;
         arr.push(obj);
       }
       this.tabList = arr;
@@ -66,7 +68,6 @@ export default {
   min-width: 300px;
   position: relative;
   margin: 0 0 15px;
-  box-sizing: content-box;
   &::after {
     content: "";
     position: absolute;
@@ -81,17 +82,17 @@ export default {
     padding: 10px 15px;
     cursor: pointer;
     text-align: center;
-    box-sizing: content-box;
+    box-sizing: border-box;
     &:first-child {
       padding: 10px 15px 15px 0;
     }
-     &:last-child {
-      padding-right: 0;
+    &:last-child {
+       padding: 10px 15px 15px 0;
     }
     &.isActive {
       color: #409eff;
     }
-    &:hover{
+    &:hover {
       color: #409eff;
     }
   }
