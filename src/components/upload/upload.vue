@@ -6,7 +6,7 @@
         <ol class="cl-uploader-fileList">
             <li v-for="file in fileList" :key="file.name">
                 <template v-if="file.status === 'uploading'">
-                    <w-icon name="loading" class="cl-uploader-spin"></w-icon>
+                    <cl-icon name="loading" class="cl-uploader-spin"></cl-icon>
                 </template>
                 <template v-else-if="file.type.indexOf('image') === 0">
                     <img class="cl-uploader-image" :src="file.url" width="32" height="32" alt="">
@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import Icon from "../icon/icon";
+import CLIcon from "../icon/icon";
 import http from "../../utils/http";
 export default {
   name: "cl-uploader",
-  components: { Icon },
+  components: { CLIcon },
   props: {
     name: { type: String, required: true },
     action: { type: String, required: true },

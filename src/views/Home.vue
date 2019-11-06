@@ -1,26 +1,20 @@
 <template>
   <div id="home">
-    <cl-tabs v-model="activeName" @tab-click="handleClick">
-      <cl-tab-pane label="用户管理" name="first">用户管理</cl-tab-pane>
-      <cl-tab-pane label="配置管理" name="second">配置管理</cl-tab-pane>
-      <cl-tab-pane label="角色管理" name="third">角色管理</cl-tab-pane>
-      <cl-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</cl-tab-pane>
-    </cl-tabs>
+    <ClButton @click="handleClick">确定</ClButton>
+    
   </div>
 </template>
 <script>
 import ClButton from "@/components/button/button";
-import ClTabs from "@/components/tabs/tabs";
-import ClTabPane from "@/components/tabs/tab-pane";
-// import ClFooter from "@/components/tabs/footer";
-// import ClHeader from "@/components/tabs/header";
-// import ClMain from "@/components/tabs/main";
+import ClToast from "@/components/toast/toast";
+import { setTimeout } from 'timers';
+
+
 
 export default {
   components: {
     ClButton,
-    ClTabs,
-    ClTabPane
+    ClToast
   },
   data() {
     return {
@@ -30,8 +24,10 @@ export default {
   },
   methods: {
     handleClick(tab) {
-      this.activeName = tab.name
-      console.log(tab);
+      this.$toast({
+        message:'xxx',
+        center:true
+      })
     },
     handleChange(val) {
       console.log(val);
