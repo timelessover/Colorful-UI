@@ -1,5 +1,5 @@
 <template>
-    <div class="cl-breadcrumb" aria-label="Breadcrumb" role="navigation">
+    <div class="cl-breadcrumb" role="navigation">
         <slot></slot>
     </div>
 </template>
@@ -26,9 +26,6 @@ export default {
 
   mounted() {
     const items = this.$el.querySelectorAll(".cl-breadcrumb__item");
-    if (items.length) {
-      items[items.length - 1].setAttribute("aria-current", "page");
-    }
   }
 };
 </script>

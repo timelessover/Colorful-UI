@@ -1,6 +1,6 @@
 
 <template>
-    <div class="cl-collapse" role="tablist" aria-multiselectable="true">
+    <div class="cl-collapse">
       <slot></slot>
     </div>
 </template>

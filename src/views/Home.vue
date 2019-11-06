@@ -1,32 +1,67 @@
 <template>
   <div id="home">
-    <ClButton @click="handleClick">确定</ClButton>
+    <cl-table
+      :data="tableData"
+      style="width: 100%">
+      <cl-table-column
+        prop="date"
+        label="日期"
+        width="180">
+      </cl-table-column>
+      <cl-table-column
+        prop="name"
+        label="姓名"
+        width="180">
+      </cl-table-column>
+      <cl-table-column
+        prop="address"
+        label="地址">
+      </cl-table-column>
+    </cl-table>
     
   </div>
 </template>
 <script>
 import ClButton from "@/components/button/button";
 import ClToast from "@/components/toast/toast";
-import { setTimeout } from 'timers';
+import ClTable from '@/components/table/table';
+import ClTableColumn from '@/components/table/table-column.vue';
 
 
 
 export default {
   components: {
     ClButton,
-    ClToast
+    ClTableColumn,
+    ClTable
   },
   data() {
     return {
       flag: true,
-      activeName: 'second'
+      activeName: 'second',
+       tableData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }]
     };
   },
   methods: {
     handleClick(tab) {
       this.$toast({
-        message:'xxx',
-        center:true
+        message:'hahahah'
       })
     },
     handleChange(val) {
