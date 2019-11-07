@@ -1,7 +1,5 @@
 <template>
-  <th colspan="1" rowspan="1" class="el-table_93_column_393 is-leaf">
-    <div class="cell">{{prop}}</div>
-  </th>
+  <div></div>
 </template>
 
 <script>
@@ -18,11 +16,7 @@ export default {
     },
     width: {
       type: [Number, String]
-    },
-    item:{}
-  },
-  mounted(){
-    this.item
+    }
   }
 };
 </script>

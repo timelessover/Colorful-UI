@@ -1,15 +1,35 @@
 <template>
-    <div class="el-table__body-wrapper">
+    <div class="cl-table__body-wrapper">
         <table
             cellspacing="0"
             cellpadding="0"
             border="0"
-            class="el-table__body"
+            class="cl-table__body"
             style="width: 675px;"
         >
+            <colgroup>
+                <col
+                    v-for="(item,index) in propList"
+                    :key="index+1"
+                    :name="`cl-table_${index + 1}_column_${index + 1}`"
+                    :width="item.width || 206"
+                >
+            </colgroup>
             <tbody>
-                <tr class="" v-for="(item,index) in tableRoot.data" :key="index">
-                    <th colspan="1" rowspan="1" class="el-table_93_column_393 is-leaf" v-for="(prop1,j) in propList" :key="j">
+                <tr
+                    class="cl-table-body--tr"
+                    v-for="(item,index) in rootList"
+                    :key="index"
+                    @click="handleClick(item)"
+                >
+                    <!-- 循环column -->
+                    <th
+                        class="is-leaf"
+                        colspan="1"
+                        rowspan="1"
+                        v-for="(prop1,j) in propList"
+                        :key="j"
+                    >
                         <div class="cell">{{propList && item[prop1.prop]}}</div>
                     </th>
                 </tr>
@@ -18,34 +38,75 @@
     </div>
 </template>
 <script>
-import tableColumn from './table-column.vue';
+import tableColumn from "./table-column.vue";
 export default {
   components: {
-      tableColumn,
+    tableColumn
   },
   inject: ["tableRoot"],
   data() {
-      return {
-          propList: null
-      }
+    return {
+      propList: null,
+      rootList: this.tableRoot.data
+    };
   },
   mounted() {
-    this.getPropList()
+    console.log(this.tableRoot);
+    this.getPropList();
   },
   methods: {
-      getPropList() {
-          let arr = []
-          const propData = this.tableRoot.$slots.default 
-          const length = propData.length
-          for (let index = 0; index < length; index++) {
-              const data = propData[index].componentOptions.propsData
-              arr.push(data)
-          }
-          this.propList = arr
+    getPropList() {
+      let arr = [];
+      const propData = this.tableRoot.$slots.default;
+      const length = propData.length;
+      for (let index = 0; index < length; index++) {
+        const data = propData[index].componentOptions.propsData;
+        arr.push(data);
       }
-  },
+      this.propList = arr;
+    },
+    handleClick(item) {
+      console.log(item);
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.cl-table__body-wrapper {
+  color:#606266;
+  .cl-table__body {
+    .cl-table-body--tr {
+      &:hover {
+        background: #f5f7fa;
+      }
+    }
+    .is-leaf {
+      border-bottom: 1px solid #ebeef5;
+    }
+  }
+}
+td,
+th {
+  padding: 12px 0;
+  min-width: 0;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  position: relative;
+  text-align: left;
+  > .cell {
+    display: inline-block;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-all;
+    line-height: 23px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
 </style>

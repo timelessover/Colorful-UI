@@ -15,7 +15,16 @@
       </cl-table-column>
       <cl-table-column
         prop="address"
-        label="地址">
+        label="地址"
+        >
+      </cl-table-column>
+      <cl-table-column
+        prop="phone"
+        label="电话">
+      </cl-table-column>
+      <cl-table-column
+        prop="xxxx"
+        label="飞机">
       </cl-table-column>
     </cl-table>
     
@@ -42,7 +51,9 @@ export default {
        tableData: [{
             date: '2016-05-02',
             name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
+            address: '上海市普陀区金沙江路 1518 弄',
+            phone:'13444444',
+            xxxx:'456748798'
           }, {
             date: '2016-05-04',
             name: '王小虎',
