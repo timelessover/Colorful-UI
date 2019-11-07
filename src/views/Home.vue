@@ -1,12 +1,13 @@
 <template>
   <div id="home">
-    <cl-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>卡片名称</span>
-        <cl-button type="text" style="float: right; padding: 2px 0;outline:none;" >操作按钮</cl-button>
-      </div>
-      <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div>
-    </cl-card>
+    <cl-breadcrumb separator="/">
+      <cl-breadcrumb-item :to="{ path: '/' }">首页</cl-breadcrumb-item>
+      <cl-breadcrumb-item>
+        <a href="/">活动管理</a>
+      </cl-breadcrumb-item>
+      <cl-breadcrumb-item>活动列表</cl-breadcrumb-item>
+      <cl-breadcrumb-item>活动详情</cl-breadcrumb-item>
+    </cl-breadcrumb>
   </div>
 </template>
 <script>
@@ -15,12 +16,16 @@ import ClCollapse from "@/components/collapse/collapse";
 import ClCollapseItem from "@/components/collapse/collapse-item";
 import ClTable from "@/components/table/table";
 import ClTableColumn from "@/components/table/table-column.vue";
+import ClBreadcrumb from "@/components/breadcrumb/breadcrumb";
+import ClBreadcrumbItem from "@/components/breadcrumb/breadcrumb-item";
 import ClCard from "@/components/card/card";
 
 export default {
   components: {
     ClButton,
-    ClCard
+    ClCard,
+    ClBreadcrumb,
+    ClBreadcrumbItem
   },
   data() {
     return {

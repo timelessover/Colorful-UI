@@ -1,7 +1,7 @@
 <template>
-    <div class="cl-breadcrumb" role="navigation">
-        <slot></slot>
-    </div>
+  <div class="cl-breadcrumb">
+    <slot></slot>
+  </div>
 </template>
 <script>
 export default {
@@ -29,3 +29,19 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.cl-breadcumb {
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  &::before {
+    content: "";
+    display: table;
+  }
+  &::after {
+    content: "";
+    display: table;
+  }
+}
+</style>
+
