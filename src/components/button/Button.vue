@@ -1,5 +1,6 @@
 <template>
-  <button :class="[classObject , getIconPosition]" @click="clickHandler" :disabled="isDisabled">
+  <span v-if="type=== 'text'"  :class="classObject"><slot/></span>
+  <button v-else :class="[classObject , getIconPosition]" @click="clickHandler" :disabled="isDisabled">
     <Icon class="icon" v-if="icon && !loading" :name="icon"/>
     <Icon class="loading icon" v-if="loading" name="loading"></Icon>
     <div class="content">

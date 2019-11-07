@@ -93,11 +93,8 @@ export default {
     }
   }
   .cl-collapse-item--pane {
-    // height: 0;
     overflow: hidden;
     transition: all 0.5s;
-    &.is-active {
-    }
   }
 }
 </style>
