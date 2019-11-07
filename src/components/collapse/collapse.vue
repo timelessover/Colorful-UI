@@ -73,7 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 .cl-collapse{
-    border-top: 1px solid red;
-    border-bottom: 1px solid red;
+    width: 50vw;
+    margin: 50px;
 }
 </style>
