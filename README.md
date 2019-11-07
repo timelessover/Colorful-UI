@@ -40,7 +40,7 @@ Data
 - [x] Breadcrumb 面包屑 
 - [x] Collapse 折叠面板
 - [x] Dropdown 下拉菜单
-- [ ] Card 卡片
+- [x] Card 卡片
 - [x] Popover 弹出框
 
 Others
