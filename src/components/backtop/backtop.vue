@@ -18,9 +18,8 @@
 <script>
 import Icon from "../icon/icon";
 
-const COMPONENT_NAME = "cl-back-top";
 export default {
-  name: COMPONENT_NAME,
+  name: "cl-back-top",
   components: {
     "cl-icon": Icon
   },

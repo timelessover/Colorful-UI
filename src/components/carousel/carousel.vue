@@ -1,32 +1,29 @@
 <template>
-    <div
-        class="cl-slides"
-        @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
-        @touchstart="onTouchStart"
-        @touchend="onTouchEnd"
-    >
-        <div class="cl-slides-window" ref="window">
-            <div class="cl-slides-wrapper">
-                <slot></slot>
-            </div>
-        </div>
-        <div class="cl-slides-dots">
-            <span @click="onClickPrev" data-action="prev">
-                <icon name="left"></icon>
-            </span>
-            <span
-                v-for="n in childrenLength"
-                :class="{active: selectedIndex === n-1}"
-                @click="select(n-1)"
-                :key="n"
-                :data-index="n-1"
-            >{{n}}</span>
-            <span @click="onClickNext" data-action="next">
-                <icon name="right"></icon>
-            </span>
-        </div>
+  <div class="cl-slides" @mouseenter.stop="onMouseEnter" @mouseleave.stop="onMouseLeave">
+    <div class="cl-slides-window" ref="window">
+      <div class="cl-slides-wrapper" :style="{height}">
+        <slot></slot>
+      </div>
     </div>
+    <div class="cl-slides-dots">
+      <!-- 上一张 -->
+      <span @click="onClickPrev">
+        <icon name="arrow-left"></icon>
+      </span>
+      <!-- 下方圆点显示 -->
+      <span
+        v-for="n in itemsLength"
+        :class="{active: selectedIndex === n-1}"
+        @click="select(n-1)"
+        :key="n"
+        :data-index="n-1"
+      >{{n}}</span>
+      <!-- 下一张 -->
+      <span @click="onClickNext">
+        <icon name="arrow-right"></icon>
+      </span>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -37,9 +34,7 @@ export default {
     Icon
   },
   props: {
-    selected: {
-      type: String
-    },
+    height: [String, Number],
     autoPlay: {
       type: Boolean,
       default: true
@@ -51,133 +46,66 @@ export default {
   },
   data() {
     return {
-      childrenLength: 0,
-      lastSelectedIndex: null,
-      timerId: null,
-      startTouch: null
+      activeIndex: -1,
+      containerWidth: 0,
+      itemsLength: 0,
+      reverse: false
     };
-  },
-  mounted() {
-    this.updateChildren();
-    if (this.autoPlay) {
-      this.playAutomatically();
-    }
-    this.childrenLength = this.items.length;
-  },
-  updated() {
-    this.updateChildren();
-  },
-  beforeDestroy() {
-    this.pause();
   },
   computed: {
     selectedIndex() {
-      let index = this.names.indexOf(this.selected);
+      let index = this.activeIndex;
       return index === -1 ? 0 : index;
     },
-    names() {
-      return this.items.map(vm => vm.name);
-    },
+
     items() {
       return this.$children.filter(
         vm => vm.$options.name === "cl-carousel-item"
       );
     }
   },
+  mounted() {
+    this.getItemsLength();
+  },
+  provide() {
+    return {
+      rootCarousel: this
+    };
+  },
   methods: {
+    getItemsLength() {
+      this.itemsLength = this.items.length;
+    },
+    onMouseEnter() {},
+    onMouseLeave() {},
     onClickPrev() {
-      this.select(this.selectedIndex - 1);
+      this.reverse = true;
+      this.$nextTick(() => {
+        let { activeIndex, itemsLength, selectedIndex } = this;
+        if (activeIndex < 0) {
+          this.activeIndex = selectedIndex;
+        }
+        if (activeIndex <= 0) {
+          this.activeIndex = itemsLength;
+        }
+        this.activeIndex--;
+      });
     },
     onClickNext() {
-      this.select(this.selectedIndex + 1);
-    },
-    onMouseEnter() {
-      this.pause();
-    },
-    onMouseLeave() {
-      this.playAutomatically();
-    },
-    onTouchStart(e) {
-      this.pause();
-      if (e.touches.lenth > 1) {
-        return;
-      } // 多点触控不认为在滑动
-      this.startTouch = e.touches[0];
-    },
-    onTouchEnd(e) {
-      let endTouch = e.changedTouches[0];
-      let { clientX: x1, clientY: y1 } = this.startTouch;
-      let { clientX: x2, clientY: y2 } = endTouch;
-      let distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-      let deltaY = Math.abs(y2 - y1);
-      let rate = distance / deltaY;
-      if (rate > 2) {
-        // 小于30度角才认为在滑动
-        if (x2 > x1) {
-          this.select(this.selectedIndex - 1);
-        } else {
-          this.select(this.selectedIndex + 1);
-        }
-      }
-      // 滑动完再自动播放
+      this.reverse = false;
       this.$nextTick(() => {
-        this.playAutomatically();
-      });
-    },
-    playAutomatically() {
-      if (this.timerId) {
-        return;
-      }
-      let run = () => {
-        let index = this.names.indexOf(this.getSelected());
-        let newIndex = index + 1;
-        this.select(newIndex); // 告诉外界选中 newIndex
-        this.timerId = setTimeout(run, this.autoPlayDelay);
-      };
-      this.timerId = setTimeout(run, this.autoPlayDelay);
-    },
-    pause() {
-      window.clearTimeout(this.timerId);
-      this.timerId = undefined;
-    },
-    select(newIndex) {
-      this.lastSelectedIndex = this.selectedIndex;
-      if (newIndex === -1) {
-        newIndex = this.names.length - 1;
-      }
-      if (newIndex === this.names.length) {
-        newIndex = 0;
-      }
-      this.$emit("update:selected", this.names[newIndex]);
-    },
-    getSelected() {
-      let first = this.items[0];
-      return this.selected || first.name;
-    },
-    updateChildren() {
-      let selected = this.getSelected();
-      this.items.forEach(vm => {
-        let reverse =
-          this.selectedIndex > this.lastSelectedIndex ? false : true;
-        if (this.timerId) {
-          if (
-            this.lastSelectedIndex === this.items.length - 1 &&
-            this.selectedIndex === 0
-          ) {
-            reverse = false;
-          }
-          if (
-            this.lastSelectedIndex === 0 &&
-            this.selectedIndex === this.items.length - 1
-          ) {
-            reverse = true;
-          }
+        let { activeIndex, itemsLength, selectedIndex } = this;
+        if (activeIndex < 0) {
+          this.activeIndex = selectedIndex;
         }
-        vm.reverse = reverse;
-        this.$nextTick(() => {
-          vm.selected = selected;
-        });
+        this.activeIndex++;
+        if (this.activeIndex >= itemsLength) {
+          this.activeIndex = 0;
+        }
       });
+    },
+    select(index) {
+      this.activeIndex = index;
     }
   }
 };

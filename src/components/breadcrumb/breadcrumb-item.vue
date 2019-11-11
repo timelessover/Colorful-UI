@@ -39,8 +39,10 @@ export default {
 @import "../../styles/common/base.scss";
 .cl-breadcrumb__item {
   .cl-breadcrumb__inner {
+    
     &.is-link,
     > a {
+      cursor: pointer;
       font-weight: 700;
       text-decoration: none;
       transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);

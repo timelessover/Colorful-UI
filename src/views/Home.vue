@@ -1,31 +1,24 @@
 <template>
   <div id="home">
-    <cl-breadcrumb separator="/">
-      <cl-breadcrumb-item :to="{ path: '/' }">首页</cl-breadcrumb-item>
-      <cl-breadcrumb-item>
-        <a href="/">活动管理</a>
-      </cl-breadcrumb-item>
-      <cl-breadcrumb-item>活动列表</cl-breadcrumb-item>
-      <cl-breadcrumb-item>活动详情</cl-breadcrumb-item>
-    </cl-breadcrumb>
+    <div class="block">
+      <cl-carousel height="150px">
+        <cl-carousel-item v-for="(index,item) in 4" :key="item" :name="index-1">
+          <h3 class="small">{{ item }}</h3>
+        </cl-carousel-item>
+      </cl-carousel>
+    </div>
   </div>
 </template>
 <script>
 import ClButton from "@/components/button/button";
-import ClCollapse from "@/components/collapse/collapse";
-import ClCollapseItem from "@/components/collapse/collapse-item";
-import ClTable from "@/components/table/table";
-import ClTableColumn from "@/components/table/table-column.vue";
-import ClBreadcrumb from "@/components/breadcrumb/breadcrumb";
-import ClBreadcrumbItem from "@/components/breadcrumb/breadcrumb-item";
-import ClCard from "@/components/card/card";
+import ClCarousel from "@/components/carousel/carousel";
+import ClCarouselItem from "@/components/carousel/carousel-item";
 
 export default {
   components: {
     ClButton,
-    ClCard,
-    ClBreadcrumb,
-    ClBreadcrumbItem
+    ClCarousel,
+    ClCarouselItem
   },
   data() {
     return {
@@ -74,6 +67,21 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cl-slides-item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+}
+
+.cl-slides-item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.cl-slides-item:nth-child(2n + 1) {
+  background-color: #99a9bf;
 }
 .cl-dropdown-link {
   height: 50px;
