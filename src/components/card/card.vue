@@ -36,8 +36,8 @@ export default {
     box-sizing: border-box;
     line-height: 28px;
   }
-  .cl-card__body{
-        padding: 20px;
+  .cl-card__body {
+    padding: 20px;
   }
 }
 </style>

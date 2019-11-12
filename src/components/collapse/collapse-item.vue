@@ -10,12 +10,9 @@
       <slot name="title">{{title}}</slot>
       <i class="cl-collapse-item__arrow cl-icon--arrow-right" :class="{'is-active': isActive}"></i>
     </div>
-    <!-- <transition name = 'fade'> -->
-      <div class="cl-collapse-item--pane" ref="pane"  :style="`height:${contentHeight}px`">
+    <div class="cl-collapse-item--pane" ref="pane" :style="`height:${contentHeight}px`">
       <slot></slot>
     </div>
-    <!-- </transition> -->
-    
   </div>
 </template>
 <script>
@@ -40,17 +37,17 @@ export default {
     },
     disabled: Boolean
   },
-  watch:{
-    isActive:'getCotentHeight'
+  watch: {
+    isActive: "getCotentHeight"
   },
 
   methods: {
-    getCotentHeight(){
-      let pane = this.$refs.pane
-      let paneHeight = pane.scrollHeight
-      this.contentHeight =  paneHeight
-      if(!this.isActive){
-        this.contentHeight = 0
+    getCotentHeight() {
+      let pane = this.$refs.pane;
+      let paneHeight = pane.scrollHeight;
+      this.contentHeight = paneHeight;
+      if (!this.isActive) {
+        this.contentHeight = 0;
       }
     },
     findItem() {
@@ -70,7 +67,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 .cl-collapse-item {
   transition: all 0.3s;
   line-height: 20px;

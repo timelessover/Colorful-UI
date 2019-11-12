@@ -96,7 +96,7 @@ export default {
   }
   .right {
     height: 100%;
-    border-left: 1px solid $border-color-light;
+    border-left: 1px solid red;
   }
   .label {
     padding: 0.5em 1em;

@@ -43,7 +43,7 @@ export default {
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 1s;
+  transition: all .6s;
 }
 .slide-enter {
   transform: translateX(100%);
