@@ -1,12 +1,7 @@
 <template>
   <div id="home">
     <div class="block">
-
-        <cl-radio :label="3" v-model="radio">备选项</cl-radio>
-        <cl-radio :label="6" v-model="radio">备选项</cl-radio>
-        <cl-radio :label="9" v-model="radio">备选项</cl-radio>
-
-      <!-- <cl-cascader v-model="value" :options="options" @change="handleChange"></cl-cascader> -->
+      <cl-cascader v-model="value" :options="options" @change="handleChange"></cl-cascader>
     </div>
   </div>
 </template>
@@ -302,7 +297,6 @@ export default {
   },
   methods: {
     handleChange(value) {
-      
      console.log(value)
     }
   }

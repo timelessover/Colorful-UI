@@ -17,10 +17,7 @@
       <i class="cl-input__icon" v-if="prefixIcon" :class="prefixIcon"></i>
     </span>
     <!-- 后置内容 -->
-    <span
-      class="cl-input__suffix"
-      v-if="getSuffixVisible"
-    >
+    <span class="cl-input__suffix" v-if="getSuffixVisible">
       <span class="cl-input__suffix-inner">
         <template v-if="!showClear || !showPwdVisible">
           <slot name="suffix"></slot>
@@ -29,7 +26,7 @@
         <i
           v-if="showClear"
           class="cl-input-icon cl-icon--circle-close cl-input__clear"
-          @click="clear"
+          @click.stop="clear"
         ></i>
         <i
           v-if="showPwdVisible"
@@ -45,6 +42,7 @@ export default {
   name: "cl-input",
   props: {
     value: { type: [String, Number], default: "" },
+    inputValue: {},
     type: { type: String, default: "text" },
     placeholder: { type: String, default: "" },
     icon: { type: String },
@@ -90,7 +88,7 @@ export default {
       return (
         this.clearable &&
         this.value &&
-        !this.readonly &&
+        this.readonly &&
         (this.focused || this.isShow)
       );
     },
@@ -102,7 +100,7 @@ export default {
     },
     showPwdVisible() {
       return this.showPassword && this.value;
-    },
+    }
   },
   methods: {
     updateValue(v) {
@@ -116,9 +114,13 @@ export default {
       this.$emit("input", v);
     },
     clear() {
-      this.$emit("input", "");
-      this.$emit("change", "");
-      this.$emit("clear");
+      if (this.$parent.$options._componentTag === "cl-cascader") {
+        this.$parent.$emit("input", []);
+      } else {
+        this.$emit("input", "");
+        this.$emit("change", "");
+        this.$emit("clear");
+      }
     },
     handlePasswordVisible() {
       this.passwordVisible = !this.passwordVisible;

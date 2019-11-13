@@ -1,30 +1,37 @@
 <template>
-  <div class="cascader-items" :style="{height: height}">
+  <div class="cl-cascader-items">
     <div class="left">
-      <div class="label" v-for="(item, index) in items" :key="index" @click="onClickLabel(item)">
-        <span class="name">
-          {{item.name}}
-        </span>
+      <div
+        class="label"
+        :class="{active:selected.indexOf(item.label)>-1}"
+        v-for="(item, index) in items"
+        :key="index"
+        @click="onClickLabel(item)"
+      >
+        <span class="name">{{item.label}}</span>
         <span class="icons">
-          <template v-if="item.name === loadingItem.name">
-            <icon class="loading" name="loading" />
-          </template>
-          <template v-else>
+          <template>
             <icon class="next" name="arrow-right" v-if="rightArrowVisible(item)"></icon>
           </template>
-
         </span>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <cl-cascader-items ref="right" :loading-item="loadingItem" :load-data="loadData" :items="rightItems" :height="height" :level="level+1" :selected="selected" @update:selected="onUpdateSelected" ></cl-cascader-items>
+      <cl-cascader-items
+        :items="rightItems"
+        @update:selected="onUpdateSelected"
+        :level="level + 1"
+        :selected="selected"
+        
+      ></cl-cascader-items>
     </div>
   </div>
 </template>
 <script>
-import Icon from '../icon/icon'
+import Icon from "../icon/icon";
+// v-if="selected[level] === rightItems"
 export default {
-  name: 'cl-cascade-items',
+  name: "cl-cascader-items",
   components: {
     Icon
   },
@@ -32,63 +39,52 @@ export default {
     items: {
       type: Array
     },
-    height: {
-      type: String
-    },
-    selected: {
-      type: Array,
-      default: () => []
-    },
+    selected: { type: Array, default: () => [] },
     level: {
       type: Number,
       default: 0
-    },
-    loadData: {
-      type: Function
-    },
-    loadingItem: {
-      type: Object,
-      default: () => ({})
     }
   },
+  inject: ["root"],
   data() {
     return {
-      leftSelected: null
-    }
+      rightItems: null,
+      label:{}
+    };
   },
-  computed: {
-    rightItems() {
-      if (this.selected[this.level]) {
-        let selected = this.items.filter((item) => item.name === this.selected[this.level].name)
-        if (selected && selected[0].children && selected[0].children.length > 0) {
-          return selected[0].children
-        }
+  watch: {
+    selected(val){
+      if(!val[this.level]){
+        this.rightItems = null
       }
     }
   },
+
   methods: {
     rightArrowVisible(item) {
-      return this.loadData ? !(item.isLeaf) : item.children
+      return item.children;
     },
     onClickLabel(item) {
-      let copy = JSON.parse(JSON.stringify(this.selected))
-      copy[this.level] = item
-      copy.splice(this.level + 1)
-      this.$emit('update:selected', copy)
+      this.rightItems = item.children
+      let copy = JSON.parse(JSON.stringify(item));
+      this.$emit("update:selected", { label: item.label, level: this.level });
+      if (!this.items[0].children) {
+        this.root.close();
+      }
     },
     onUpdateSelected(newSelected) {
-      this.$emit('update:selected', newSelected)
+      this.$emit("update:selected", newSelected);
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 @import "../../styles/common/base.scss";
-.cascader-items {
+.cl-cascader-items {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  height: 100%;
+  max-height: 300px;
   .left {
     height: 100%;
     padding: 0.3em 0;
@@ -96,7 +92,8 @@ export default {
   }
   .right {
     height: 100%;
-    border-left: 1px solid red;
+    border-left: 1px solid #ddd;
+    overflow: auto;
   }
   .label {
     padding: 0.5em 1em;
@@ -107,6 +104,9 @@ export default {
     &:hover {
       background: $grey;
     }
+    &.active {
+      color: $brand;
+    }
     > .name {
       margin-right: 1em;
       user-select: none;
@@ -114,10 +114,7 @@ export default {
     .icons {
       margin-left: auto;
       .next {
-        transform: scale(0.5);
-      }
-      .loading {
-        animation: spin 2s infinite linear;
+        transform: scale(0.8);
       }
     }
   }
