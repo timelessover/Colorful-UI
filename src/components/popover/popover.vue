@@ -98,8 +98,8 @@ export default {
       }
       if (
         this.$el&&this.$el.contains(e.target) ||
-        reference.contains(e.target) ||
-        popover.contains(e.target)
+        reference&&reference.contains(e.target) ||
+        popover&&popover.contains(e.target)
       )
         return;
       this.visible = false;

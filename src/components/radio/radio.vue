@@ -44,10 +44,6 @@ export default {
       radioGroup: null
     };
   },
-  // inject: ["radioGroup"],
-  // mounted () {
-  //   console.log(this.$parent.$options.componentName);
-  // },
   computed: {
     isGroup() {
       let parent = this.$parent;

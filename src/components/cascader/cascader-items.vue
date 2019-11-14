@@ -29,7 +29,6 @@
 </template>
 <script>
 import Icon from "../icon/icon";
-// v-if="selected[level] === rightItems"
 export default {
   name: "cl-cascader-items",
   components: {

@@ -5,7 +5,6 @@
       placeholder="请选择"
       readonly
       clearable
-
       @click.native="popoverVisible = !popoverVisible"
     ></cl-input>
     <div class="cl-popover-wrapper" v-if="popoverVisible">

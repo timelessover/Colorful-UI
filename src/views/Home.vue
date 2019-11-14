@@ -1,6 +1,12 @@
 <template>
   <div id="home">
-      <cl-date-picker v-model="value" range ></cl-date-picker>
+    <cl-checkbox-group v-model="checkList">
+      <cl-checkbox label="复选框 A"></cl-checkbox>
+      <cl-checkbox label="复选框 B"></cl-checkbox>
+      <cl-checkbox label="复选框 C"></cl-checkbox>
+      <cl-checkbox label="禁用" disabled></cl-checkbox>
+      <cl-checkbox label="选中且禁用" disabled></cl-checkbox>
+    </cl-checkbox-group>
   </div>
 </template>
 <script>
@@ -8,7 +14,9 @@ import ClButton from "@/components/button/button";
 import ClCascader from "@/components/cascader/cascader";
 import ClRadio from "@/components/radio/radio";
 import ClRadioGroup from "@/components/radio/radio-group";
-import ClDatePicker from '@/components/date-picker/date-picker';
+import ClDatePicker from "@/components/date-picker/date-picker";
+import ClCheckbox from "@/components/checkbox/checkbox";
+import ClCheckboxGroup from "@/components/checkbox/checkbox-group";
 
 export default {
   components: {
@@ -16,16 +24,20 @@ export default {
     ClCascader,
     ClRadio,
     ClRadioGroup,
-    ClDatePicker
+    ClDatePicker,
+    ClCheckbox,
+    ClCheckboxGroup
   },
   data() {
     return {
-      value:'',
-      radio: '3',
+      checkList: ['选中且禁用','复选框 A'],
+      checked1: true,
+      value: "",
+      radio: "3",
       type1: true,
       type2: true,
       type3: true,
-      value2:[],
+      value2: [],
       options: [
         {
           value: "zhinan",
@@ -298,7 +310,7 @@ export default {
   },
   methods: {
     handleChange(value) {
-     console.log(value)
+      console.log(value);
     }
   }
 };

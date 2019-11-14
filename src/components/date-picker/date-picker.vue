@@ -5,6 +5,7 @@
         slot="reference"
         type="text"
         clearable
+        readonly
         :value="formattedValue"
         @input="onInput"
         ref="input"
@@ -147,7 +148,7 @@ export default {
         month = month + 1;
         let showDate = `${year}-${month}-${day}`;
         this.$emit("input", showDate);
-        // this.$refs.popover.handleHide();
+        this.$refs.popover.handleHide();
       }
     },
     getVisibleDay(row, col) {
@@ -163,7 +164,7 @@ export default {
       }
       let [y, m, d] = helper.getYearMonthDate(date);
       let [y2, m2, d2] = this.value.split("-");
-      return y === Number(y2) && m === Number(m2) && d === Number(d2);
+      return y === Number(y2) && m+1 === Number(m2) && d === Number(d2);
     },
     isToday(date) {
       let [y, m, d] = helper.getYearMonthDate(date);
@@ -200,7 +201,6 @@ export default {
       if (d >= this.scope[0] && d <= this.scope[1]) {
         this.display.year = year;
       } else {
-        alert("no");
         e.target.value = this.display.year;
       }
     },
@@ -210,7 +210,7 @@ export default {
       if (d >= this.scope[0] && d <= this.scope[1]) {
         this.display.month = month;
       } else {
-        alert("no");
+        
         e.target.value = this.display.month;
       }
     },
@@ -221,7 +221,6 @@ export default {
       let new_month = month + 1;
       let showDate = `${year}-${new_month}-${day}`;
       this.$emit("input", showDate);
-      this.$refs.popover.handleHide();
     },
     onClickClear() {
       this.$emit("input", "");
