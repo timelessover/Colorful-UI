@@ -1,8 +1,6 @@
 <template>
   <div id="home">
-    <div class="block">
-      <cl-cascader v-model="value" :options="options" @change="handleChange"></cl-cascader>
-    </div>
+      <cl-date-picker v-model="value" range ></cl-date-picker>
   </div>
 </template>
 <script>
@@ -10,21 +8,24 @@ import ClButton from "@/components/button/button";
 import ClCascader from "@/components/cascader/cascader";
 import ClRadio from "@/components/radio/radio";
 import ClRadioGroup from "@/components/radio/radio-group";
+import ClDatePicker from '@/components/date-picker/date-picker';
 
 export default {
   components: {
     ClButton,
     ClCascader,
     ClRadio,
-    ClRadioGroup
+    ClRadioGroup,
+    ClDatePicker
   },
   data() {
     return {
-      value: [],
+      value:'',
       radio: '3',
       type1: true,
       type2: true,
       type3: true,
+      value2:[],
       options: [
         {
           value: "zhinan",

@@ -1,13 +1,21 @@
 
 <template>
   <div class="cl-popover">
+    <slot name="reference"></slot>
     <transition name="fade">
-      <div :class="classObject" :style="{width:`${width}px`}" v-show="visible" ref="popover">
-        <div class="cl-popover--title">{{title}}</div>
-        <div class="cl-popover--content">{{content}}</div>
+      <div
+        :class="container?containerObject:classObject"
+        :style="{width:`${width}px`}"
+        v-show="visible"
+        ref="popover"
+      >
+        <slot name="content" v-if="container"></slot>
+        <template v-else>
+          <div class="cl-popover--title">{{title}}</div>
+          <div class="cl-popover--content">{{content}}</div>
+        </template>
       </div>
     </transition>
-    <slot name="reference"></slot>
   </div>
 </template>
 
@@ -21,15 +29,13 @@ export default {
     content: {
       type: [Number, String]
     },
-    // visible: {
-    //   type: Boolean,
-    //   default: false
-    // },
+
     position: {
       type: String,
       default: "top",
       validator: value => ["top", "bottom", "left", "right"].indexOf(value) > -1
     },
+    container: {},
     trigger: {
       type: String,
       default: "click",
@@ -52,6 +58,9 @@ export default {
         `position-${this.position}`,
         this.popClassName
       ];
+    },
+    containerObject() {
+      return ["cl-popover--item", `date-position-${this.position}`];
     }
   },
   mounted() {
@@ -88,7 +97,7 @@ export default {
         reference = this.referenceElm = this.$slots.reference[0].elm;
       }
       if (
-        this.$el.contains(e.target) ||
+        this.$el&&this.$el.contains(e.target) ||
         reference.contains(e.target) ||
         popover.contains(e.target)
       )
@@ -120,13 +129,12 @@ export default {
 $border-color: #ebeef5;
 $border-radius: 4px;
 .cl-popover {
-  display: inline-block;
   vertical-align: top;
   position: relative;
-  font-size:14px;
+  font-size: 14px;
+  display: flex;
 }
 .cl-popover--item {
-  position: absolute;
   border: 1px solid $border-color;
   border-radius: $border-radius;
   filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
@@ -135,7 +143,7 @@ $border-radius: 4px;
   padding: 1em 1.2em;
   word-break: break-all;
   z-index: 1;
-  >.cl-popover--title {
+  > .cl-popover--title {
     font-size: 16px;
     line-height: 1;
     margin-bottom: 12px;
@@ -185,7 +193,7 @@ $border-radius: 4px;
     }
   }
   &.position-left {
-    transform: translate(-100%,-25%);
+    transform: translate(-100%, -25%);
     margin-left: -15px;
     &::before,
     &::after {
@@ -204,7 +212,7 @@ $border-radius: 4px;
   }
   &.position-right {
     margin-left: 15px;
-    transform: translate(45%,-25%);
+    transform: translate(45%, -25%);
     &::before,
     &::after {
       transform: translateY(-50%);
@@ -221,11 +229,84 @@ $border-radius: 4px;
     }
   }
 }
+.date-position-top {
+  margin-top: -15px;
+  &::before,
+  &::after {
+    left: 10px;
+  }
+  &::before {
+    border-bottom: none;
+    top: 100%;
+  }
+  &::after {
+    border-top-color: white;
+    border-bottom: none;
+    top: calc(100% - 1px);
+  }
+}
+.date-position-bottom {
+  // transform: translateY(50%);
+  position: absolute;
+  top: 100%;
+  margin-top: 15px;
+  &::before,
+  &::after {
+    left: 10px;
+  }
+  &::before {
+    border-top: none;
+    border-bottom-color: white;
+    bottom: 100%;
+  }
+  &::after {
+    border-top: none;
+    border-bottom-color: white;
+    bottom: calc(100% - 1px);
+  }
+}
+.date-position-left {
+  // transform: translate(-100%, -25%);
+  margin-left: -15px;
+  &::before,
+  &::after {
+    transform: translateY(-50%);
+    top: 50%;
+  }
+  &::before {
+    border-right: none;
+    left: 100%;
+  }
+  &::after {
+    border-left-color: white;
+    border-right: none;
+    left: calc(100% - 1px);
+  }
+}
+.date-position-right {
+  margin-left: 15px;
+  // transform: translate(45%, -25%);
+  &::before,
+  &::after {
+    transform: translateY(-50%);
+    top: 50%;
+  }
+  &::before {
+    border-left: none;
+    right: 100%;
+  }
+  &::after {
+    border-right-color: white;
+    border-left: none;
+    right: calc(100% - 1px);
+  }
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
 }
-.fade-enter, .fade-leave-to{
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

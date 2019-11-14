@@ -88,7 +88,6 @@ export default {
       return (
         this.clearable &&
         this.value &&
-        this.readonly &&
         (this.focused || this.isShow)
       );
     },

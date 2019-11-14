@@ -1,55 +1,62 @@
 <template>
   <div class="cl-date-picker" ref="wrapper">
-    <cl-popover ref="popover" position="bottom" :container="popoverContainer" @open="onOpen">
-      <cl-input type="text" :value="formattedValue" @input="onInput" @change="onChange" ref="input"/>
+    <cl-popover ref="popover" position="bottom" :container="popoverContainer">
+      <cl-input
+        slot="reference"
+        type="text"
+        clearable
+        :value="formattedValue"
+        @input="onInput"
+        ref="input"
+      />
       <template slot="content">
         <div class="cl-date-picker-pop" @selectstart.prevent>
           <div class="cl-date-picker-nav">
-            <span :class="c('prevYear', 'navItem')" @click="onClickPrevYear">
-              <cl-icon name="leftleft"/>
+            <span :class="cx('prevYear', 'navItem')" @click="onClickPrevYear">
+              <cl-icon name="d-arrow-left"/>
             </span>
-            <span :class="c('prevMonth', 'navItem')" @click="onClickPrevMonth">
-              <cl-icon name="left"/>
+            <span :class="cx('prevMonth', 'navItem')" @click="onClickPrevMonth">
+              <cl-icon name="arrow-left"/>
             </span>
-            <span :class="c('yearAndMonth')" @click="onClickMonth">
+            <span :class="cx('yearAndMonth')" @click="onClickMonth">
               <span>{{display.year}}年</span>
               <span>{{display.month+1}}月</span>
             </span>
-            <span :class="c('nextMonth', 'navItem')" @click="onClickNextMonth">
-              <cl-icon name="right"/>
+            <span :class="cx('nextMonth', 'navItem')" @click="onClickNextMonth">
+              <cl-icon name="arrow-right"/>
             </span>
-            <span :class="c('nextYear', 'navItem')" @click="onClickNextYear">
-              <cl-icon name="rightright"/>
+            <span :class="cx('nextYear', 'navItem')" @click="onClickNextYear">
+              <cl-icon name="d-arrow-right"/>
             </span>
           </div>
           <div class="cl-date-picker-panels">
             <div class="cl-date-picker-content">
               <template v-if="mode==='month'">
-                <div :class="c('selectMonth')">
-                  <div :class="c('selects')">
+                <div :class="cx('selectMonth')">
+                  <div :class="cx('selects')">
                     <select @change="onSelectYear" :value="display.year">
                       <option v-for="year in years" :value="year" :key="year">{{year}}</option>
-                    </select>年
+                    </select><span style="margin:0 6px">年</span> 
                     <select @change="onSelectMonth" :value="display.month">
                       <option
                         v-for="month in helper.range(0,12)"
                         :value="month"
                         :key="month"
                       >{{month+1}}</option>
-                    </select>月
+                    </select><span style="margin:0 6px">月</span> 
                   </div>
-                  <div :class="c('returnToDayMode')">
-                    <button @click="mode='day'">返回</button>
+                  <div :class="cx('returnToDayMode')">
+                    <cl-button @click.stop="mode='day'">确定</cl-button>
                   </div>
                 </div>
               </template>
               <template v-else>
-                <div :class="c('weekdays')">
-                  <span :class="c('weekday')" v-for="i in [1,2,3,4,5,6,0]" :key="i">{{weekdays[i]}}</span>
+                <div :class="cx('weekdays')">
+                  <span :class="cx('weekday')" v-for="i in [1,2,3,4,5,6,0]" :key="i">{{weekdays[i]}}</span>
                 </div>
-                <div :class="c('row')" v-for="i in helper.range(1, 7)" :key="i">
+                <div :class="cx('row')" v-for="i in helper.range(1, 7)" :key="i">
                   <span
-                    :class="[c('cell'), {
+                    :class="[cx('cell'), {
                       currentMonth: isCurrentMonth(getVisibleDay(i,j)), 
                       selected: isSelected(getVisibleDay(i,j)),
                       today: isToday(getVisibleDay(i,j))
@@ -73,14 +80,14 @@
 </template>
 
 <script>
-import CLInput from "../input/input";
-import CLIcon from "../icon/icon";
-import CLPopover from "../popover/popover";
-import ClickOutside from "../utils/click-outside";
+import ClInput from "../input/input";
+import ClButton from "../button/button";
+import ClIcon from "../icon/icon";
+import ClPopover from "../popover/popover";
+import ClickOutside from "../../utils/click-outside";
 import helper from "./helper";
-import CLButton from "../button/button";
 export default {
-  components: { CLInput, CLIcon, CLPopover, CLButton },
+  components: { ClInput, ClIcon, ClPopover, ClButton },
   directives: { ClickOutside },
   name: "cl-datepicker",
   props: {
@@ -89,7 +96,7 @@ export default {
       default: 1
     },
     value: {
-      type: Date
+      type: [String,Array]
     },
     scope: {
       type: Array,
@@ -100,7 +107,7 @@ export default {
     let [year, month] = helper.getYearMonthDate(this.value || new Date());
     return {
       mode: "days",
-      helper: helper, // FIXME helper 放这里不好
+      helper: helper,
       popoverContainer: null,
       weekdays: ["日", "一", "二", "三", "四", "五", "六"],
       display: { year, month }
@@ -110,7 +117,7 @@ export default {
     this.popoverContainer = this.$refs.wrapper;
   },
   methods: {
-    c(...classNames) {
+    cx(...classNames) {
       return classNames.map(className => `cl-date-picker-${className}`);
     },
     onInput(value) {
@@ -121,11 +128,11 @@ export default {
         year = year - 0;
         this.display = { year, month };
         this.$emit("input", new Date(year, month, day));
+      } else {
+        this.$emit("input", value);
       }
     },
-    onChange() {
-      this.$refs.input.setRawValue(this.formattedValue);
-    },
+
     onClickMonth() {
       if (this.mode !== "month") {
         this.mode = "month";
@@ -135,8 +142,12 @@ export default {
     },
     onClickCell(date) {
       if (this.isCurrentMonth(date)) {
-        this.$emit("input", date);
-        this.$refs.popover.close();
+        let [year, month, day] = helper.getYearMonthDate(date);
+        this.display = { year, month };
+        month = month + 1;
+        let showDate = `${year}-${month}-${day}`;
+        this.$emit("input", showDate);
+        // this.$refs.popover.handleHide();
       }
     },
     getVisibleDay(row, col) {
@@ -151,8 +162,8 @@ export default {
         return false;
       }
       let [y, m, d] = helper.getYearMonthDate(date);
-      let [y2, m2, d2] = helper.getYearMonthDate(this.value);
-      return y === y2 && m === m2 && d === d2;
+      let [y2, m2, d2] = this.value.split("-");
+      return y === Number(y2) && m === Number(m2) && d === Number(d2);
     },
     isToday(date) {
       let [y, m, d] = helper.getYearMonthDate(date);
@@ -207,14 +218,14 @@ export default {
       const now = new Date();
       const [year, month, day] = helper.getYearMonthDate(now);
       this.display = { year, month };
-      this.$emit("input", new Date(year, month, day));
+      let new_month = month + 1;
+      let showDate = `${year}-${new_month}-${day}`;
+      this.$emit("input", showDate);
+      this.$refs.popover.handleHide();
     },
     onClickClear() {
-      this.$emit("input", undefined);
-      this.$refs.popover.close();
-    },
-    onOpen() {
-      this.mode = "day";
+      this.$emit("input", "");
+      this.$refs.popover.handleHide();
     }
   },
   computed: {
@@ -235,8 +246,9 @@ export default {
       if (!this.value) {
         return "";
       }
-      const [year, month, day] = helper.getYearMonthDate(this.value);
-      return `${year}-${helper.pad2(month + 1)}-${helper.pad2(day)}`;
+      let value = this.value.split("-");
+      const [year, month, day] = value;
+      return `${Number(year)}-${Number(month)}-${Number(day)}`;
     },
     years() {
       return helper.range(
@@ -251,7 +263,6 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/common/base.scss";
 .cl-date-picker {
-
   &-popWrapper {
     padding: 0;
   }
@@ -263,24 +274,26 @@ export default {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
   &-cell {
     color: #ddd;
     cursor: not-allowed;
-    border-radius: $border-radius;
+    border-radius: 4px;
     &.currentMonth {
       color: black;
       &:hover {
-        background: $blue;
+        background: $brand;
         cursor: pointer;
         color: white;
       }
     }
     &.today {
-      background: $grey;
+      background: $brand;
+      color: #fff;
     }
     &.selected {
-      border: 1px solid $blue;
+      border: 1px solid $brand;
     }
   }
   &-nav {
@@ -288,6 +301,10 @@ export default {
   }
   &-yearAndMonth {
     margin: auto;
+    cursor: pointer;
+    &:hover{
+      color:$brand;
+    }
   }
   &-selectMonth {
     width: 224px;
@@ -298,14 +315,13 @@ export default {
     flex-direction: column;
   }
   &-returnToDayMode {
-    margin-top: 8px;
+    margin-top: 20px;
   }
-  :v-deep .cl-popover-content-wrapper {
-    padding: 0;
-  }
+
   &-actions {
     padding: 8px;
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>
