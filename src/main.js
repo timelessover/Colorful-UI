@@ -4,13 +4,13 @@ import router from './router'
 import _ from 'lodash'
 import './styles/index.scss'
 import "./assets/fonts/icon.css";
-import toast from './components/toast'
+import Message from './components/message-box'
 
 Vue.prototype._ = _
 
 
 Vue.config.productionTip = false
-Vue.prototype.$toast = toast
+Vue.prototype.$message = Message
 
 new Vue({
   router,

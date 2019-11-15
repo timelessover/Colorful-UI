@@ -1,30 +1,26 @@
 <template>
   <div id="home">
-    <cl-upload
-      accept="image/*"
-      method="POST"
-      action="http://127.0.0.1:3000/upload"
-      name="file"
-      :parseResponse="parseResponse"
-      :file-list.sync="fileList"
-      @error="error=$event"
-      :size-limit="1024*1024"
-    >
-      <cl-button type="primary" icon="upload">上传</cl-button>
-    </cl-upload>
+    <cl-progress type="dashboard" :percentage="percentage" :color="colors"></cl-progress>
+    <div>
+      <cl-button-group>
+        <cl-button icon="cl-icon-minus" @click="decrease"></cl-button>
+        <cl-button icon="cl-icon-plus" @click="increase"></cl-button>
+      </cl-button-group>
+    </div>
   </div>
 </template>
 <script>
 import ClButton from "@/components/button/button";
-import ClUpload from "@/components/upload/upload";
-import ClPagination from "@/components/pagination/page";
-import ClDropdownItem from "@/components/dropdown/dropdown-item";
+import ClMenu from "@/components/menu/menu";
+import ClSubMenu from "@/components/menu/sub-menu";
+import ClMenuItem from "@/components/menu/menu-item";
 
 export default {
   components: {
     ClButton,
-    ClPagination,
-    ClUpload
+    ClMenuItem,
+    ClSubMenu,
+    ClMenu
   },
   data() {
     return {
@@ -38,30 +34,56 @@ export default {
       type3: true,
       value2: [],
       fileList: [],
-      error: ""
+      error: "",
+      selected1: "1",
+      percentage: 10,
+      colors: [
+        { color: "#f56c6c", percentage: 20 },
+        { color: "#e6a23c", percentage: 40 },
+        { color: "#5cb87a", percentage: 60 },
+        { color: "#1989fa", percentage: 80 },
+        { color: "#6f7ad3", percentage: 100 }
+      ]
     };
   },
   methods: {
     handleChange(value) {
-      this.currentPage = value;
+      this.$message
+        .confirm({
+          title: "请确认操作",
+          confirmText: "确定删除",
+          cancleText: "取消删除",
+          message: "永久删除该文件，是否继续？"
+        })
+        .then(() => {
+          // this.$message.success({
+          //   message: "删除成功",
+          //   duration: 1500
+          // });
+        })
+        .catch(() => {
+          // this.$message.info({
+          //   message: "已取消删除",
+          //   duration: 1500
+          // });
+        });
     },
-    parseResponse(response) {
-      let object = JSON.parse(response);
-      let url = "http://127.0.0.1:3000/preview/" + object.id;
-      return url;
+    decrease() {
+      this.percentage -= 10;
+      if (this.percentage < 0) {
+        this.percentage = 0;
+      }
     },
-    updateFileList(newFileList) {
-      this.fileList = newFileList;
+    increase() {
+      this.percentage += 10;
+      if (this.percentage > 100) {
+        this.percentage = 100;
+      }
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-@mixin center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .cl-slides-item h3 {
   color: #475669;
   font-size: 14px;
@@ -102,7 +124,7 @@ export default {
   clear: both;
 }
 
-.box-card {
+.bocl-card {
   width: 480px;
   margin: 0 auto;
 }

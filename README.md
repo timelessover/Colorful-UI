@@ -43,7 +43,7 @@ Notice
 - [] Alert 警告
 - [] Loading 加载
 - [x] Toast 消息提示
-- [] MessageBox 弹框
+- [x] MessageBox 弹框
 - [] Notification 通知
 
 Navigation
@@ -55,7 +55,7 @@ Navigation
 
 Others
 
-- [ ] Dialog 对话框
+- [x] Dialog 对话框
 - [x] Magnifier 放大镜
 - [x] Affix 钉子
 - [x] Backtop 回到顶部
