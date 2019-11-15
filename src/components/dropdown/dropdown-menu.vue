@@ -1,15 +1,16 @@
 <template>
+  <transition name="fade">
     <div class="cl-dropdown-menu" v-show="isVisable">
-        <slot></slot>
+      <slot></slot>
     </div>
+  </transition>
 </template>
 
 <script>
 export default {
-  name:'cl-dropdown-menu',
+  name: "cl-dropdown-menu",
   inject: ["dropdown"],
-  created() {
-  },
+  created() {},
   computed: {
     isVisable() {
       return this.dropdown.visable;
@@ -25,4 +26,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

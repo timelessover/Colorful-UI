@@ -28,7 +28,6 @@ export default {
     label: {},
     name: String,
     disabled: Boolean,
-    checked: Boolean
   },
   data() {
     return {

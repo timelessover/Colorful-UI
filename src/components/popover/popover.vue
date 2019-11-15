@@ -246,7 +246,6 @@ $border-radius: 4px;
   }
 }
 .date-position-bottom {
-  // transform: translateY(50%);
   position: absolute;
   top: 100%;
   margin-top: 15px;
@@ -266,7 +265,6 @@ $border-radius: 4px;
   }
 }
 .date-position-left {
-  // transform: translate(-100%, -25%);
   margin-left: -15px;
   &::before,
   &::after {
@@ -285,7 +283,6 @@ $border-radius: 4px;
 }
 .date-position-right {
   margin-left: 15px;
-  // transform: translate(45%, -25%);
   &::before,
   &::after {
     transform: translateY(-50%);

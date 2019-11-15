@@ -1,21 +1,21 @@
 <template>
-  <div class="cl-pager" :class="{hide: hideIfOnePage && totalPage <=1 }">
+  <div class="cl-pager" :class="{hide: hideIfOnePage && total <=1 }">
     <span class="cl-pager-nav prev" :class="{disabled:currentPage===1}" @click="onClickPage(currentPage - 1)">
-      <icon name="left"></icon>
+      <icon name="arrow-left"></icon>
     </span>
     <template v-for="(page, i) in pages">
       <template v-if="page === currentPage">
         <span :key="i" class="cl-pager-item current">{{page}}</span>
       </template>
       <template v-else-if="page === '...'">
-        <icon :key="i" class="cl-pager-separator" name="dots"></icon>
+        <icon :key="i" class="cl-pager-separator" name="more"></icon>
       </template>
       <template v-else>
         <span :key="i" class="cl-pager-item other" @click="onClickPage(page)">{{page}}</span>
       </template>
     </template>
-    <span class="cl-pager-nav next" :class="{disabled: currentPage===totalPage}" @click="onClickPage(currentPage + 1)">
-      <icon name="right"></icon>
+    <span class="cl-pager-nav next" :class="{disabled: currentPage===total}" @click="onClickPage(currentPage + 1)">
+      <icon name="arrow-right"></icon>
     </span>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
       type: Number,
       required: true
     },
-    totalPage: {
+    total: {
       type: Number,
       required: true
     },
@@ -41,9 +41,9 @@ export default {
   },
   computed: {
     pages() {
-      let {currentPage, totalPage} = this
-      return unique([1, currentPage,currentPage-1, currentPage-2, currentPage +1, currentPage +2, totalPage])
-                  .filter((n) => n >= 1 && n <= totalPage)
+      let {currentPage, total} = this
+      return unique([1, currentPage,currentPage-1, currentPage-2, currentPage +1, currentPage +2, total])
+                  .filter((n) => n >= 1 && n <= total)
                   .sort((a, b) => a-b)
                   .reduce((prev, current, index, array) => {
                     prev.push(current)
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     onClickPage(n) {
-      if(n >=1 && n <= this.totalPage) {
+      if(n >=1 && n <= this.total) {
         this.$emit('update:currentPage', n)
       }
     }
@@ -70,7 +70,7 @@ function unique(array) {
 }
 </script>
 <style scoped lang="scss">
-  @import "../../styles/_var.scss";
+  @import "../../styles/index.scss";
   .cl-pager { 
     display: flex; justify-content: flex-start; align-items: center;
     $width: 20px;
@@ -86,14 +86,14 @@ function unique(array) {
     }
     &-item {
       min-width: $width; height: $height;font-size: $font-size;
-      border: 1px solid #e1e1e1; border-radius: $border-radius; padding: 0 4px; display: inline-flex; justify-content: center;
+      border: 1px solid #e1e1e1; border-radius: 4px; padding: 0 4px; display: inline-flex; justify-content: center;
       align-items: center; margin: 0 4px; cursor: pointer;
-      &.current, &:hover { border-color: $blue; }
+      &.current, &:hover { border-color: $brand; }
       &.current { cursor: default; }
     }
     &-nav {
       margin: 0 4px; display: inline-flex; justify-content: center; align-items: center;
-      background: $grey; height: $height; width: $width; border-radius: $border-radius; font-size: $font-size;
+      background: $grey; height: $height; width: $width; border-radius: 4px; font-size: $font-size;
       cursor: pointer;
       &.disabled {
         cursor: default;

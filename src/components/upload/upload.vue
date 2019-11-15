@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import CLIcon from "../icon/icon";
+import ClIcon from "../icon/icon";
 import http from "../../utils/http";
 export default {
   name: "cl-uploader",
-  components: { CLIcon },
+  components: { ClIcon },
   props: {
     name: { type: String, required: true },
     action: { type: String, required: true },
@@ -197,8 +197,7 @@ export default {
     height: 32px;
   }
   &-spin {
-    width: 32px;
-    height: 32px;
+    padding:6px;
     @include spin;
   }
 }
