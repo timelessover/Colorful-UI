@@ -14,14 +14,14 @@
     <!-- 前置内容 -->
     <span class="cl-input__prefix" v-if="$slots.prefix || prefixIcon">
       <slot name="prefix"></slot>
-      <i class="cl-input__icon" v-if="prefixIcon" :class="prefixIcon"></i>
+      <i class="cl-input__icon" v-if="prefixIcon" :class="`cl-icon--${prefixIcon}`"></i>
     </span>
     <!-- 后置内容 -->
     <span class="cl-input__suffix" v-if="getSuffixVisible">
       <span class="cl-input__suffix-inner">
         <template v-if="!showClear || !showPwdVisible">
           <slot name="suffix"></slot>
-          <i class="cl-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
+          <i class="cl-input__icon" v-if="suffixIcon" :class="`cl-icon--${suffixIcon}`"></i>
         </template>
         <i
           v-if="showClear"
@@ -48,8 +48,6 @@ export default {
     icon: { type: String },
     iconLeft: { type: Boolean, default: false },
     loading: { type: Boolean, default: false },
-    size: { type: String },
-    transparent: { type: Boolean, default: false },
     label: { type: String },
     labelLeft: { type: String },
     disabled: { type: Boolean, default: false },
@@ -169,6 +167,7 @@ export default {
     padding: 0 15px;
     transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     width: 100%;
+    cursor: pointer;
     &:focus {
       outline: none;
       border-color: #409eff;
@@ -193,13 +192,13 @@ export default {
     text-align: center;
     transition: all 0.3s;
     position: absolute;
-    left: 5px;
-    top: 12px;
+    left: 8px;
+    top: 10px;
     color: #c0c4cc;
   }
   > .cl-input__suffix {
     position: absolute;
-    right: 5px;
+    right: 8px;
     top: 10px;
     text-align: center;
     color: #c0c4cc;

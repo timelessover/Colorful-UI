@@ -11,10 +11,9 @@
 <script>
 import Icon from "../icon/icon";
 import { Wave } from "../../utils/wave";
-const COMPONENT_NAME = "cl-button";
 
 export default {
-  name: COMPONENT_NAME,
+  name: "cl-button",
   components: {
     Icon
   },

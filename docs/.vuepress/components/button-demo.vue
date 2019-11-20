@@ -65,9 +65,7 @@
       <div class="component-wrapper-demo">
         <cl-button-group>
           <cl-button type="primary" icon="arrow-left">上一页</cl-button>
-          <cl-button type="primary" icon = "arrow-right" iconPosition="right">
-            下一页
-          </cl-button>
+          <cl-button type="primary" icon="arrow-right" iconPosition="right">下一页</cl-button>
         </cl-button-group>
       </div>
       <div class="code-content" v-highlight style="height: 0;">
@@ -84,7 +82,7 @@
     <p>点击按钮后进行数据加载操作，在按钮上显示加载状态</p>
     <div class="component-wrapper">
       <div class="component-wrapper-demo">
-          <cl-button type="primary" loading>加载中</cl-button>
+        <cl-button type="primary" loading>加载中</cl-button>
       </div>
       <div class="code-content" v-highlight style="height: 0;">
         <div class="code-content-height">
@@ -96,7 +94,7 @@
         <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
       </div>
     </div>
-    <Attributes></Attributes>      
+    <Attributes></Attributes>
   </div>
 </template>
 
@@ -105,9 +103,8 @@ import Icon from "../../../src/components/icon/icon";
 import mixin from "../mixin";
 import Button from "../../../src/components/button/button";
 import ButtonGroup from "../../../src/components/button-group/button-group";
-import Attributes from "./button-attributes.vue"
+import Attributes from "./button-attributes.vue";
 export default {
-  name: "demo",
   mixins: [mixin],
   components: {
     "cl-icon": Icon,
@@ -135,7 +132,7 @@ export default {
         <cl-button type="success" icon="success"></cl-button>
         <cl-button  icon="search">搜索</cl-button>
         <cl-button type="primary" icon="upload" iconPosition="right">上传</cl-button>`,
-        codeStr3: `
+      codeStr3: `
      <cl-button type="primary" loading>加载中</cl-button>`
     };
   },
@@ -149,15 +146,19 @@ export default {
     withIcon() {
       return this.trim(this.codeStr2);
     },
-    withLoading(){
-      return this.trim(this.codeStr3)
+    withLoading() {
+      return this.trim(this.codeStr3);
     }
   },
-  methods: {
-    trim(code) {
-      return code.replace(/^\s*/gm, "").trim();
-    }
-  }
+  mounted() {
+    let demoGroup = document.querySelectorAll(".component-wrapper-demo");
+      demoGroup.forEach(item => {
+        item && item.childNodes.forEach(item => {
+          item.classList&&item.classList.add("wave");
+        });
+      });
+
+  },
 };
 </script>
 

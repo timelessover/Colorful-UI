@@ -9,6 +9,9 @@ export default {
         }
     },
     methods: {
+        trim(code) {
+            return code.replace(/^ {8}/gm, '').trim()
+        },
         //根据子元素的高度 设置代码区域父元素的高度
         showCode(index) {
             this.$set(this.isShow, index, !this.isShow[index])
