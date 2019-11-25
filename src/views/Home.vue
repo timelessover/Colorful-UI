@@ -1,12 +1,11 @@
 <template>
   <div id="home">
-    <cl-progress type="dashboard" :percentage="percentage" :color="colors"></cl-progress>
-    <div>
-      <cl-button-group>
-        <cl-button icon="cl-icon-minus" @click="decrease"></cl-button>
-        <cl-button icon="cl-icon-plus" @click="increase"></cl-button>
-      </cl-button-group>
-    </div>
+    <cl-tabs v-model="activeName" @tab-click="handleClick">
+      <cl-tab-pane label="用户" name="first">用户</cl-tab-pane>
+      <cl-tab-pane label="配置" name="second">配置</cl-tab-pane>
+      <cl-tab-pane label="角色" name="third">角色</cl-tab-pane>
+      <cl-tab-pane label="非常长的字段" name="fourth">非常长的字段</cl-tab-pane>
+    </cl-tabs>
   </div>
 </template>
 <script>
@@ -14,16 +13,21 @@ import ClButton from "@/components/button/button";
 import ClMenu from "@/components/menu/menu";
 import ClSubMenu from "@/components/menu/sub-menu";
 import ClMenuItem from "@/components/menu/menu-item";
+import ClTabs from "@/components/tabs/tabs";
+import ClTabPane from "@/components/tabs/tab-pane";
 
 export default {
   components: {
     ClButton,
     ClMenuItem,
     ClSubMenu,
-    ClMenu
+    ClMenu,
+    ClTabs,
+    ClTabPane,
   },
   data() {
     return {
+      activeName: "second",
       checkList: ["选中且禁用", "复选框 A"],
       currentPage: 1,
       checked1: true,
@@ -47,26 +51,28 @@ export default {
     };
   },
   methods: {
-    handleChange(value) {
-      this.$message
-        .confirm({
-          title: "请确认操作",
-          confirmText: "确定删除",
-          cancleText: "取消删除",
-          message: "永久删除该文件，是否继续？"
-        })
-        .then(() => {
-          // this.$message.success({
-          //   message: "删除成功",
-          //   duration: 1500
-          // });
-        })
-        .catch(() => {
-          // this.$message.info({
-          //   message: "已取消删除",
-          //   duration: 1500
-          // });
-        });
+    handleClick(value) {
+      console.log(value)
+      this.activeName = value.name
+      // this.$message
+      //   .confirm({
+      //     title: "请确认操作",
+      //     confirmText: "确定删除",
+      //     cancleText: "取消删除",
+      //     message: "永久删除该文件，是否继续？"
+      //   })
+      //   .then(() => {
+      //     // this.$message.success({
+      //     //   message: "删除成功",
+      //     //   duration: 1500
+      //     // });
+      //   })
+      //   .catch(() => {
+      //     // this.$message.info({
+      //     //   message: "已取消删除",
+      //     //   duration: 1500
+      //     // });
+      //   });
     },
     decrease() {
       this.percentage -= 10;

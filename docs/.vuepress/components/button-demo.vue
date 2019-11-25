@@ -99,10 +99,10 @@
 </template>
 
 <script>
-import Icon from "../../../src/components/icon/icon";
+import Icon from "@/icon/icon";
 import mixin from "../mixin";
-import Button from "../../../src/components/button/button";
-import ButtonGroup from "../../../src/components/button-group/button-group";
+import Button from "@/button/button";
+import ButtonGroup from "@/button-group/button-group";
 import Attributes from "./button-attributes.vue";
 export default {
   mixins: [mixin],

@@ -19,7 +19,7 @@
     },
     computed: {
       isShow(){
-        if(this.name == this.$parent.value)return true
+        if(this.name == this.$parent.value) return true
       }
     },
   };

@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :style="rowStyle" :class="rowClass">
+  <div class="cl-row" :style="rowStyle" :class="rowClass">
     <slot></slot>
   </div>
 </template>
@@ -40,9 +40,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .row {
+  .cl-row {
     display: flex;
-    flex-wrap: wrap;
     &.align-left {
       justify-content: flex-start;
     }

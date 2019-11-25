@@ -86,9 +86,9 @@
 </template>
 
 <script>
-import Icon from "../../../src/components/icon/icon";
+import Icon from "@/icon/icon";
 import mixin from "../mixin";
-import Input from "../../../src/components/input/input";
+import Input from "@/input/input";
 import Attributes from "./input-attributes.vue";
 export default {
   name: "input-demo",

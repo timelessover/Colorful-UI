@@ -22,13 +22,13 @@ module.exports = {
       },
       {
         title: '组件',
-        collapsable: true,
+        collapsable: false,
         children: [
           '/components/button',
           '/components/input',
           '/components/tabs',
-          '/components/grid',
           '/components/layout',
+          '/components/container',
           '/components/toast',
           '/components/popover',
           '/components/backtop',
@@ -39,5 +39,13 @@ module.exports = {
   },
   scss:{
     includePaths: [path.join(__dirname, '../../styles')]
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': '../../../src/components'
+      }
+    }
   }
+  
 }

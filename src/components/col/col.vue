@@ -69,7 +69,7 @@ export default {
   methods: {
     createClasses(obj, str = '') {
       if(!obj) return []
-      if(typeof(Number(obj)) === Number) return [`cl-col-${str}${obj}`]
+      if(toString.call(obj) === '[object Number]') return [`cl-col-${str}${obj}`]
       let arr = []
       if(obj.span){
         arr.push(`cl-col-${str}${obj.span}`)

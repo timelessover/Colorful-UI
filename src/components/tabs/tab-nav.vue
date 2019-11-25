@@ -36,10 +36,14 @@ export default {
   methods: {
     handleClick(item) {
       this.currentTab = item;
-      this.$parent.$emit("tab-click", item);
+      this.$parent.$emit("tab-click", JSON.parse(JSON.stringify(item)));
     },
     getTabList() {
-      let item = this.$parent.$slots.default;
+      let slotsArr =  this.$parent.$slots.default;
+      let item = slotsArr.filter(item => {
+        return item.componentOptions
+      })
+
       let list = item.map(item => {
         return item.data.attrs;
       });
@@ -61,7 +65,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/styles/variable.scss";
+@import "../../styles/variable.scss";
 .cl-tabs-nav {
   font-size: 14px;
   display: flex;
@@ -76,7 +80,7 @@ export default {
     width: 100%;
     height: 2px;
     background-color: #e4e7ed;
-    z-index: -1;
+    z-index: 1;
   }
   .cl-tabs-nav--item {
     padding: 10px 15px;
