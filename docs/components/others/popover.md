@@ -7,8 +7,3 @@ title: Popover 弹出层
   <popover-demo></popover-demo>
 </ClientOnly>
 
-# BackTop返回顶部
-
-<ClientOnly>
-  <backTop-demo></backTop-demo>
-</ClientOnly>

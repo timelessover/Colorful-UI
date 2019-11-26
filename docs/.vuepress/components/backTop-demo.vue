@@ -13,7 +13,7 @@
           <pre><code class="html">{{baseMethods}}</code></pre>
         </div>
       </div>
-      <div class="lock-code" @click="showCode(1)">
+      <div class="lock-code" @click="showCode(0)">
         <cl-icon class="icon-down" :name="isShow[0]=== false ? 'arrow-down' : 'arrow-up'"></cl-icon>
         <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
       </div>
