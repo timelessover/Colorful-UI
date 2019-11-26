@@ -1,8 +1,8 @@
 <template>
   <div class="demo">
-    <p>常用的操作按钮</p>
+    <p>分隔内容上有关联但属于不同类别的数据集合</p>
     <h3>基础用法</h3>
-    <p>基础的按钮用法</p>
+    <p>基础的标签页</p>
     <div class="component-wrapper">
       <div class="component-wrapper-demo">
         <cl-tabs v-model="activeName" @tab-click="handleClick">

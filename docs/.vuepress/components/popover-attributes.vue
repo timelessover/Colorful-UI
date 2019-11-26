@@ -33,70 +33,55 @@ export default {
     return {
       table: [
         {
-          param: "type",
-          des: "类型",
-          type: "string",
-          choice: "text / textarea	",
-          def: "text"
-        },
-        {
-          param: "value / v-model",
-          des: "绑定值",
-          type: "string / number",
+          param: "trigger",
+          des: "触发方式",
+          type: "click/hover",
           choice: "-",
-          def: "value"
+          def: "click"
         },
         {
-          param: "placeholder",
-          des: "输入框占位文本",
-          type: "string",
-          choice: "—",
-          def: "—"
-        },
-        {
-          param: "clearable",
-          des: "是否可清空",
-          type: "boolean",
-          choice: "-",
-          def: "false"
-        },
-         {
-          param: "show-password",
-          des: "是否加载中状态",
-          type: "boolean",
-          choice: "-",
-          def: "false"
-        },
-        {
-          param: "disabled",
-          des: "是否禁用状态",
-          type: "boolean",
-          choice: "-",
-          def: "false"
-        },
-        {
-          param: "prefix-icon",
-          des: "输入框头部图标",
+          param: "title",
+          des: "标题",
           type: "string",
           choice: "-",
           def: "-"
         },
         {
-          param: "suffix-icon",
-          des: "输入框尾部图标",
+          param: "content",
+          des: "显示的内容，也可以通过 slot 传入 DOM",
           type: "string",
           choice: "-",
           def: "-"
         },
         {
-          param: "readonly",
-          des: "原生属性，是否只读",
-          type: "boolean",
+          param: "title",
+          des: "标题",
+          type: "string",
           choice: "-",
-          def: "false"
+          def: "-"
         },
+        {
+          param: "width",
+          des: "宽度",
+          type: "string, number",
+          choice: "-",
+          def: "15px"
+        },
+        {
+          param: "position",
+          des: "出现位置",
+          type: "string",
+          choice: "top/left/right/bottom",
+          def: "top"
+        },{
+          param: "popClassName",
+          des: "自定义Class",
+          type: "string",
+          choice: "-",
+          def: "-"
+        }
       ]
-    }
-  },
-}
+    };
+  }
+};
 </script>

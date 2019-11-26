@@ -89,7 +89,7 @@
           <pre><code class="html">{{withLoading}}</code></pre>
         </div>
       </div>
-      <div class="lock-code" @click="showCode(4)" ref="xxx">
+      <div class="lock-code" @click="showCode(5)" ref="xxx">
         <cl-icon class="icon-down" :name=" isShow[0]=== false ? 'arrow-down' : 'arrow-up'"></cl-icon>
         <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
       </div>

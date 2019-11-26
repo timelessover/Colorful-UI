@@ -16,7 +16,7 @@ export default {
   mounted () {
     this.$children.forEach((vm) => {
       if (vm.$options.name === 'cl-aside') {
-        this.containerClass.hasSider = true
+        this.containerClass.hasAside = true
       }
     })
   }

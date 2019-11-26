@@ -33,54 +33,33 @@ export default {
     return {
       table: [
         {
-          param: "icon",
-          des: "图标类名",
+          param: "target",
+          des: "触发滚动的对象",
           type: "string",
           choice: "-",
-          def: "—"
+          def: "-"
         },
         {
-          param: "iconPosition",
-          des: "图标位置",
-          type: "string",
-          choice: "left/right",
-          def: "left"
-        },
-        {
-          param: "size",
-          des: "尺寸",
-          type: "string",
-          choice: "normal/large/small",
-          def: "normal"
-        },
-        {
-          param: "type",
-          des: "类型",
-          type: "string",
-          choice: "default/primary/success/danger",
-          def: "default"
-        },
-         {
-          param: "loading",
-          des: "是否加载中状态",
-          type: "boolean",
+          param: "visibility-height	",
+          des: "滚动高度达到此参数值才出现",
+          type: "number",
           choice: "-",
-          def: "false"
+          def: "200"
         },
         {
-          param: "disabled",
-          des: "是否禁用状态",
-          type: "boolean",
+          param: "right",
+          des: "控制其显示位置, 距离页面右边距",
+          type: "number",
           choice: "-",
-          def: "false"
+          def: "30"
         },
         {
-          param: "native-type",
-          des: "原生 type 属性",
-          type: "boolean",
-          choice: "button/submit/reset",
-          def: "false"
-        },
+          param: "bottom",
+          des: "控制其显示位置, 距离页面底部距离",
+          type: "number",
+          choice: "-",
+          def: "30"
+        }
       ]
     };
   }

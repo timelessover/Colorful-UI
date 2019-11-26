@@ -1,7 +1,7 @@
 <template>
   <div class="base">
     <section>
-      <h2>Attributes</h2>
+      <h2>Options</h2>
       <div class="attr">
         <table>
           <thead>
@@ -33,70 +33,70 @@ export default {
     return {
       table: [
         {
-          param: "type",
-          des: "类型",
+          param: "message",
+          des: "消息文字",
           type: "string",
-          choice: "text / textarea	",
-          def: "text"
-        },
-        {
-          param: "value / v-model",
-          des: "绑定值",
-          type: "string / number",
           choice: "-",
-          def: "value"
+          def: "-"
         },
         {
-          param: "placeholder",
-          des: "输入框占位文本",
+          param: "type",
+          des: "主题",
           type: "string",
-          choice: "—",
-          def: "—"
+          choice: "success/warning/info/error",
+          def: "info"
         },
         {
-          param: "clearable",
-          des: "是否可清空",
+          param: "offset",
+          des: "距离窗口顶部的偏移量",
+          type: "number",
+          choice: "-",
+          def: "20"
+        },
+        {
+          param: "duration",
+          des: "显示时间, 毫秒。设为 0 则不会自动关闭	",
+          type: "number",
+          choice: "-",
+          def: "3000"
+        },
+        {
+          param: "type",
+          des: "主题",
+          type: "string",
+          choice: "success/warning/info/error",
+          def: "info"
+        },
+        {
+          param: "center",
+          des: "文字是否居中",
           type: "boolean",
           choice: "-",
           def: "false"
         },
          {
-          param: "show-password",
-          des: "是否加载中状态",
+          param: "center",
+          des: "文字是否居中",
+          type: "boolean",
+          choice: "-",
+          def: "false"
+        },
+         {
+          param: "dangerouslyUseHTMLString",
+          des: "是否将 message 属性作为 HTML 片段处理",
           type: "boolean",
           choice: "-",
           def: "false"
         },
         {
-          param: "disabled",
-          des: "是否禁用状态",
-          type: "boolean",
-          choice: "-",
-          def: "false"
-        },
-        {
-          param: "prefix-icon",
-          des: "输入框头部图标",
+          param: "iconClass",
+          des: "自定义图标的类名",
           type: "string",
           choice: "-",
           def: "-"
-        },
-        {
-          param: "suffix-icon",
-          des: "输入框尾部图标",
-          type: "string",
-          choice: "-",
-          def: "-"
-        },
-        {
-          param: "readonly",
-          des: "原生属性，是否只读",
-          type: "boolean",
-          choice: "-",
-          def: "false"
         },
       ]
-    }
-  },
-}
+    };
+  }
+};
 </script>

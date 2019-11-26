@@ -17,6 +17,7 @@
 </template>
 <script>
 import Icon from "../icon/icon";
+import {throttle} from "lodash"
 
 export default {
   name: "cl-back-top",
@@ -26,7 +27,7 @@ export default {
   props: {
     visibilityHeight: {
       type: Number,
-      default: 300
+      default: 200
     },
     target: [String],
     right: {
@@ -90,7 +91,7 @@ export default {
   },
   mounted() {
     this.init();
-    this.throttledScrollHandler = this._.throttle(this.onScroll, 300);
+    this.throttledScrollHandler = throttle(this.onScroll, 300);
     this.container.addEventListener("scroll", this.throttledScrollHandler);
   },
   beforeDestroy() {

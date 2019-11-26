@@ -14,19 +14,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>label</td>
-              <td class="des">选项卡标题</td>
-              <td class="type">string</td>
-              <td>—</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>name</td>
-              <td class="des">与选项卡绑定值 value 对应的标识符，表示选项卡别名</td>
-              <td class="type">string</td>
-              <td>—</td>
-              <td>'1'</td>
+            <tr v-for="(item,index) in table" :key="index">
+              <th>{{item.param}}</th>
+              <th class="des">{{item.des}}</th>
+              <th class="type">{{item.type}}</th>
+              <td>{{item.choice}}</td>
+              <td>{{item.def}}</td>
             </tr>
           </tbody>
         </table>
@@ -34,3 +27,27 @@
     </section>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      table: [
+        {
+          param: "label",
+          des: "选项卡标题",
+          type: "string",
+          choice: "-",
+          def: "-"
+        },
+        {
+          param: "name",
+          des: "与选项卡绑定值 value 对应的标识符，表示选项卡别名",
+          type: "string",
+          choice: "-",
+          def: "-"
+        }
+      ]
+    };
+  }
+};
+</script>

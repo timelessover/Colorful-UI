@@ -146,6 +146,20 @@ export default {
           width: ($n / 24 ) * 100%;
         }
       }
+      $class-prefix: cl-offset-lg-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          margin-left: ($n / 24 ) * 100%;
+        }
+      }
+    }
+    @media (min-width: 1201px) {    
+      $class-prefix: cl-col-xl-;
+      @for $n from 1 through 24 {l
+        &.#{$class-prefix}#{$n} {
+          width: ($n / 24 ) * 100%;
+        }
+      }
       $class-prefix: cl-offset-xl-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {

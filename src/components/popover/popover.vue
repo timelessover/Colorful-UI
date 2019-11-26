@@ -29,7 +29,6 @@ export default {
     content: {
       type: [Number, String]
     },
-
     position: {
       type: String,
       default: "top",
@@ -39,10 +38,11 @@ export default {
     trigger: {
       type: String,
       default: "click",
-      validator: value => ["click", "focus", "hover"].indexOf(value) > -1
+      validator: value => ["click", "hover"].indexOf(value) > -1
     },
     width: {
-      type: [String, Number]
+      type: [String, Number],
+      default: "15"
     },
     title: {}
   },
@@ -97,9 +97,9 @@ export default {
         reference = this.referenceElm = this.$slots.reference[0].elm;
       }
       if (
-        this.$el&&this.$el.contains(e.target) ||
-        reference&&reference.contains(e.target) ||
-        popover&&popover.contains(e.target)
+        (this.$el && this.$el.contains(e.target)) ||
+        (reference && reference.contains(e.target)) ||
+        (popover && popover.contains(e.target))
       )
         return;
       this.visible = false;
@@ -132,7 +132,6 @@ $border-radius: 4px;
   vertical-align: top;
   position: relative;
   font-size: 14px;
-  display: flex;
 }
 .cl-popover--item {
   border: 1px solid $border-color;
@@ -143,6 +142,7 @@ $border-radius: 4px;
   padding: 1em 1.2em;
   word-break: break-all;
   z-index: 1;
+  position: absolute;
   > .cl-popover--title {
     font-size: 16px;
     line-height: 1;
@@ -158,8 +158,7 @@ $border-radius: 4px;
     position: absolute;
   }
   &.position-top {
-    transform: translateY(-100%);
-    margin-top: -15px;
+    transform: translateY(-150%);
     &::before,
     &::after {
       left: 10px;
@@ -175,7 +174,6 @@ $border-radius: 4px;
     }
   }
   &.position-bottom {
-    transform: translateY(50%);
     margin-top: 15px;
     &::before,
     &::after {
@@ -193,7 +191,7 @@ $border-radius: 4px;
     }
   }
   &.position-left {
-    transform: translate(-100%, -25%);
+    transform: translate(-100%, -75%);
     margin-left: -15px;
     &::before,
     &::after {
@@ -211,8 +209,7 @@ $border-radius: 4px;
     }
   }
   &.position-right {
-    margin-left: 15px;
-    transform: translate(45%, -25%);
+    transform: translate(45%, -75%);
     &::before,
     &::after {
       transform: translateY(-50%);

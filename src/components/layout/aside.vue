@@ -6,11 +6,11 @@
 </template>
 <script>
 export default {
-  name: "cl-sider",
+  name: "cl-aside",
   props: {
     width: {
       type: String,
-      default: "300px"
+      default: "150px"
     }
   }
 };

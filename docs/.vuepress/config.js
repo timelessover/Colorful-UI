@@ -21,20 +21,50 @@ module.exports = {
         ]
       },
       {
-        title: '组件',
+        title: 'Basic 基础组件',
         collapsable: false,
         children: [
-          '/components/button',
-          '/components/input',
-          '/components/tabs',
-          '/components/layout',
-          '/components/container',
-          '/components/toast',
-          '/components/popover',
-          '/components/backtop',
+          '/components/basic/button',
+          '/components/basic/contanier',
+          '/components/basic/layout',
         ]
       },
-
+      {
+        title: 'Form 表单组件',
+        collapsable: false,
+        children: [
+          '/components/form/input',
+        ]
+      },
+      {
+        title: 'Data 数据展示组件',
+        collapsable: false,
+        children: [
+          '/components/data/data',
+        ]
+      },
+      {
+        title: 'Navigation 导航组件',
+        collapsable: false,
+        children: [
+          '/components/navigation/tabs',
+        ]
+      },
+      {
+        title: 'Notice 消息提示组件',
+        collapsable: false,
+        children: [
+          '/components/notice/toast',
+        ]
+      },
+      {
+        title: 'Others 其他',
+        collapsable: false,
+        children: [
+          '/components/others/popover',
+          '/components/others/backTop',
+        ]
+      },
     ]
   },
   scss:{
