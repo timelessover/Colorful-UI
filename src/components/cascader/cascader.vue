@@ -2,9 +2,9 @@
   <div class="cl-cascader" ref="cascader" v-click-outside="close">
     <cl-input
       v-model="result"
-      placeholder="请选择"
+      :placeholder="placeholder"
       readonly
-      clearable
+      :clearable="clearable"
       @click.native="popoverVisible = !popoverVisible"
     ></cl-input>
     <div class="cl-popover-wrapper" v-if="popoverVisible">
@@ -33,22 +33,24 @@ export default {
     value: { type: Array, default: () => [] },
     options: {
       type: Array
-    }
+    },
+    clearable: { type: Boolean },
+    placeholder: { type: [String, Number], default: "请选择" }
   },
   data() {
     return {
       popoverVisible: false,
-      level:0
+      level: 0
     };
   },
-  provide(){
+  provide() {
     return {
-      root:this
-    }
+      root: this
+    };
   },
   computed: {
     result() {
-      return this.value.map(item => item).join("/")
+      return this.value.map(item => item).join("/");
     }
   },
   destroyed() {
@@ -62,6 +64,7 @@ export default {
       let copy = [...this.value];
       copy[obj.level] = obj.label;
       copy = copy.slice(0, obj.level + 1);
+      this.$emit('change',obj.label)
       this.$emit("input", copy);
     }
   }

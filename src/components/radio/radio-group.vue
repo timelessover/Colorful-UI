@@ -10,12 +10,6 @@ export default {
   componentName: 'ClRadioGroup',
   props: {
     value: {},
-    size: String
-  },
-  computed: {
-    radioGroupSize() {
-      return this.size;
-    }
   },
   provide(){
       return {

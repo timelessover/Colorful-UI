@@ -1,17 +1,16 @@
 <template>
   <div id="home">
-    <cl-tabs v-model="activeName" @tab-click="handleClick">
-      <cl-tab-pane label="用户" name="first">用户</cl-tab-pane>
-      <cl-tab-pane label="配置" name="second">配置</cl-tab-pane>
-      <cl-tab-pane label="角色" name="third">角色</cl-tab-pane>
-      <cl-tab-pane label="非常长的字段" name="fourth">非常长的字段</cl-tab-pane>
-    </cl-tabs>
+    <cl-radio-group v-model="radio">
+      <cl-radio :label="3">备选项</cl-radio>
+      <cl-radio :label="6">备选项</cl-radio>
+      <cl-radio :label="9">备选项</cl-radio>
+    </cl-radio-group>
   </div>
 </template>
 <script>
 import ClButton from "@/components/button/button";
-import ClMenu from "@/components/menu/menu";
-import ClSubMenu from "@/components/menu/sub-menu";
+import ClRadioGroup from "@/components/radio/radio-group";
+import ClRadio from "@/components/radio/radio";
 import ClMenuItem from "@/components/menu/menu-item";
 import ClTabs from "@/components/tabs/tabs";
 import ClTabPane from "@/components/tabs/tab-pane";
@@ -19,14 +18,12 @@ import ClTabPane from "@/components/tabs/tab-pane";
 export default {
   components: {
     ClButton,
-    ClMenuItem,
-    ClSubMenu,
-    ClMenu,
-    ClTabs,
-    ClTabPane,
+    ClRadio,
+    ClRadioGroup
   },
   data() {
     return {
+      radio: 3,
       activeName: "second",
       checkList: ["选中且禁用", "复选框 A"],
       currentPage: 1,
@@ -52,8 +49,8 @@ export default {
   },
   methods: {
     handleClick(value) {
-      console.log(value)
-      this.activeName = value.name
+      console.log(value);
+      this.activeName = value.name;
       // this.$message
       //   .confirm({
       //     title: "请确认操作",

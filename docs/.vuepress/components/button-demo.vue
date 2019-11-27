@@ -157,7 +157,6 @@ export default {
           item.classList&&item.classList.add("wave");
         });
       });
-
   },
 };
 </script>

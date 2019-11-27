@@ -1,6 +1,6 @@
 <template>
     <div class="cl-switch">
-        <span v-if="falseText" class="switch-left-text">{{falseText}}</span>
+        <span v-if="falseText" :style="{color:!value?falseColor:''}" class="switch-left-text">{{falseText}}</span>
         <span
             ref="core"
             class="cl-switch-core"
@@ -11,7 +11,7 @@
         >
             <span class="cl-switch-core-inner" :style="innerStyle"></span>
         </span>
-        <span v-if="trueText" class="switch-right-text">{{trueText}}</span>
+        <span v-if="trueText" :style="{color:value?trueColor:''}" class="switch-right-text">{{trueText}}</span>
     </div>
 </template>
 <script>
@@ -102,7 +102,8 @@ export default {
       }
     }
     &.disabled {
-      background: #bbb;
+      background: #bbb !important;
+      cursor: not-allowed;
     }
   }
 }

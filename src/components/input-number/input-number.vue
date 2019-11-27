@@ -9,12 +9,10 @@
     <cl-input
       ref="input"
       :value="currentValue"
-      :placeholder="placeholder"
       :max="max"
       :min="min"
-      :name="name"
-      :label="label"
       @change="handleInputChange"
+      @blur="handlerBlur"
     ></cl-input>
   </div>
 </template>
@@ -28,14 +26,6 @@ export default {
     ClInput
   },
   props: {
-    step: {
-      type: Number,
-      default: 1
-    },
-    placeholder: {
-      type: String,
-      default: ""
-    },
     max: {
       type: Number,
       default: Infinity
@@ -45,23 +35,20 @@ export default {
       default: -Infinity
     },
     value: {},
-    label: String,
-    name: String
   },
   data() {
     return {
-      currentValue: 0,
-      userInput: null
+      currentValue: 0
     };
   },
   watch: {
-    value: {
+    currentValue: {
       immediate: true,
-      handler(value) {        
+      handler(value) {
         let newVal = value === undefined ? value : Number(value);
         if (newVal !== undefined) {
           if (isNaN(newVal)) {
-            newVal = 0
+            newVal = 0;
           }
         }
         if (newVal >= this.max) newVal = this.max;
@@ -74,25 +61,48 @@ export default {
   methods: {
     increase() {
       if (this.max) {
-        this.currentValue < this.max ? this.currentValue++ : this.max;
+        this.currentValue < this.max
+          ? this.currentValue++
+          : (this.currentValue = this.max);
       }
-      this.$emit("change", this.currentValue);
+    },
+    handlerBlur(e) {
+      let value = e.target.value;
+      let newVal = value === undefined ? value : Number(value);
+      if (newVal !== undefined) {
+        if (isNaN(newVal)) {
+          newVal = 0;
+        }
+      }
+      if (newVal >= this.max) newVal = this.max;
+      if (newVal <= this.min) newVal = this.min;
+      e.target.value = newVal;
+      this.currentValue = newVal;
     },
     handleInputChange(value) {
-      this.currentValue = value;
+      let newVal = value === undefined ? value : Number(value);
+      if (newVal !== undefined) {
+        if (isNaN(newVal)) {
+          newVal = 0;
+        }
+      }
+      if (newVal >= this.max) newVal = this.max;
+      if (newVal <= this.min) newVal = this.min;
+      this.currentValue = newVal;
     },
     decrease() {
       if (this.min) {
-        this.currentValue > this.min ? this.currentValue-- : this.min;
+        this.currentValue > this.min
+          ? this.currentValue--
+          : (this.currentValue = this.min);
       }
-      this.$emit("change", this.currentValue);
     }
   }
 };
 </script>
 
 <style lang="scss" >
-@import "@/styles/variable.scss";
+@import "../../styles/variable.scss";
 
 .cl-input-number {
   position: relative;

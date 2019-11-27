@@ -79,8 +79,6 @@
         <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
       </div>
     </div>
-    <h3>attributes</h3>
-    <p>组件参数说明后期扩展</p>
     <Attributes></Attributes>
   </div>
 </template>

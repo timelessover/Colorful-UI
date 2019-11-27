@@ -22,7 +22,6 @@
         @update:selected="onUpdateSelected"
         :level="level + 1"
         :selected="selected"
-        
       ></cl-cascader-items>
     </div>
   </div>

@@ -40,11 +40,11 @@ Data
 
 Notice
 
-- [] Alert 警告
-- [] Loading 加载
+- [ ] Alert 警告
+- [ ] Loading 加载
 - [x] Toast 消息提示
 - [x] MessageBox 弹框
-- [] Notification 通知
+- [ ] Notification 通知
 
 Navigation
 

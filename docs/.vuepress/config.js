@@ -33,7 +33,13 @@ module.exports = {
         title: 'Form 表单组件',
         collapsable: false,
         children: [
+          '/components/form/radio',
+          '/components/form/checkbox',
           '/components/form/input',
+          '/components/form/inputnumber',
+          '/components/form/cascader',
+          '/components/form/switch',
+          '/components/form/datePicker',
         ]
       },
       {
