@@ -40,13 +40,15 @@ module.exports = {
           '/components/form/cascader',
           '/components/form/switch',
           '/components/form/datePicker',
+          '/components/form/upload',
         ]
       },
       {
         title: 'Data 数据展示组件',
         collapsable: false,
         children: [
-          '/components/data/data',
+          '/components/data/table',
+          '/components/data/pagination',
         ]
       },
       {

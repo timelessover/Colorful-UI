@@ -37,7 +37,9 @@ export default {
   methods: {
     getHeadList() {
       let arr = [];
-      const headerData = this.tableRoot.$slots.default;
+      const headerData = this.tableRoot.$slots.default.filter(item => {
+        return item.tag !== undefined
+      });
       const length = headerData.length;
       for (let index = 0; index < length; index++) {
         const data = headerData[index].componentOptions.propsData;

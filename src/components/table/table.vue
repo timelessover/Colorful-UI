@@ -31,7 +31,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .cl-table{
   font-size: 14px;
   background: #fff

@@ -1,11 +1,9 @@
 <template>
     <div class="demo">
-        <p>在一组备选项中进行单选</p>
-        <h3>基础用法</h3>
-        <p>选项默认可见</p>
+        <p>用于选择或输入日期</p>
         <div class="component-wrapper">
             <div class="component-wrapper-demo">
-                <cl-input-number v-model="num" @change="handleChange" :min="1" :max="10"></cl-input-number>
+                <cl-date-picker v-model="value"  placeholder="选择日期"></cl-date-picker>
             </div>
             <div class="code-content" v-highlight style="height: 0;">
                 <div class="code-content-height">
@@ -24,25 +22,25 @@
 <script>
 import ClIcon from "@/icon/icon";
 import mixin from "../mixin";
-import ClInputNumber from "@/input-number/input-number";
-import Attributes from "./inputNumber-attributes.vue";
+import ClDatePicker from "@/date-picker/date-picker";
+import Attributes from "./date-picker-attributes.vue";
 export default {
   name: "inputNumber-demo",
   mixins: [mixin],
   components: {
     ClIcon,
-    ClInputNumber,
+    ClDatePicker,
     Attributes
   },
   data() {
     return {
-      num: 1,
+      value: '',
       codeStr: `
-        <cl-input-number v-model="num" @change="handleChange" :min="1" :max="10"></cl-input-number>
+        <cl-date-picker v-model="value"  placeholder="选择日期"></cl-date-picker>
         
-methods: {
-   handleChange(value) {
-    this.num = value;
+data() {
+   return {
+      value:''
    }
 }
         `
@@ -51,7 +49,7 @@ methods: {
   computed: {
     baseMethods() {
       return this.trim(this.codeStr);
-    },
+    }
   },
   methods: {
     handleChange(value) {

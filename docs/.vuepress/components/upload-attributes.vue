@@ -25,7 +25,7 @@
         </table>
       </div>
     </section>
-     <!-- <section>
+     <section>
       <h2>Events</h2>
       <div class="attr">
         <table>
@@ -45,7 +45,7 @@
           </tbody>
         </table>
       </div>
-    </section> -->
+    </section>
   </div>
 </template>
 <script>
@@ -54,20 +54,62 @@ export default {
     return {
       table: [
         {
-          param: "value / v-model",
-          des: "绑定值",
+          param: "name",
+          des: "上传的文件字段名",
           type: "string",
           choice: "-",
-          def: "value"
-        }
+          def: "-"
+        },
+        {
+          param: "action",
+          des: "上传的地址",
+          type: "number",
+          choice: "string",
+          def: "-"
+        },
+        {
+          param: "method",
+          des: "上传的请求方法",
+          type: "string",
+          choice: "GET, POST",
+          def: "POST"
+        },
+        {
+          param: "method",
+          des: "上传的请求方法",
+          type: "string",
+          choice: "GET, POST",
+          def: "POST"
+        },
+        {
+          param: "fileList",
+          des: "上传的文件列表",
+          type: "array",
+          choice: "-",
+          def: "-"
+        },
+        {
+          param: "sizeLimit",
+          des: "文件的数量限制",
+          type: "Number",
+          choice: "-",
+          def: "-"
+        },
+        {
+          param: "accept",
+          des: "文件类型",
+          type: "string",
+          choice: "-",
+          def: "image"
+        },
       ],
-    //   table1: [
-    //       {
-    //           name:'change',
-    //           des: '绑定值被改变时触发',
-    //           cb: 'currentValue'
-    //       }
-    //   ]
+      table1: [
+          {
+              name:'parseResponse',
+              des: '成功上传的回调',
+              cb: '200'
+          }
+      ]
     }
   },
 }

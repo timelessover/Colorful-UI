@@ -51,13 +51,14 @@ export default {
     };
   },
   mounted() {
-    console.log(this.tableRoot);
     this.getPropList();
   },
   methods: {
     getPropList() {
       let arr = [];
-      const propData = this.tableRoot.$slots.default;
+      const propData = this.tableRoot.$slots.default.filter(item => {
+        return item.tag !== undefined
+      });
       const length = propData.length;
       for (let index = 0; index < length; index++) {
         const data = propData[index].componentOptions.propsData;
@@ -66,7 +67,7 @@ export default {
       this.propList = arr;
     },
     handleClick(item) {
-      console.log(item);
+      console.log(JSON.parse(JSON.stringify(item)));
     }
   }
 };

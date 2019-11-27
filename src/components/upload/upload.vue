@@ -18,7 +18,7 @@
                     class="cl-uploader-name"
                     :class="{[file.status]: file.status}"
                 >{{file.name}}</span>
-                <button class="cl-uploader-remove" @click="onRemoveFile(file)">x</button>
+                <span class="cl-uploader-remove" @click="onRemoveFile(file)">x</span>
             </li>
         </ol>
         <div ref="temp" style="width: 0; height: 0; overflow: hidden;"></div>
@@ -195,6 +195,11 @@ export default {
   &-remove {
     width: 32px;
     height: 32px;
+    text-align: center;
+    cursor: pointer;
+    &:hover{
+      color:red;
+    }
   }
   &-spin {
     padding:6px;

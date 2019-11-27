@@ -33,54 +33,33 @@ export default {
     return {
       table: [
         {
-          param: "value/v-model",
-          des: "绑定值",
-          type: "boolean/string/number",
+          param: "label",
+          des: "显示的标题",
+          type: "string",
+          choice: "-",
+          def: "-"
+        },
+        {
+          param: "prop",
+          des: "对应列内容的字段名，也可以使用 property 属性",
+          type: "string",
           choice: "-",
           def: "-"
         },
         {
           param: "width",
-          des: "switch 的宽度(px)",
-          type: "number",
+          des: "对应列的宽度",
+          type: "string",
           choice: "-",
-          def: "40px"
-        },
-        {
-          param: "true-text",
-          des: "value 为 true 时文字描述",
-          type: "boolean",
-          choice: "-",
-          def: "false"
+          def: "-"
         },
          {
-          param: "false-text",
-          des: "value 为 false 时文字描述",
-          type: "boolean",
+          param: "data",
+          des: "数据源",
+          type: "array",
           choice: "-",
-          def: "false"
+          def: "-"
         },
-         {
-          param: "true-text",
-          des: "value 为 true 时文字描述",
-          type: "boolean",
-          choice: "-",
-          def: "false"
-        },
-         {
-          param: "false-text",
-          des: "value 为 false 时文字描述",
-          type: "boolean",
-          choice: "-",
-          def: "false"
-        },
-        {
-          param: "disabled",
-          des: "是否禁用",
-          type: "boolean",
-          choice: "-",
-          def: "false"
-        }
       ]
     };
   }

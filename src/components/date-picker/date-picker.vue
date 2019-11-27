@@ -7,6 +7,7 @@
         clearable
         readonly
         :value="formattedValue"
+        :placeholder="placeholder"
         @input="onInput"
         ref="input"
       />
@@ -102,6 +103,9 @@ export default {
     scope: {
       type: Array,
       default: () => [new Date(1900, 0, 1), helper.addYear(new Date(), 100)]
+    },
+    placeholder:{
+      
     }
   },
   data() {

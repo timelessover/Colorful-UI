@@ -5,7 +5,7 @@
     <transition name="fade">
       <div
         :class="container?containerObject:classObject"
-        :style="{width:`${width}px`}"
+        :style="{width:!container?`${width}px`:''}"
         v-show="visible"
         ref="popover"
       >
