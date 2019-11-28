@@ -1,13 +1,13 @@
 <template>
     <transition name="nnprogress">
-        <div class="x-loading" v-show="visible" :style="elStyle">
+        <div class="cl-loading" v-show="visible" :style="elStyle">
             <div class="nprogress" ref="nprogress" :style="proStyle"></div>
         </div>
     </transition>
 </template>
 <script>
     export default {
-        name: 'xLoading',
+        name: 'cl-nprogress',
         props: {
             background: { type: String, default: '#fff' },
             color: { type: String, default: '#36b1bf' },
@@ -75,7 +75,7 @@
 </script>
 <style scoped lang="scss">
     @import '../../basic/color.scss';
-    .x-loading {
+    .cl-loading {
         position: fixed;
         top: 0;
         left: 0;

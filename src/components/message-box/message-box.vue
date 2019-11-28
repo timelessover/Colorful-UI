@@ -1,19 +1,24 @@
 <template>
-    <transition name="fade-confirm">
-        <div class="cl-confirm" v-show="visible">
-            <div class="confirm-info">
-                <div class="info-title">{{title}}</div>
-                <div class="info-message">
-                    <cl-icon name="warning" class="cl-icon"></cl-icon>
-                    <p class="text">{{message}}</p>
-                </div>
-                <div class="button-wrapper">
-                    <cl-button @click="onClick('cancle')">{{cancleText}}</cl-button>
-                    <cl-button @click="onClick('confirm')" primary>{{confirmText}}</cl-button>
-                </div>
-            </div>
+  <transition name="fade-confirm">
+    <div class="cl-confirm" v-show="visible">
+      <div class="confirm-info">
+        <div class="info-title-container">
+          <div class="info-title">{{title}}</div>
+          <div class="info-cancel">
+            <cl-icon name="close" class="cl-icon" @click.native="onClick('close')"></cl-icon>
+          </div>
         </div>
-    </transition>
+        <div class="info-message">
+          <cl-icon name="warning" class="cl-icon"></cl-icon>
+          <p class="text">{{message}}</p>
+        </div>
+        <div class="button-wrapper">
+          <cl-button @click="onClick('cancle')">{{cancleText}}</cl-button>
+          <cl-button @click="onClick('confirm')" type="primary">{{confirmText}}</cl-button>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 <script>
 import ClIcon from "../icon/icon.vue";
@@ -24,34 +29,41 @@ export default {
   props: {
     title: { type: String, default: "提示" },
     message: String,
-    confirmText: { type: String, default: "继续" },
+    confirmText: { type: String, default: "确定" },
     cancleText: { type: String, default: "取消" }
   },
   data() {
     return { promiseStatus: null, visible: false };
   },
+  mounted() {
+    document.body.style.overflow = "hidden";
+  },
   methods: {
     onClick(type) {
-      if (type === "cancle") {
-        this.promiseStatus.reject();
-      } else {
-        this.promiseStatus.resolve();
+      switch (type) {
+        case "cancle":
+          this.promiseStatus.reject();
+          break;
+        case "confirm":
+          this.promiseStatus.resolve();
+          break;
+        case "close":
+          break;
       }
-      this.visible = false;
-      this.$el.addEventListener("transitionend", this.destroyEle);
+      this.boxClose()
     },
     confirm() {
       return new Promise((resolve, reject) => {
         this.promiseStatus = { resolve, reject };
       });
     },
-    destroyEle() {
-      this.$el.removeEventListener("transitioncancel", this.destroyEle);
-      this.$destroy();
+    boxClose() {
+      this.visible = false;
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        this.$el.parentNode.removeChild(this.$el);
+      }, 300);
     }
-  },
-  beforeDestroy() {
-    this.$el.remove();
   }
 };
 </script>
@@ -73,31 +85,49 @@ export default {
     width: 400px;
     height: 150px;
     background: #fff;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 4px;
     box-shadow: $shadow;
     line-height: 1.8em;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    > .info-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: $brand;
+    > .info-title-container {
+      display: flex;
+      justify-content: space-between;
+      > .info-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #303133;
+      }
+      > .info-cancel {
+        > .cl-icon {
+          &:hover {
+            color: $brand;
+            cursor: pointer;
+          }
+        }
+      }
     }
+
     > .info-message {
       display: flex;
       justify-content: flecl-start;
       align-items: center;
       color: $main;
-      padding-left: 10px;
       font-size: 14px;
       height: 50px;
+      > p {
+        margin: 0;
+        line-height: 24px;
+      }
       > .cl-icon {
         color: $warning;
         margin-right: 4px;
         width: 30px;
         height: 30px;
+        font-size: 24px;
+        line-height: 30px;
       }
     }
     > .button-wrapper {

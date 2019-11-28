@@ -1,13 +1,13 @@
 <template>
     <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter" @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave">
-        <div class="x-spread" v-show="visible">
+        <div v-show="visible">
             <slot></slot>
         </div>
     </transition>
 </template>
 <script>
     export default {
-        name: 'xSpread',
+        name: 'cl-spread',
         props: {
             visible: { type: Boolean, required: true },
             horizontal: { type: Boolean, default: false },

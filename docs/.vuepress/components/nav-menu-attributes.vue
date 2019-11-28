@@ -1,7 +1,7 @@
 <template>
   <div class="base">
     <section>
-      <h2>Row Attributes</h2>
+      <h2>Attributes</h2>
       <div class="attr">
         <table>
           <thead>
@@ -35,18 +35,18 @@ export default {
     return {
       table1: [
         {
-          param: "total",
-          des: "总页数",
-          type: "Number",
+          param: "selected-index",
+          des: "默认选中子菜单的 index",
+          type: "string",
           choice: "-",
-          def: "10"
+          def: "提示"
         },
        {
-          param: "current-page",
-          des: "当前页数",
-          type: "Number",
+          param: "vertical",
+          des: "纵向菜单",
+          type: "Boolean",
           choice: "-",
-          def: "1"
+          def: "false"
         },
       ],
 

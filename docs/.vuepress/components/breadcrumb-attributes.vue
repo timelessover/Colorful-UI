@@ -1,7 +1,7 @@
 <template>
   <div class="base">
     <section>
-      <h2>Row Attributes</h2>
+      <h2>Attributes</h2>
       <div class="attr">
         <table>
           <thead>
@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item,index) in table1" :key="index">
+            <tr v-for="(item,index) in table" :key="index">
               <th>{{item.param}}</th>
               <th class="des">{{item.des}}</th>
               <th class="type">{{item.type}}</th>
@@ -25,35 +25,43 @@
         </table>
       </div>
     </section>
-
   </div>
 </template>
-
 <script>
 export default {
   data() {
     return {
-      table1: [
+      table: [
         {
-          param: "total",
-          des: "总页数",
-          type: "Number",
+          param: "separator",
+          des: "分隔符",
+          type: "string",
           choice: "-",
-          def: "10"
+          def: "斜杠'/'"
         },
-       {
-          param: "current-page",
-          des: "当前页数",
-          type: "Number",
+        {
+          param: "separator-class",
+          des: "icon 分隔符 class",
+          type: "string",
           choice: "-",
-          def: "1"
+          def: "-"
         },
-      ],
-
+        {
+          param: "to",
+          des: "路由跳转对象，同 vue-router 的 to",
+          type: "string/object",
+          choice: "-",
+          def: "-"
+        },
+        {
+          param: "replace",
+          des: "在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录",
+          type: "boolean",
+          choice: "-",
+          def: "false"
+        }
+      ]
     };
   }
 };
 </script>
-
-<style lang="scss" scoped>
-</style>

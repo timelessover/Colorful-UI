@@ -1,5 +1,5 @@
 <template>
-  <div class="cl-card" :class="shadow ? 'is-' + shadow + '-shadow' : 'is-always-shadow'">
+  <div class="cl-card" :class="shadow ? 'is-' + shadow + '-shadow' : 'is-always-shadow'" >
     <div class="cl-card__header" v-if="$slots.header || header">
       <slot name="header">{{ header }}</slot>
     </div>
@@ -29,6 +29,12 @@ export default {
   }
   &.is-always-shadow {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  }
+  &.is-hover-shadow{
+    &:hover{
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      transition-duration: .5s;
+    }
   }
   .cl-card__header {
     padding: 18px 20px;

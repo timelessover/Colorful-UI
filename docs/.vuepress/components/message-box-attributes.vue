@@ -35,18 +35,32 @@ export default {
     return {
       table1: [
         {
-          param: "total",
-          des: "总页数",
-          type: "Number",
+          param: "title",
+          des: "标题内容",
+          type: "string",
           choice: "-",
-          def: "10"
+          def: "提示"
         },
        {
-          param: "current-page",
-          des: "当前页数",
-          type: "Number",
+          param: "message",
+          des: "正文内容",
+          type: "String",
           choice: "-",
-          def: "1"
+          def: "-"
+        },
+         {
+          param: "confirmText",
+          des: "确定按钮内容",
+          type: "String",
+          choice: "-",
+          def: "-"
+        },
+         {
+          param: "cancleText",
+          des: "取消按钮内容",
+          type: "String",
+          choice: "-",
+          def: "-"
         },
       ],
 

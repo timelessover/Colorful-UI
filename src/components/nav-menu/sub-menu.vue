@@ -1,15 +1,15 @@
 <template>
-    <div class="cl-sub-menu" :class="{open:itemIsOpen,vertical}">
-        <div class="title" @click="onClick">
-            <slot name="title"></slot>
-            <cl-icon name="arrow-down" class="cl-icon" :class="{'is-rotate':itemIsOpen}"></cl-icon>
-        </div>
-        <div class="popover">
-            <cl-spread :visible="itemIsOpen">
-                <slot></slot>
-            </cl-spread>
-        </div>
+  <div class="cl-sub-menu" :class="{open:itemIsOpen,vertical,active}">
+    <div class="title" @click="onClick">
+      <slot name="title"></slot>
+      <cl-icon name="arrow-down" class="cl-icon" :class="{'is-rotate':itemIsOpen}"></cl-icon>
     </div>
+    <div class="popover">
+      <cl-spread :visible="itemIsOpen">
+        <slot></slot>
+      </cl-spread>
+    </div>
+  </div>
 </template>
 <script>
 import ClIcon from "../icon/icon";
@@ -36,7 +36,8 @@ export default {
     return {
       itemIsOpen: false,
       vertical: false,
-      clickable: true
+      clickable: true,
+      active: false
     };
   },
   computed: {
@@ -97,7 +98,7 @@ export default {
         this.indexArr.forEach((str, n) => {
           str !== arr[n] ? (result = false) : "";
         });
-        //如果在路径中，打开 如果不在路径中，关闭
+        // 如果在路径中，打开 如果不在路径中，关闭
         this.itemIsOpen = result;
       }
     }
@@ -116,19 +117,19 @@ export default {
   color: $main;
   font-size: 14px;
   position: relative;
-  width: 100%;
+  box-sizing: border-box;
+  &.active {
+    color: $brand;
+  }
   > .title {
     padding: 5px 15px;
     position: relative;
-    width: 100%;
     min-width: 8em;
     white-space: nowrap;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    &:hover {
-      background: $brand;
-    }
+    box-sizing: border-box;
     > .cl-icon {
       margin-left: auto;
       transition: transform 0.3s;
@@ -136,7 +137,6 @@ export default {
     }
   }
   > .popover {
-    width: 100%;
     position: absolute;
     margin-top: 2px;
     top: 100%;
@@ -144,30 +144,33 @@ export default {
     background: #fff;
     border-radius: 2px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 999;
   }
   &.open {
     > .title {
+      box-sizing: border-box;
       > .cl-icon {
         transform: rotate(-180deg);
       }
     }
   }
 }
-.x-sub-menu.vertical {
+.cl-sub-menu.vertical {
   color: $main;
   font-size: 14px;
+  &.active {
+    overflow: hidden;
+    color: $brand;
+  }
   > .title {
     padding: 5px 15px;
     position: relative;
-    width: 100%;
+    box-sizing: border-box;
     min-width: 8em;
     white-space: nowrap;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    &:hover {
-      background: $brand;
-    }
     > .cl-icon {
       margin-left: auto;
       transition: transform 0.3s;

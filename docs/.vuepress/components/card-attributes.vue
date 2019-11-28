@@ -1,7 +1,7 @@
 <template>
   <div class="base">
     <section>
-      <h2>Row Attributes</h2>
+      <h2>Attributes</h2>
       <div class="attr">
         <table>
           <thead>
@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item,index) in table1" :key="index">
+            <tr v-for="(item,index) in table" :key="index">
               <th>{{item.param}}</th>
               <th class="des">{{item.des}}</th>
               <th class="type">{{item.type}}</th>
@@ -25,35 +25,36 @@
         </table>
       </div>
     </section>
-
   </div>
 </template>
-
 <script>
 export default {
   data() {
     return {
-      table1: [
+      table: [
         {
-          param: "total",
-          des: "总页数",
-          type: "Number",
+          param: "header",
+          des: "设置 header，也可以通过 slot 传入 DOM",
+          type: "string",
           choice: "-",
-          def: "10"
+          def: "-"
         },
-       {
-          param: "current-page",
-          des: "当前页数",
-          type: "Number",
+        {
+          param: "body-style",
+          des: "设置 body 的样式",
+          type: "object",
           choice: "-",
-          def: "1"
+          def: "{ padding: '20px' }"
         },
-      ],
-
+        {
+          param: "shadow",
+          des: "设置阴影显示时机",
+          type: "string",
+          choice: "always / hover / never	",
+          def: "always"
+        }
+      ]
     };
   }
 };
 </script>
-
-<style lang="scss" scoped>
-</style>

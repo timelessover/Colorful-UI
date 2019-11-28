@@ -52,17 +52,20 @@ module.exports = {
         ]
       },
       {
-        title: 'Navigation 导航组件',
-        collapsable: false,
-        children: [
-          '/components/navigation/tabs',
-        ]
-      },
-      {
         title: 'Notice 消息提示组件',
         collapsable: false,
         children: [
           '/components/notice/toast',
+          '/components/notice/message-box',
+        ]
+      },
+      {
+        title: 'Navigation 导航组件',
+        collapsable: false,
+        children: [
+          '/components/navigation/nav-menu',
+          '/components/navigation/tabs',
+          '/components/navigation/breadcrumb'
         ]
       },
       {
@@ -71,6 +74,7 @@ module.exports = {
         children: [
           '/components/others/popover',
           '/components/others/backTop',
+          '/components/others/card',
         ]
       },
     ]
