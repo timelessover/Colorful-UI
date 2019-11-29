@@ -1,76 +1,66 @@
 <template>
-  <div class="cl-affix-wrapper" ref="wrapper" :style="{height}">
-    <div class="cl-affix-item" :class="classObject" :style="{left, width, top}">
-      <slot></slot>
+    <div class="cl-affix-wrapper">
+        <div class="cl-affix" ref="affix" :class="{affix}">
+            <slot></slot>
+        </div>
     </div>
-  </div>
 </template>
 <script>
-export default {
-  name: 'cl-affix',
-  props: {
-    distance: {
-      type: Number,
-      default: 0
+    export default {
+        name: 'cl-affix',
+        props: {
+            distance: {
+                type: Number,
+                default: 0
+            }
+        },
+        data() {
+            return {
+                affix: false,
+                top: 0,
+                handleScroll: null
+            }
+        },
+        mounted() {
+            let { top } = this.$refs.affix.getBoundingClientRect()
+            this.top = top + window.scrollY
+            this.handleScroll = this._handleScroll.bind(this)
+            window.addEventListener('scroll', this.handleScroll)
+        },
+        beforeDestroy() {
+            window.removeEventListener('scroll', this.handleScroll)
+        },
+        methods: {
+            _handleScroll() {
+                if (window.scrollY > this.top - this.distance) {
+                    let { width, height, left } = this.$refs.affix.getBoundingClientRect()
+                    const affix = this.$refs.affix
+                    this.$el.style.width = width + 'px'
+                    this.$el.style.height = height + 'px'
+                    affix.style.width = width + 'px'
+                    affix.style.height = height + 'px'
+                    affix.style.top = this.distance + 'px'
+                    affix.style.left = left + 'px'
+                    this.affix = true
+                } else {
+                    this.affix = false
+                }
+            }
+        }
     }
-  },
-  data() {
-    return {
-      sticky: false,
-      left: null,
-      height: null,
-      width: null,
-      top: null
-    }
-  },
-  computed: {
-    classObject() {
-      return {
-        sticky: this.sticky
-      }
-    }
-  },
-  mounted() {
-    this.windowScrollHandler = this._windowScrollHandler.bind(this)
-    window.addEventListener('scroll', this.windowScrollHandler)
-  },
-  beforeDestroy(){
-    window.removeEventListener('scroll', this.windowScrollHandler)
-  },
-  methods: {
-    offsetTop() {
-      let { top } = this.$refs.wrapper.getBoundingClientRect()
-      let t = window.scrollY
-      return t + top
-    },
-    _windowScrollHandler(){
-      // top 多次获取会改变，因此只能获取一次
-      let top = this.offsetTop()
-      if(window.scrollY > top - this.distance) {
-        let { height, width, left } = this.$refs.wrapper.getBoundingClientRect()
-        // 需要给最外层div加高度让他占位置，否则会出现不能滚动的情况
-        this.height = `${height}px`
-        // 有可能sticky内容是延迟加载的，所以宽度会变，应该浮起来的时候再赋值
-        this.width = `${width}px`
-        // 有可能居中，因此left会变
-        this.left = `${left}px`
-        this.top = `${this.distance}px`
-        this.sticky = true
-      } else {
-        this.height = null
-        this.width = null
-        this.left = null
-        this.top = null
-        this.sticky = false
-      }
-    }
-  }
-}
 </script>
-<style lang="scss" scoped>
-  .cl-affix-wrapper {
-    .cl-affix-item {
-      position: fixed;
+<style scoped lang="scss">
+    .cl-affix-wrapper {
+        width: 100%;
+        >.cl-affix {
+            width: 100%;
+            height: 100%;
+            &.affix {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 100;
+            }
+        }
     }
-  }
 </style>

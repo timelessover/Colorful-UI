@@ -1,16 +1,13 @@
 <template>
     <div class="demo">
-        <p>将信息聚合在卡片容器中展示</p>
+        <p>将页面元素钉在可视范围</p>
         <h3>基础用法</h3>
-        <p>包含标题，内容</p>
+        <p>当内容区域比较长，需要滚动页面时</p>
         <div class="component-wrapper">
             <div class="component-wrapper-demo">
-                <cl-card class="box-card">
-                    <div slot="header" class="clearfix">
-                        <span>卡片名称</span>
-                    </div>
-                    <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div>
-                </cl-card>
+                <cl-affix :distance="60">
+                    <div class="box">Affix</div>
+                </cl-affix>
             </div>
             <div class="code-content" v-highlight style="height: 0;">
                 <div class="code-content-height">
@@ -29,56 +26,44 @@
 <script>
 import ClIcon from "@/icon/icon";
 import mixin from "../mixin";
-import ClCard from "@/card/card";
-import Attributes from "./card-attributes.vue";
+import ClTabs from "@/tabs/tabs";
+import ClAffix from "@/affix/affix";
+import Attributes from "./affix-attributes.vue";
 export default {
-  name: "backTop-demo",
+  name: "affix-demo",
   mixins: [mixin],
   components: {
     ClIcon,
-    ClCard,
+    ClAffix,
     Attributes
   },
   data() {
     return {
-      activeName: "second",
       codeStr: `
-<cl-card class="box-card">
-    <div slot="header" class="clearfix">
-        <span>卡片名称</span>
-    </div>
-    <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div>
-</cl-card>
+       <cl-affix :distance="60">
+            <div class="box">Affix</div>
+        </cl-affix>
         `
     };
   },
   computed: {
     baseMethods() {
-      return this.codeStr.replace(/^ {20}$/gm,"").trim();
+      return this.trim(this.codeStr);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.text {
-  font-size: 14px;
+.box {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #1890ff;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
 }
-
-.item {
-  margin-bottom: 18px;
-}
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-.clearfix:after {
-  clear: both;
-}
-
-.box-card {
-  width: 480px;
+.component-wrapper-demo{
+    height:50vh;
 }
 </style>

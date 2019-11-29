@@ -10,7 +10,7 @@
       <slot name="title">{{title}}</slot>
       <i class="cl-collapse-item__arrow cl-icon--arrow-right" :class="{'is-active': isActive}"></i>
     </div>
-    <div class="cl-collapse-item--pane" ref="pane" :style="`height:${contentHeight}px`">
+    <div class="cl-collapse-item--pane" ref="pane"  :style="`height:${contentHeight}px`" :class="{'is-active': isActive}">
       <slot></slot>
     </div>
   </div>
@@ -68,6 +68,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .cl-collapse-item {
+  font-size: 13px;
   transition: all 0.3s;
   line-height: 20px;
   will-change: height;
@@ -77,13 +78,16 @@ export default {
     border-bottom: 1px solid #ebeef5;
   }
   .cl-collapse-item__header {
-    height: 20px;
+    height: 48px;
+    line-height: 48px;
     display: flex;
     justify-content: space-between;
   }
 
   .cl-collapse-item__arrow {
     transition: all 0.3s;
+    height: 48px;
+    line-height: 48px;
     &.is-active {
       transform: rotate(90deg);
     }
@@ -91,6 +95,9 @@ export default {
   .cl-collapse-item--pane {
     overflow: hidden;
     transition: all 0.5s;
+    &.is-active{
+      padding-bottom: 25px;
+    }
   }
 }
 </style>

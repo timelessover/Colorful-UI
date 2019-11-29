@@ -65,7 +65,8 @@ module.exports = {
         children: [
           '/components/navigation/nav-menu',
           '/components/navigation/tabs',
-          '/components/navigation/breadcrumb'
+          '/components/navigation/breadcrumb',
+          '/components/navigation/affix',
         ]
       },
       {
@@ -75,6 +76,8 @@ module.exports = {
           '/components/others/popover',
           '/components/others/backTop',
           '/components/others/card',
+          '/components/others/carousel',
+          '/components/others/collapse',
         ]
       },
     ]

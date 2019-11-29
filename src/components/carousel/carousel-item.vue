@@ -11,15 +11,9 @@ export default {
   name: "cl-carousel-item",
   props: {
     name: {
-      type: Number,
+      type: [Number,String],
       default: 0
-    }
-  },
-  data() {
-    return {
-      selected: undefined,
-      animationEnabled: false
-    };
+    },
   },
   inject: ["rootCarousel"],
   computed: {

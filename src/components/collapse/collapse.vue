@@ -54,7 +54,6 @@ export default {
       } else {
         let activeNames = this.activeNames.slice(0);
         let index = activeNames.indexOf(item.name);
-
         if (index > -1) {
           activeNames.splice(index, 1);
         } else {
@@ -72,8 +71,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cl-collapse{
-    width: 50vw;
-    margin: 50px;
-}
 </style>

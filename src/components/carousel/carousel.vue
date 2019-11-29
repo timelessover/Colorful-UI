@@ -35,11 +35,11 @@ export default {
   },
   props: {
     height: [String, Number],
-    autoPlay: {
+    autoplay: {
       type: Boolean,
       default: true
     },
-    autoPlayDelay: {
+    interval: {
       type: Number,
       default: 3000
     }
@@ -49,15 +49,15 @@ export default {
       activeIndex: -1,
       containerWidth: 0,
       itemsLength: 0,
-      reverse: false
+      reverse: false,
+      timer:null
     };
   },
   computed: {
     selectedIndex() {
-      let index = this.activeIndex;
+      let index = this.activeIndex
       return index === -1 ? 0 : index;
     },
-
     items() {
       return this.$children.filter(
         vm => vm.$options.name === "cl-carousel-item"
@@ -66,6 +66,7 @@ export default {
   },
   mounted() {
     this.getItemsLength();
+    this.setAutoPlay();
   },
   provide() {
     return {
@@ -73,11 +74,22 @@ export default {
     };
   },
   methods: {
+    setAutoPlay(){
+      if(this.autoplay){
+       this.timer =  setInterval(()=>{
+          this.onClickNext()
+        },this.interval)
+      }
+    },
     getItemsLength() {
       this.itemsLength = this.items.length;
     },
-    onMouseEnter() {},
-    onMouseLeave() {},
+    onMouseEnter() {
+      clearInterval(this.timer)
+    },
+    onMouseLeave() {
+      this.setAutoPlay()
+    },
     onClickPrev() {
       this.reverse = true;
       this.$nextTick(() => {
@@ -138,8 +150,7 @@ export default {
         cursor: pointer;
       }
       &.active {
-        background: red;
-        background: black;
+        background: #1890ff;
         color: white;
         &:hover {
           cursor: default;

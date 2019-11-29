@@ -33,12 +33,21 @@ export default {
     cancleText: { type: String, default: "取消" }
   },
   data() {
-    return { promiseStatus: null, visible: false };
+    return { promiseStatus: null, visible: false, barWidth: null };
   },
   mounted() {
-    document.body.style.overflow = "hidden";
+    this.getBarWidth()
   },
   methods: {
+    getBarWidth() {
+      const barWidth = document.documentElement.clientWidth;
+      // 异步拿到待遇遮罩层的 width
+      this.$nextTick(() => {
+        document.body.style.overflow = "hidden";
+        document.body.style.marginRight =
+          document.documentElement.clientWidth - barWidth + "px";
+      });
+    },
     onClick(type) {
       switch (type) {
         case "cancle":
@@ -50,7 +59,7 @@ export default {
         case "close":
           break;
       }
-      this.boxClose()
+      this.boxClose();
     },
     confirm() {
       return new Promise((resolve, reject) => {
@@ -60,6 +69,7 @@ export default {
     boxClose() {
       this.visible = false;
       document.body.style.overflow = "";
+      document.body.style.marginRight = "";
       setTimeout(() => {
         this.$el.parentNode.removeChild(this.$el);
       }, 300);
