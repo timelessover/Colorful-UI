@@ -51,6 +51,11 @@ export default {
       visible: false
     };
   },
+  watch:{
+    visible(val){
+      this.$emit('change',val)
+    }
+  },
   computed: {
     classObject() {
       return [
@@ -60,7 +65,7 @@ export default {
       ];
     },
     containerObject() {
-      return ["cl-popover--item", `date-position-${this.position}`];
+      return ["cl-popover--item__container", `date-position-${this.position}`];
     }
   },
   mounted() {
@@ -132,6 +137,98 @@ $border-radius: 4px;
   vertical-align: top;
   position: relative;
   font-size: 14px;
+}
+.cl-popover--item__container {
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  background: white;
+  word-break: break-all;
+  z-index: 1;
+  position: absolute;
+  > .cl-popover--title {
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    border: 8px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+  &.position-top {
+    transform: translateY(-150%);
+    &::before,
+    &::after {
+      left: 10px;
+    }
+    &::before {
+      border-bottom: none;
+      top: 100%;
+    }
+    &::after {
+      border-top-color: white;
+      border-bottom: none;
+      top: calc(100% - 1px);
+    }
+  }
+  &.position-bottom {
+    margin-top: 15px;
+    &::before,
+    &::after {
+      left: 10px;
+    }
+    &::before {
+      border-top: none;
+      border-bottom-color: white;
+      bottom: 100%;
+    }
+    &::after {
+      border-top: none;
+      border-bottom-color: white;
+      bottom: calc(100% - 1px);
+    }
+  }
+  &.position-left {
+    transform: translate(-100%, -75%);
+    margin-left: -15px;
+    &::before,
+    &::after {
+      transform: translateY(-50%);
+      top: 50%;
+    }
+    &::before {
+      border-right: none;
+      left: 100%;
+    }
+    &::after {
+      border-left-color: white;
+      border-right: none;
+      left: calc(100% - 1px);
+    }
+  }
+  &.position-right {
+    transform: translate(45%, -75%);
+    &::before,
+    &::after {
+      transform: translateY(-50%);
+      top: 50%;
+    }
+    &::before {
+      border-left: none;
+      right: 100%;
+    }
+    &::after {
+      border-right-color: white;
+      border-left: none;
+      right: calc(100% - 1px);
+    }
+  }
 }
 .cl-popover--item {
   border: 1px solid $border-color;

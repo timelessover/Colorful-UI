@@ -35,10 +35,6 @@ Data
 
 - [x] Table 表格
 - [ ] Progress 进度条
-- [x] Collapse 折叠面板
-- [x] Dropdown 下拉菜单
-- [x] Card 卡片
-- [x] Popover 弹出框
 
 Notice
 
@@ -52,16 +48,18 @@ Navigation
 
 - [x] Breadcrumb 面包屑 
 - [x] Tabs 标签页
-- [x] Steps 步骤条
-
+- [x] Affix 固钉
 
 Others
 
-- [x] Dialog 对话框
 - [x] Magnifier 放大镜
-- [x] Affix 钉子
+- [x] Popover 弹出框
 - [x] Backtop 回到顶部
 - [x] Carousel 走马灯
+- [x] Collapse 折叠面板
+- [x] Card 卡片
+
+
 
 
 

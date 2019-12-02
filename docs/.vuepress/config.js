@@ -38,6 +38,7 @@ module.exports = {
           '/components/form/input',
           '/components/form/inputnumber',
           '/components/form/cascader',
+          '/components/form/select',
           '/components/form/switch',
           '/components/form/datePicker',
           '/components/form/upload',

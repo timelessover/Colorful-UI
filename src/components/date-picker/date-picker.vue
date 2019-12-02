@@ -12,7 +12,7 @@
         ref="input"
       />
       <template slot="content">
-        <div class="cl-date-picker-pop" @selectstart.prevent>
+        <div  style="padding: 0.5em 1em;" class="cl-date-picker-pop" @selectstart.prevent>
           <div class="cl-date-picker-nav">
             <span :class="cx('prevYear', 'navItem')" @click="onClickPrevYear">
               <cl-icon name="d-arrow-left"/>
@@ -86,11 +86,9 @@ import ClInput from "../input/input";
 import ClButton from "../button/button";
 import ClIcon from "../icon/icon";
 import ClPopover from "../popover/popover";
-import ClickOutside from "../../utils/click-outside";
 import helper from "./helper";
 export default {
   components: { ClInput, ClIcon, ClPopover, ClButton },
-  directives: { ClickOutside },
   name: "cl-datepicker",
   props: {
     firstDayOfWeek: {
@@ -265,10 +263,10 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/common/base.scss";
+.cl-date-picker-pop{
+  padding: 1em 2em;
+}
 .cl-date-picker {
-  &-popWrapper {
-    padding: 0;
-  }
   &-navItem,
   &-cell,
   &-weekday {

@@ -17,7 +17,7 @@
       <i class="cl-input__icon" v-if="prefixIcon" :class="`cl-icon--${prefixIcon}`"></i>
     </span>
     <!-- 后置内容 -->
-    <span class="cl-input__suffix" v-if="getSuffixVisible">
+    <span class="cl-input__suffix" v-if="$slots.suffix || getSuffixVisible">
       <span class="cl-input__suffix-inner">
         <template v-if="!showClear || !showPwdVisible">
           <slot name="suffix"></slot>
@@ -58,7 +58,7 @@ export default {
       default: false
     },
     suffixIcon: String,
-    prefixIcon: String
+    prefixIcon: String,
   },
   data() {
     return {
@@ -99,6 +99,7 @@ export default {
       return this.showPassword && this.value;
     }
   },
+
   methods: {
     updateValue(v) {
       this.changeHandler(v);

@@ -1,50 +1,46 @@
 <template>
   <div id="home">
-    <cl-radio-group v-model="radio">
-      <cl-radio :label="3">备选项</cl-radio>
-      <cl-radio :label="6">备选项</cl-radio>
-      <cl-radio :label="9">备选项</cl-radio>
-    </cl-radio-group>
+   <cl-select v-model="value" placeholder="请选择">
+      <cl-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></cl-option>
+    </cl-select> 
   </div>
 </template>
 <script>
 import ClButton from "@/components/button/button";
-import ClRadioGroup from "@/components/radio/radio-group";
-import ClRadio from "@/components/radio/radio";
-import ClMenuItem from "@/components/menu/menu-item";
-import ClTabs from "@/components/tabs/tabs";
-import ClTabPane from "@/components/tabs/tab-pane";
+import ClSelect from "@/components/select/select";
+import ClOption from "@/components/select/option";
 
 export default {
   components: {
     ClButton,
-    ClRadio,
-    ClRadioGroup
+    ClSelect,
+    ClOption
   },
   data() {
     return {
-      radio: 3,
-      activeName: "second",
-      checkList: ["选中且禁用", "复选框 A"],
-      currentPage: 1,
-      checked1: true,
-      value: "",
-      radio: "3",
-      type1: true,
-      type2: true,
-      type3: true,
-      value2: [],
-      fileList: [],
-      error: "",
-      selected1: "1",
-      percentage: 10,
-      colors: [
-        { color: "#f56c6c", percentage: 20 },
-        { color: "#e6a23c", percentage: 40 },
-        { color: "#5cb87a", percentage: 60 },
-        { color: "#1989fa", percentage: 80 },
-        { color: "#6f7ad3", percentage: 100 }
-      ]
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕"
+        },
+        {
+          value: "选项2",
+          label: "双皮奶"
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎"
+        },
+        {
+          value: "选项4",
+          label: "龙须面"
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭"
+        }
+      ],
+      value: ""
     };
   },
   methods: {
